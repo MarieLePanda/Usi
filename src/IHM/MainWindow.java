@@ -57,17 +57,22 @@ public class MainWindow extends JFrame {
             
             //assignment
             tree = new JTree(rootFolder);
+            
+            this.getContentPane().add(tree, BorderLayout.WEST);
+            //this.getContentPane().setSize(300, 300);
             scrollTree = new JScrollPane(tree);
-            panelTree = new JPanel();
-            layoutTree = new BorderLayout();
-            panelTree.add(scrollTree, BorderLayout.WEST);
-            this.getContentPane().add(panelTree, BorderLayout.WEST);
-            //containerTree.add(panelTree);
-            //this.getContentPane().add(new JButton("WEST"), BorderLayout.WEST);
+            //scrollTree.setSize(300, 300);
+            
 
 
-            this.add(panelTree);
+            this.add(scrollTree);
           
+        }
+        
+        public void initDraw(){
+        	Graphics graph = null;
+        	graph.setColor(Color.red);
+        	graph.fillRect(10,10,80,80);
         }
         
         public void initFolder(){
