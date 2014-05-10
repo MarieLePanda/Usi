@@ -5,6 +5,7 @@
 package IHM;
 
 import Object.User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -88,11 +89,15 @@ public class FrameCreateUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
-        
-        User newUser = new User(jTextFieldLogin.getText(), new String(jPasswordFieldPdw.getPassword()), jCheckBoxAdmin.isSelected());
-        newUser.createUser();
-        System.out.print(newUser);
-        this.dispose();
+        if(jTextFieldLogin.getText().isEmpty() || new String(jPasswordFieldPdw.getPassword()).isEmpty()){
+            JOptionPane.showMessageDialog(null, "Des champs sont vide");
+        }
+        else{
+            User newUser = new User(jTextFieldLogin.getText(), new String(jPasswordFieldPdw.getPassword()), jCheckBoxAdmin.isSelected());
+            newUser.createUser();
+            JOptionPane.showMessageDialog(null,"Utilisateur " + newUser.getLogin() + " supprimé");
+            this.dispose();
+        }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     /**

@@ -5,6 +5,7 @@
 package IHM;
 
 import Object.User;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -109,12 +110,12 @@ public class FrameAdmin extends javax.swing.JFrame {
                                 .addComponent(jLabelLogin)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))))
+                        .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +154,7 @@ public class FrameAdmin extends javax.swing.JFrame {
             jCheckBoxAdmin.setSelected(currentUser.getAdministrator());
         }
         else{
-            System.out.println("Aucun élément ");
+            JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
         }
     }//GEN-LAST:event_jComboBoxListUserActionPerformed
 
@@ -162,11 +163,12 @@ public class FrameAdmin extends javax.swing.JFrame {
             User currentUser = (User) jComboBoxListUser.getSelectedItem();
             currentUser.setLogin(jTextFieldLogin.getText());
             currentUser.setRole(jCheckBoxAdmin.isSelected());
-            System.out.println(currentUser.getLogin() + currentUser.getAdministrator());
             currentUser.updateUser();
+            JOptionPane.showMessageDialog(null,"Utilisateur " + currentUser.getLogin() + " modifié");
+            
         }
         else{
-            System.out.println("Aucun élément ");
+            JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
@@ -174,12 +176,16 @@ public class FrameAdmin extends javax.swing.JFrame {
 
          if(jComboBoxListUser.getSelectedItem() != null){
             User currentUser = (User) jComboBoxListUser.getSelectedItem();
-            currentUser.deleteUser();
-            jComboBoxListUser.removeItem(currentUser);
-            jComboBoxListUser.remove(jComboBoxListUser.getSelectedIndex());
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment supprimer l'utilisateur " + currentUser.getLogin() + " ?");
+            if(dialogResult == JOptionPane.YES_OPTION){
+                currentUser.deleteUser();
+                jComboBoxListUser.removeItem(currentUser);
+                jComboBoxListUser.remove(jComboBoxListUser.getSelectedIndex());
+                JOptionPane.showMessageDialog(null,"Utilisateur " + currentUser.getLogin() + " supprimé");
+            }
         }
         else{
-            System.out.println("Aucun élément ");
+            JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
