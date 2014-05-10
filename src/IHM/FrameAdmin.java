@@ -5,6 +5,7 @@
 package IHM;
 
 import Object.User;
+import genmdp.MotDePasse;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -58,6 +59,11 @@ public class FrameAdmin extends javax.swing.JFrame {
         });
 
         jButtonChangePwd.setText("Changer mdp");
+        jButtonChangePwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangePwdActionPerformed(evt);
+            }
+        });
 
         jCheckBoxAdmin.setText("Administrateur");
         jCheckBoxAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +201,19 @@ public class FrameAdmin extends javax.swing.JFrame {
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButtonCreateActionPerformed
+
+    private void jButtonChangePwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangePwdActionPerformed
+        if(jComboBoxListUser.getSelectedItem() != null){
+            MotDePasse mdp = new MotDePasse(true, true, true);
+            User currentUser = (User) jComboBoxListUser.getSelectedItem();
+            currentUser.setPassword(mdp.generationMdp());
+            currentUser.updateUser();
+            JOptionPane.showMessageDialog(null,"Nouveau mot de passe pour l'utilisateur " + currentUser.getLogin() + " : " + currentUser.getPassword());
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
+        }
+    }//GEN-LAST:event_jButtonChangePwdActionPerformed
 
     /**
      * @param args the command line arguments
