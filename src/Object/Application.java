@@ -9,15 +9,15 @@ public class Application {
 	private int id, investmentCost, operatingCost, numberUser;
 	private String name, description;
 	private Date productionDate, decommissionDate;
-	private TypeApplication typeApplication;
+	private String typeApplication;
 	private Responsible responsible, responsibleDeputy, responsibleOperation, responsibleDevelopment;
 	private Lifecycle lifecycle;
 	private Database database;
-	private Security securityAvailability, securityConfidentiality, securityIntegrity;
+	private String securityAvailability, securityConfidentiality, securityIntegrity;
 	private Category category;
 	private Server server;
-	private Fit fitBusiness, fitIT, fitCost;
-	private Strategy strategyImportance;
+	private String fitBusiness, fitIT, fitCost;
+	private String strategyImportance;
 	private ArrayList<Capability> listCapability;
 	private ArrayList<Application> listSubstitute, listReplace;
 	private ArrayList<Interface> listInterfaceProvider, listInterfaceUse;
@@ -73,13 +73,13 @@ public class Application {
 	/**
 	 * @return the typeApplication
 	 */
-	public TypeApplication getTypeApplication() {
+	public String getTypeApplication() {
 		return typeApplication;
 	}
 	/**
 	 * @param typeApplication the typeApplication to set
 	 */
-	public void setTypeApplication(TypeApplication typeApplication) {
+	public void setTypeApplication(String typeApplication) {
 		this.typeApplication = typeApplication;
 	}
 	/**
@@ -205,37 +205,37 @@ public class Application {
 	/**
 	 * @return the securityAvailability
 	 */
-	public Security getSecurityAvailability() {
+	public String getSecurityAvailability() {
 		return securityAvailability;
 	}
 	/**
 	 * @param securityAvailability the securityAvailability to set
 	 */
-	public void setSecurityAvailability(Security securityAvailability) {
+	public void setSecurityAvailability(String securityAvailability) {
 		this.securityAvailability = securityAvailability;
 	}
 	/**
 	 * @return the securityConfidentiality
 	 */
-	public Security getSecurityConfidentiality() {
+	public String getSecurityConfidentiality() {
 		return securityConfidentiality;
 	}
 	/**
 	 * @param securityConfidentiality the securityConfidentiality to set
 	 */
-	public void setSecurityConfidentiality(Security securityConfidentiality) {
+	public void setSecurityConfidentiality(String securityConfidentiality) {
 		this.securityConfidentiality = securityConfidentiality;
 	}
 	/**
 	 * @return the securityIntegrity
 	 */
-	public Security getSecurityIntegrity() {
+	public String getSecurityIntegrity() {
 		return securityIntegrity;
 	}
 	/**
 	 * @param securityIntegrity the securityIntegrity to set
 	 */
-	public void setSecurityIntegrity(Security securityIntegrity) {
+	public void setSecurityIntegrity(String securityIntegrity) {
 		this.securityIntegrity = securityIntegrity;
 	}
 	/**
@@ -265,49 +265,49 @@ public class Application {
 	/**
 	 * @return the fitBusiness
 	 */
-	public Fit getFitBusiness() {
+	public String getFitBusiness() {
 		return fitBusiness;
 	}
 	/**
 	 * @param fitBusiness the fitBusiness to set
 	 */
-	public void setFitBusiness(Fit fitBusiness) {
+	public void setFitBusiness(String fitBusiness) {
 		this.fitBusiness = fitBusiness;
 	}
 	/**
 	 * @return the fitIT
 	 */
-	public Fit getFitIT() {
+	public String getFitIT() {
 		return fitIT;
 	}
 	/**
 	 * @param fitIT the fitIT to set
 	 */
-	public void setFitIT(Fit fitIT) {
+	public void setFitIT(String fitIT) {
 		this.fitIT = fitIT;
 	}
 	/**
 	 * @return the fitCost
 	 */
-	public Fit getFitCost() {
+	public String getFitCost() {
 		return fitCost;
 	}
 	/**
 	 * @param fitCost the fitCost to set
 	 */
-	public void setFitCost(Fit fitCost) {
+	public void setFitCost(String fitCost) {
 		this.fitCost = fitCost;
 	}
 	/**
 	 * @return the strategyImportance
 	 */
-	public Strategy getStrategyImportance() {
+	public String getStrategyImportance() {
 		return strategyImportance;
 	}
 	/**
 	 * @param strategyImportance the strategyImportance to set
 	 */
-	public void setStrategyImportance(Strategy strategyImportance) {
+	public void setStrategyImportance(String strategyImportance) {
 		this.strategyImportance = strategyImportance;
 	}
 	/**
@@ -420,15 +420,15 @@ public class Application {
 	 * @param listTechnology
 	 */
 	public Application(int id, String name, String description,
-			Date productionDate, TypeApplication typeApplication,
+			Date productionDate, String typeApplication,
 			Responsible responsible, Responsible responsibleDeputy,
 			Responsible responsibleOperation,
 			Responsible responsibleDevelopment, Lifecycle lifecycle,
 			Database database, Date decommissionDate, int investmentCost,
-			int operatingCost, int numberUser, Security securityAvailability,
-			Security securityConfidentiality, Security securityIntegrity,
-			Category category, Server server, Fit fitBusiness, Fit fitIT,
-			Fit fitCost, Strategy strategyImportance,
+			int operatingCost, int numberUser, String securityAvailability,
+			String securityConfidentiality, String securityIntegrity,
+			Category category, Server server, String fitBusiness, String fitIT,
+			String fitCost, String strategyImportance,
 			ArrayList<Capability> listCapability,
 			ArrayList<Application> listSubstitute,
 			ArrayList<Application> listReplace,
