@@ -1,10 +1,12 @@
-package Object;
+package myObject;
 
+import myObject.old.Synchronicity;
+import myObject.old.Security;
 import java.util.ArrayList;
 
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
-public class Interface {
+public class Interface extends MetaModelObject{
 
 	private int id;
 	private String name, description, dataTransfer;
@@ -167,6 +169,36 @@ public class Interface {
 		this.lifecycle = lifecycle;
 		this.listTechnology = listTechnology;
 	}
+
+    @Override
+    void addObjectToMetaModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void createObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void deleteObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void updateObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void associateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void dissociateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 	
 }

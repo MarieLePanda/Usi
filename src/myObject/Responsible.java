@@ -1,4 +1,4 @@
-package Object;
+package myObject;
 
 public class Responsible {
 	

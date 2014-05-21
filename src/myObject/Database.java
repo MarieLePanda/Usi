@@ -1,10 +1,10 @@
-package Object;
+package myObject;
 
 import java.util.ArrayList;
 
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
-public class Database {
+public class Database extends MetaModelObject{
 
 
 	private int id, investmentCost, operatingCost;
@@ -241,6 +241,36 @@ public class Database {
 				+ ", decommissionDate=" + decommissionDate + ", lifecycle="
 				+ lifecycle + ", listTechnology=" + listTechnology + "]";
 	}
+
+    @Override
+    void addObjectToMetaModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void createObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void deleteObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void updateObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void associateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void dissociateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 	
 }

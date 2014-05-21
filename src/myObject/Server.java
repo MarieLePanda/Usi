@@ -1,18 +1,19 @@
-package Object;
+package myObject;
+
 
 import java.util.ArrayList;
 
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
-public class Server {
+public class Server extends MetaModelObject{
     
     private int id, investmentCost, operatingCost, productionCost;
     private String name, description;
-    private TypeServer typseServer;
+    private String typseServer;
     private Responsible responsible, responsibleDeputy, responsibleDevelopment, responsibleOperation;
-    private Ram ram;
-    private Processeur processeur;
-    private Os os;
+    private String ram;
+    private String processeur;
+    private String os;
     private Date productionDate, decommissionDate;
     private ArrayList<Technology> listTechnology;
     
@@ -58,10 +59,10 @@ public class Server {
 	public void setResponsible(Responsible responsible) {
 		this.responsible = responsible;
 	}
-	public TypeServer getTypseServer() {
+	public String getTypseServer() {
 		return typseServer;
 	}
-	public void setTypseServer(TypeServer typseServer) {
+	public void setTypseServer(String typseServer) {
 		this.typseServer = typseServer;
 	}
 	public Responsible getResponsibleDeputy() {
@@ -82,22 +83,22 @@ public class Server {
 	public void setResponsibleDevelopment(Responsible responsibleDevelopment) {
 		this.responsibleDevelopment = responsibleDevelopment;
 	}
-	public Ram getRam() {
+	public String getRam() {
 		return ram;
 	}
-	public void setRam(Ram ram) {
+	public void setRam(String ram) {
 		this.ram = ram;
 	}
-	public Processeur getProcesseur() {
+	public String getProcesseur() {
 		return processeur;
 	}
-	public void setProcesseur(Processeur processeur) {
+	public void setProcesseur(String processeur) {
 		this.processeur = processeur;
 	}
-	public Os getOs() {
+	public String getOs() {
 		return os;
 	}
-	public void setOs(Os os) {
+	public void setOs(String os) {
 		this.os = os;
 	}
 	public Date getDecommissionDate() {
@@ -144,10 +145,10 @@ public class Server {
 	 */
 	public Server(int id, int investmentCost, int operatingCost,
 			int productionCost, String name, String description,
-			TypeServer typseServer, Responsible responsible,
+			String typseServer, Responsible responsible,
 			Responsible responsibleDeputy, Responsible responsibleDevelopment,
-			Responsible responsibleOperation, Ram ram, Processeur processeur,
-			Os os, Date productionDate, Date decommissionDate,
+			Responsible responsibleOperation, String ram, String processeur,
+			String os, Date productionDate, Date decommissionDate,
 			ArrayList<Technology> listTechnology) {
 		this.id = id;
 		this.investmentCost = investmentCost;
@@ -182,4 +183,34 @@ public class Server {
 				+ productionDate + ", decommissionDate=" + decommissionDate
 				+ ", listTechnology=" + listTechnology + "]";
 	}
+
+    @Override
+    void addObjectToMetaModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void createObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void deleteObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void updateObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void associateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void dissociateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

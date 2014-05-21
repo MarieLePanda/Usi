@@ -1,4 +1,4 @@
-package Object;
+
 
 public class TypeApplication {
 	

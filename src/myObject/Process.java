@@ -1,10 +1,10 @@
-package Object;
+package myObject;
 
 import java.util.ArrayList;
 
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
-public class Process {
+public class Process extends MetaModelObject{
 
 	private int id;
 	private String name;
@@ -165,5 +165,35 @@ public class Process {
 				+ ", responsibleDeputy=" + responsibleDeputy
 				+ ", listCapability=" + listCapability + "]";
 	}
+
+    @Override
+    void addObjectToMetaModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void createObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void deleteObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void updateObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void associateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void dissociateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 }

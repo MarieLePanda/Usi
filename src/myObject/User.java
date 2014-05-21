@@ -1,4 +1,4 @@
-package Object;
+package myObject;
 
 public class User {
 	
@@ -61,7 +61,7 @@ public class User {
 	 */
 	public void createUser(){
 		
-            System.out.println("Function createUser not supported yet");
+            throw new UnsupportedOperationException("Not supported yet.");
 	}
 	
 	/***
@@ -70,7 +70,7 @@ public class User {
 	 */
 	public void deleteUser(){
 		
-            System.out.println("Function deleteUser not supported yet");
+            throw new UnsupportedOperationException("Not supported yet.");
 	}
 	
 	/***
@@ -79,7 +79,7 @@ public class User {
 	 */
 	public void updateUser(){
 		
-            System.out.println("Function update User not supported yet");
+           throw new UnsupportedOperationException("Not supported yet.");
 	}
 	
 }

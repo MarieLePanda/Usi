@@ -1,10 +1,11 @@
-package Object;
+package myObject;
+
 
 import java.util.ArrayList;
 
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
-public class Application {
+public class Application extends MetaModelObject{
 	
 	private int id, investmentCost, operatingCost, numberUser;
 	private String name, description;
@@ -14,7 +15,7 @@ public class Application {
 	private Lifecycle lifecycle;
 	private Database database;
 	private String securityAvailability, securityConfidentiality, securityIntegrity;
-	private Category category;
+	private String category;
 	private Server server;
 	private String fitBusiness, fitIT, fitCost;
 	private String strategyImportance;
@@ -241,13 +242,13 @@ public class Application {
 	/**
 	 * @return the category
 	 */
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 	/**
 	 * @param category the category to set
 	 */
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 	/**
@@ -427,7 +428,7 @@ public class Application {
 			Database database, Date decommissionDate, int investmentCost,
 			int operatingCost, int numberUser, String securityAvailability,
 			String securityConfidentiality, String securityIntegrity,
-			Category category, Server server, String fitBusiness, String fitIT,
+			String category, Server server, String fitBusiness, String fitIT,
 			String fitCost, String strategyImportance,
 			ArrayList<Capability> listCapability,
 			ArrayList<Application> listSubstitute,
@@ -494,6 +495,36 @@ public class Application {
 				+ ", listInterfaceUse=" + listInterfaceUse
 				+ ", listTechnology=" + listTechnology + "]";
 	}
+
+    @Override
+    void addObjectToMetaModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void createObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void deleteObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void updateObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void associateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void dissociateObject(MetaModelObject secondObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 	
 	

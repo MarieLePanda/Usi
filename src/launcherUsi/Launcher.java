@@ -1,4 +1,5 @@
-package Launch;
+package launcherUsi;
+import IHM.frameObject.FrameApplication;
 import IHM.*;
 import javax.swing.WindowConstants;
 
