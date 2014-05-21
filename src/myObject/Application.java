@@ -466,6 +466,7 @@ public class Application extends MetaModelObject{
 		this.listInterfaceProvider = listInterfaceProvider;
 		this.listInterfaceUse = listInterfaceUse;
 		this.listTechnology = listTechnology;
+                
 	}
 	
 	/* (non-Javadoc)
@@ -473,27 +474,7 @@ public class Application extends MetaModelObject{
 	 */
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", name=" + name + ", description="
-				+ description + ", productionDate=" + productionDate
-				+ ", typeApplication=" + typeApplication + ", responsible="
-				+ responsible + ", responsibleDeputy=" + responsibleDeputy
-				+ ", responsibleOperation=" + responsibleOperation
-				+ ", responsibleDevelopment=" + responsibleDevelopment
-				+ ", lifecycle=" + lifecycle + ", database=" + database
-				+ ", decommissionDate=" + decommissionDate
-				+ ", investmentCost=" + investmentCost + ", operatingCost="
-				+ operatingCost + ", numberUser=" + numberUser
-				+ ", securityAvailability=" + securityAvailability
-				+ ", securityConfidentiality=" + securityConfidentiality
-				+ ", securityIntegrity=" + securityIntegrity + ", category="
-				+ category + ", server=" + server + ", fitBusiness="
-				+ fitBusiness + ", fitIT=" + fitIT + ", fitCost=" + fitCost
-				+ ", strategyImportance=" + strategyImportance
-				+ ", listCapability=" + listCapability + ", listSubstitute="
-				+ listSubstitute + ", listReplace=" + listReplace
-				+ ", listInterfaceProvider=" + listInterfaceProvider
-				+ ", listInterfaceUse=" + listInterfaceUse
-				+ ", listTechnology=" + listTechnology + "]";
+		return getName();
 	}
 
     @Override

@@ -4,6 +4,11 @@
  */
 package IHM;
 
+import data.DataIHM;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import myObject.Application;
+
 /**
  *
  * @author lug13995
@@ -14,8 +19,14 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
+        
         initComponents();
-        pack();
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Meta-model");
+        DefaultMutableTreeNode function = new DefaultMutableTreeNode("function");
+        root.add(function);
+        jTreeMetaModel = new javax.swing.JTree(root);
+
+        //System.out.print(jTreeMetaModel.getModel().getChild(root, WIDTH));
     }
 
     /**
@@ -26,32 +37,30 @@ public class MainFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        DefaultMutableTreeNode root;
+        root = DataIHM.initTree();
+        jTreeMetaModel = new javax.swing.JTree(root);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTree1, org.jdesktop.beansbinding.ObjectProperty.create(), jTree1, org.jdesktop.beansbinding.BeanProperty.create("model"), "test");
-        bindingGroup.addBinding(binding);
-
-        jScrollPane1.setViewportView(jTree1);
+        jScrollPane1.setViewportView(jTreeMetaModel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 303, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 226, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
         );
-
-        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -92,7 +101,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTree jTree1;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables
 }
