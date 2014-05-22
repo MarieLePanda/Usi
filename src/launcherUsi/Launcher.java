@@ -14,7 +14,7 @@ public class Launcher {
             
             Runnable r = new Runnable(){
                 public void run(){
-                    MainFrame win = new MainFrame();
+                    FrameAdmin win = new FrameAdmin();
                     win.setVisible(true);
                     win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		}

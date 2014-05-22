@@ -6,6 +6,7 @@ package IHM.frameAdmin;
 
 import myObject.User;
 import genmdp.MotDePasse;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -18,11 +19,14 @@ public class FrameAdmin extends javax.swing.JFrame {
     /**
      * Creates new form FrameAdmin
      */
+    
     public FrameAdmin() {
+        
         initComponents();
-        jComboBoxListUser.addItem(new User (1, "Panda", "panda", true));
+        
+        /*jComboBoxListUser.addItem(new User (1, "Panda", "panda", true));
         jComboBoxListUser.addItem(new User(2, "Marie", "marie", false));
-        jComboBoxListUser.addItem(new User(3, "Mary", "mary", false));
+        jComboBoxListUser.addItem(new User(3, "Mary", "mary", false));*/
         pack();
     }
 
@@ -51,7 +55,7 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         jLabelLogin.setText("Login :");
 
-        jComboBoxListUser.setModel(new javax.swing.DefaultComboBoxModel());
+        jComboBoxListUser.setModel(new javax.swing.DefaultComboBoxModel(data.DataIHM.loadUser()));
         jComboBoxListUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxListUserActionPerformed(evt);
