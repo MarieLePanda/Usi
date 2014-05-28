@@ -243,32 +243,37 @@ public class Database extends MetaModelObject{
 	}
 
     @Override
-    void addObjectToMetaModel() {
+    public void addObjectToMetaModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void createObject() {
+    public void createObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void deleteObject() {
+    public void deleteObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void updateObject() {
+    public void updateObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void associateObject(MetaModelObject secondObject) {
+    public void associateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void dissociateObject(MetaModelObject secondObject) {
+    public void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 	

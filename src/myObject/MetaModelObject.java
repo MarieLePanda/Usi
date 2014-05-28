@@ -12,16 +12,31 @@ import java.util.ArrayList;
  */
 abstract class MetaModelObject {
     private static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
+    private static ArrayList<String> listOfTypeObject = new ArrayList<String>();
+
+    public ArrayList<MetaModelObject> getListObject() {
+        return listObject;
+    }
     
-    abstract void addObjectToMetaModel();
+    public ArrayList<String> getListOfTypeObject() {
+        return listOfTypeObject;
+    }
     
-    abstract void createObject();
+    public static ArrayList<String> getListOfTypeObject(String type) {
+        return listOfTypeObject;
+    }
     
-    abstract void deleteObject();
+    public abstract void addObjectToMetaModel();
     
-    abstract void updateObject();
+    public abstract void createObject();
     
-    abstract void associateObject(MetaModelObject secondObject);
+    public abstract void deleteObject();
     
-    abstract void dissociateObject(MetaModelObject secondObject);
+    public abstract void updateObject();
+    
+    public abstract void associateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget);
+    
+    public abstract void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget);
+    
+    public abstract void sizeObject();
 }

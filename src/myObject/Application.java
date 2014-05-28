@@ -1,9 +1,10 @@
 package myObject;
 
 
+import data.database.SqlDatabase;
 import java.util.ArrayList;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
+import java.util.Date;
 
 public class Application extends MetaModelObject{
 	
@@ -388,6 +389,85 @@ public class Application extends MetaModelObject{
 		
 	}
 	
+        /**
+	 * @param name
+	 * @param description
+	 * @param productionDate
+	 * @param typeApplication
+	 * @param responsible
+	 * @param responsibleDeputy
+	 * @param responsibleOperation
+	 * @param responsibleDevelopment
+	 * @param lifecycle
+	 * @param database
+	 * @param decommissionDate
+	 * @param investmentCost
+	 * @param operatingCost
+	 * @param numberUser
+	 * @param securityAvailability
+	 * @param securityConfidentiality
+	 * @param securityIntegrity
+	 * @param category
+	 * @param server
+	 * @param fitBusiness
+	 * @param fitIT
+	 * @param fitCost
+	 * @param strategyImportance
+	 * @param listCapability
+	 * @param listSubstitute
+	 * @param listReplace
+	 * @param listInterfaceProvider
+	 * @param listInterfaceUse
+	 * @param listTechnology
+	 */
+	public Application(String name, String description,
+			Date productionDate, String typeApplication,
+			Responsible responsible, Responsible responsibleDeputy,
+			Responsible responsibleOperation,
+			Responsible responsibleDevelopment, Lifecycle lifecycle,
+			Database database, Date decommissionDate, int investmentCost,
+			int operatingCost, int numberUser, String securityAvailability,
+			String securityConfidentiality, String securityIntegrity,
+			String category, Server server, String fitBusiness, String fitIT,
+			String fitCost, String strategyImportance,
+			ArrayList<Capability> listCapability,
+			ArrayList<Application> listSubstitute,
+			ArrayList<Application> listReplace,
+			ArrayList<Interface> listInterfaceProvider,
+			ArrayList<Interface> listInterfaceUse,
+			ArrayList<Technology> listTechnology) {
+		this.name = name;
+		this.description = description;
+		this.productionDate = productionDate;
+		this.typeApplication = typeApplication;
+		this.responsible = responsible;
+		this.responsibleDeputy = responsibleDeputy;
+		this.responsibleOperation = responsibleOperation;
+		this.responsibleDevelopment = responsibleDevelopment;
+		this.lifecycle = lifecycle;
+		this.database = database;
+		this.decommissionDate = decommissionDate;
+		this.investmentCost = investmentCost;
+		this.operatingCost = operatingCost;
+		this.numberUser = numberUser;
+		this.securityAvailability = securityAvailability;
+		this.securityConfidentiality = securityConfidentiality;
+		this.securityIntegrity = securityIntegrity;
+		this.category = category;
+		this.server = server;
+		this.fitBusiness = fitBusiness;
+		this.fitIT = fitIT;
+		this.fitCost = fitCost;
+		this.strategyImportance = strategyImportance;
+		this.listCapability = listCapability;
+		this.listSubstitute = listSubstitute;
+		this.listReplace = listReplace;
+		this.listInterfaceProvider = listInterfaceProvider;
+		this.listInterfaceUse = listInterfaceUse;
+		this.listTechnology = listTechnology;
+                
+	}
+        
 	/**
 	 * @param id
 	 * @param name
@@ -478,32 +558,38 @@ public class Application extends MetaModelObject{
 	}
 
     @Override
-    void addObjectToMetaModel() {
+    public void addObjectToMetaModel() {
+       super.getListObject().add(this);
+    }
+
+    @Override
+    public void createObject() {
+       this.addObjectToMetaModel();
+       SqlDatabase.createApplication(this);
+    }
+
+    @Override
+    public void deleteObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void createObject() {
+    public void updateObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void deleteObject() {
+    public void associateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void updateObject() {
+    public void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    void associateObject(MetaModelObject secondObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void dissociateObject(MetaModelObject secondObject) {
+    public void sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 	

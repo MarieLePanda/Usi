@@ -1,6 +1,6 @@
 package myObject;
 
-public class Lifecycle extends MetaModelObject{
+public class Lifecycle {
 
 	private int id;
 	private String name;
@@ -49,36 +49,5 @@ public class Lifecycle extends MetaModelObject{
 	@Override
 	public String toString() {
 		return "Lifecycle [id=" + id + ", name=" + name + "]";
-	}	
-
-    @Override
-    void addObjectToMetaModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void createObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void deleteObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void updateObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void associateObject(MetaModelObject secondObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void dissociateObject(MetaModelObject secondObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-	
+	}		
 }
