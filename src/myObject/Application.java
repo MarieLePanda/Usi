@@ -1,10 +1,10 @@
 package myObject;
 
 
-import data.database.SqlDatabase;
+import data.database.CrudDatabase;
 import java.util.ArrayList;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Application extends MetaModelObject{
 	
@@ -565,7 +565,7 @@ public class Application extends MetaModelObject{
     @Override
     public void createObject() {
        this.addObjectToMetaModel();
-       SqlDatabase.createApplication(this);
+       CrudDatabase.createApplication(this);
     }
 
     @Override

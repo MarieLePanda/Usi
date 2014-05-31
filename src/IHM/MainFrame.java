@@ -4,10 +4,13 @@
  */
 package IHM;
 
-import data.DataIHM;
+import IHM.frameObject.*;
+import data.IHM.DataIHM;
+import java.sql.Date;
 import javax.swing.JTree;
+import javax.swing.WindowConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
-import myObject.Application;
+import myObject.*;
 
 /**
  *
@@ -21,12 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         
         initComponents();
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Meta-model");
-        DefaultMutableTreeNode function = new DefaultMutableTreeNode("function");
-        root.add(function);
-        jTreeMetaModel = new javax.swing.JTree(root);
 
-        //System.out.print(jTreeMetaModel.getModel().getChild(root, WIDTH));
     }
 
     /**
@@ -45,6 +43,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTreeMetaModel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTreeMetaModelMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTreeMetaModel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -52,18 +55,31 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 226, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 390, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTreeMetaModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTreeMetaModelMouseClicked
+        // TODO add your handling code here:
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
+        if(node != null){
+            if(node.getUserObject() instanceof Segment){
+                System.out.println("C'est un segment");
+                FrameSegment win = new FrameSegment((Segment) node.getUserObject());
+                    win.setVisible(true);
+                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
+        }
+    }//GEN-LAST:event_jTreeMetaModelMouseClicked
 
     /**
      * @param args the command line arguments

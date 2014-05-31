@@ -1,13 +1,13 @@
 package myObject;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class Process extends MetaModelObject{
 
 	private int id;
-	private String name;
+	private String name, description;
 	private Date validFrom;
 	private Date valideUntil;
 	private Segment segment;
@@ -43,6 +43,20 @@ public class Process extends MetaModelObject{
 		this.name = name;
 	}
 	
+        /**
+	 * @return the description
+	 */
+        public String getDescription() {
+            return description;
+        }
+        
+        /**
+	 * @param description the description to set
+	 */
+        public void setDescription(String description) {
+            this.description = description;
+        }
+        
 	/**
 	 * @return the validFrom
 	 */
@@ -153,17 +167,38 @@ public class Process extends MetaModelObject{
 		this.responsibleDeputy = responsibleDeputy;
 		this.listCapability = listCapability;
 	}
+
+         /**
+	 * @param id
+	 * @param name
+         * @param description
+	 * @param validFrom
+	 * @param valideUntil
+	 * @param segment
+	 * @param responsible
+	 * @param responsibleDeputy
+	 * @param listCapability
+	 */
+        public Process(int id, String name, String description, Date validFrom, 
+                Date valideUntil, Segment segment, Responsible responsible, 
+                Responsible responsibleDeputy, ArrayList<Capability> listCapability) {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.validFrom = validFrom;
+            this.valideUntil = valideUntil;
+            this.segment = segment;
+            this.responsible = responsible;
+            this.responsibleDeputy = responsibleDeputy;
+            this.listCapability = listCapability;
+        }
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Process [id=" + id + ", name=" + name + ", validFrom="
-				+ validFrom + ", valideUntil=" + valideUntil + ", segment="
-				+ segment + ", responsible=" + responsible
-				+ ", responsibleDeputy=" + responsibleDeputy
-				+ ", listCapability=" + listCapability + "]";
+		return getName();
 	}
 
     @Override

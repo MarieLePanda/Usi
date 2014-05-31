@@ -4,17 +4,21 @@
  */
 package data.database;
 
-import myObject.Application;
+import java.sql.*;
+import java.util.ArrayList;
+import myObject.*;
 
 /**
  *
  * @author lug13995
  */
-public class SqlDatabase {
+public class CrudDatabase {
     
     public static void createApplication(Application application){
-        
+        ConnectionSql.getConnection();
         System.out.print("Creation de l'application en base de données");
         System.out.println(application);
     }
+    
+   
 }

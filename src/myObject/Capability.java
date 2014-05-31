@@ -2,15 +2,15 @@ package myObject;
 
 import java.util.ArrayList;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
+import java.sql.Date;
 
 public class Capability extends MetaModelObject{
 	
 	private int id;
-	private String name;
+	private String name, description;
 	private Date validFrom;
 	private Date valideUntil;
-	private Segment segment;
+	private Process process;
 	private Responsible responsible;
 	private Responsible responsibleDeputy;
 	private ArrayList<Application> listApplication;
@@ -43,6 +43,20 @@ public class Capability extends MetaModelObject{
 		this.name = name;
 	}
 	
+         /**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+        
 	/**
 	 * @return the validFrom
 	 */
@@ -72,17 +86,17 @@ public class Capability extends MetaModelObject{
 	}
 	
 	/**
-	 * @return the segment
+	 * @return the process
 	 */
-	public Segment getSegment() {
-		return segment;
+	public Process getProcess() {
+		return process;
 	}
 	
 	/**
-	 * @param segment the segment to set
+	 * @param process the process to set
 	 */
-	public void setSegment(Segment segment) {
-		this.segment = segment;
+	public void setProcess(Process process) {
+		this.process = process;
 	}
 	
 	/**
@@ -134,22 +148,22 @@ public class Capability extends MetaModelObject{
 	/**
 	 * @param id
 	 * @param name
+         * @param description
 	 * @param validFrom
 	 * @param valideUntil
-	 * @param segment
+	 * @param process
 	 * @param responsible
 	 * @param responsibleDeputy
 	 * @param listApplication
 	 */
-	public Capability(int id, String name, Date validFrom, Date valideUntil,
-			Segment segment, Responsible responsible,
-			Responsible responsibleDeputy,
-			ArrayList<Application> listApplication) {
+	public Capability(int id, Process process, String name, String description, Date validFrom, Date valideUntil,
+			Responsible responsible, Responsible responsibleDeputy,	ArrayList<Application> listApplication) {
 		this.id = id;
 		this.name = name;
+                this.description = description;
 		this.validFrom = validFrom;
 		this.valideUntil = valideUntil;
-		this.segment = segment;
+		this.process = process;
 		this.responsible = responsible;
 		this.responsibleDeputy = responsibleDeputy;
 		this.listApplication = listApplication;
@@ -160,11 +174,7 @@ public class Capability extends MetaModelObject{
 	 */
 	@Override
 	public String toString() {
-		return "Capability [id=" + id + ", name=" + name + ", validFrom="
-				+ validFrom + ", valideUntil=" + valideUntil + ", segment="
-				+ segment + ", responsible=" + responsible
-				+ ", responsibleDeputy=" + responsibleDeputy
-				+ ", listApplication=" + listApplication + "]";
+		return getName();
 	}
 
     @Override

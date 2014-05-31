@@ -55,7 +55,7 @@ public class FrameAdmin extends javax.swing.JFrame {
 
         jLabelLogin.setText("Login :");
 
-        jComboBoxListUser.setModel(new javax.swing.DefaultComboBoxModel(data.DataIHM.loadUser()));
+        jComboBoxListUser.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.loadUser()));
         jComboBoxListUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxListUserActionPerformed(evt);

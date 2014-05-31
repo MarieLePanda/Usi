@@ -3,7 +3,7 @@ package myObject;
 public class Responsible {
 	
 	private int id;
-	private String firstName, name;
+	private String name;
 	
 	/**
 	 * @return the id
@@ -16,18 +16,6 @@ public class Responsible {
 	 */
 	public void setId(int id) {
 		this.id = id;
-	}
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
 	}
 	/**
 	 * @return the name
@@ -51,9 +39,8 @@ public class Responsible {
 	 * @param firstName
 	 * @param name
 	 */
-	public Responsible(int id, String firstName, String name) {
+	public Responsible(int id, String name) {
 		this.id = id;
-		this.firstName = firstName;
 		this.name = name;
 	}
 	
@@ -62,8 +49,7 @@ public class Responsible {
 	 */
 	@Override
 	public String toString() {
-		return "Responsible [id=" + id + ", firstName=" + firstName + ", name="
-				+ name + "]";
+		return getName();
 	}
 	
 	

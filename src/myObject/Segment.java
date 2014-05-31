@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Segment extends MetaModelObject{
 	
 	private int id;
-	private String name;
+	private String name, description;
 	private Responsible responsible;
 	private Responsible responsibledeputy;
 	private ArrayList<Process> listProcess;
@@ -36,6 +36,20 @@ public class Segment extends MetaModelObject{
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+        	
+        /**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	/**
@@ -87,14 +101,16 @@ public class Segment extends MetaModelObject{
 	/**
 	 * @param id
 	 * @param name
+         * @param description
 	 * @param responsible
 	 * @param responsibledeputy
 	 * @param listProcess
 	 */
-	public Segment(int id, String name, Responsible responsible,
+	public Segment(int id, String name, String description, Responsible responsible,
 			Responsible responsibledeputy, ArrayList<Process> listProcess) {
 		this.id = id;
 		this.name = name;
+                this.description = description;
 		this.responsible = responsible;
 		this.responsibledeputy = responsibledeputy;
 		this.listProcess = listProcess;
@@ -105,9 +121,7 @@ public class Segment extends MetaModelObject{
 	 */
 	@Override
 	public String toString() {
-		return "Segment [id=" + id + ", name=" + name + ", responsible="
-				+ responsible + ", responsibledeputy=" + responsibledeputy
-				+ ", listProcess=" + listProcess + "]";
+		return getName();
 	}
 
     @Override

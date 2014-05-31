@@ -5,9 +5,11 @@
 package IHM.frameObject;
 
 
+import data.IHM.DataIHM;
 import java.util.ArrayList;
 import myObject.*;
-import java.util.Date;
+import java.sql.Date;
+import javax.swing.ComboBoxModel;
 
 
 /**
@@ -187,19 +189,19 @@ public class FrameApplication extends javax.swing.JFrame {
 
         jLabelResponsible.setText("Responsable");
 
-        jComboBoxResponsible.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxResponsible.setModel(new javax.swing.DefaultComboBoxModel(DataIHM.loadResponsible()));
 
         jLabelResponsibleDeputy.setText("Responsable suppléant");
 
-        jComboBoxResponsibleDeputy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxResponsibleDeputy.setModel(new javax.swing.DefaultComboBoxModel(DataIHM.loadResponsible()));
 
         jLabelResponsibleDevelopment.setText("Responsable développement");
 
-        jComboBoxResponsibleDevelopment.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxResponsibleDevelopment.setModel(new javax.swing.DefaultComboBoxModel(DataIHM.loadResponsible()));
 
         jLabelResponsibleOperation.setText("Responsable Opération");
 
-        jComboBoxResponsibleOperation.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxResponsibleOperation.setModel(new javax.swing.DefaultComboBoxModel(DataIHM.loadResponsible()));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -657,11 +659,11 @@ public class FrameApplication extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Application application = new Application(jTextFieldName.getText(), jTextAreaDescription.getText(), 
-            jCalendarComboBoxProduction.getDate(), jTextFieldType.getText(),
+            (java.sql.Date)jCalendarComboBoxProduction.getDate(), jTextFieldType.getText(),
             (Responsible) jComboBoxResponsible.getSelectedItem(),(Responsible) jComboBoxResponsibleDeputy.getSelectedItem(),
             (Responsible) jComboBoxResponsibleOperation.getSelectedItem(), (Responsible) jComboBoxResponsibleDevelopment.getSelectedItem(),
             (Lifecycle) jComboBoxLifecycle.getSelectedItem(), (Database) jComboBoxDatabaseUse.getSelectedItem(),
-            jCalendarComboBoxDecommissionDate.getDate(), Integer.parseInt(jTextFieldInvestmentCost.getText()),
+            (java.sql.Date) jCalendarComboBoxDecommissionDate.getDate(), Integer.parseInt(jTextFieldInvestmentCost.getText()),
             Integer.parseInt(jTextFieldOperatingCost.getText()), Integer.parseInt(jTextFieldNumberOfUser.getText()),
             jTextFieldSecurityAvailability.getText(), jTextFieldSecurityConfidentiality.getText(),
             jTextFieldSecurityIntegrity.getText(),
