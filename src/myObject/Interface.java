@@ -204,6 +204,27 @@ public class Interface extends MetaModelObject{
     public void sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-	
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Interface other = (Interface) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 	
 }

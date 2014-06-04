@@ -276,6 +276,28 @@ public class Database extends MetaModelObject{
     public void sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Database other = (Database) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 	
 	
 }

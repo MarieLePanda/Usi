@@ -49,5 +49,28 @@ public class Lifecycle {
 	@Override
 	public String toString() {
 		return "Lifecycle [id=" + id + ", name=" + name + "]";
-	}		
+	}	
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Lifecycle other = (Lifecycle) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+        
 }

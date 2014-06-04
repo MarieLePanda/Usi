@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 package IHM.frameObject;
+import java.util.*;
+import javax.swing.*;
 import myObject.*;
 
 /**
@@ -194,6 +196,11 @@ public class FrameSegment extends javax.swing.JFrame {
         });
 
         jButtonCancel.setText("Annuler");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,9 +234,14 @@ public class FrameSegment extends javax.swing.JFrame {
 
   private void loadValue(){
       jTextFieldName.setText(this.segment.getName());
-      jLabelIdValue.setText(Integer.toHexString(this.segment.getId()));
+      jLabelIdValue.setText(Integer.toString(this.segment.getId()));
       jTextAreaDescription.setText(this.segment.getDescription());
+      //jComboBoxResponsible.setSelectedIndex(1);
       jComboBoxResponsible.setSelectedItem(this.segment.getResponsible());
+      
+      System.out.println(this.segment.getResponsible().equals(jComboBoxResponsible.getSelectedItem()));
+      System.out.println(this.segment.getResponsible().equals(jComboBoxResponsible.getSelectedItem()));
+      
       jComboBoxResponsibleDeputy.setSelectedItem(this.segment.getResponsibledeputy());
       
   }
@@ -240,8 +252,19 @@ public class FrameSegment extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
-        
+        Segment segment;
+        segment = new Segment(Integer.parseInt(jLabelIdValue.getText()), jTextFieldName.getText(), jTextAreaDescription.getText(), 
+        (Responsible) jComboBoxResponsible.getSelectedItem(), (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), 
+        (ArrayList<myObject.Process>) new ArrayList<myObject.Process>());
+        segment.updateObject();
+        JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " modifier");
+        this.dispose();
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments

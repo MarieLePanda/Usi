@@ -106,6 +106,7 @@ public class Segment extends MetaModelObject{
 	 * @param responsibledeputy
 	 * @param listProcess
 	 */
+        
 	public Segment(int id, String name, String description, Responsible responsible,
 			Responsible responsibledeputy, ArrayList<Process> listProcess) {
 		this.id = id;
@@ -141,7 +142,7 @@ public class Segment extends MetaModelObject{
 
     @Override
     public void updateObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        data.database.CrudDatabase.updateSegment(this);
     }
 
     @Override
@@ -157,6 +158,21 @@ public class Segment extends MetaModelObject{
     @Override
     public void sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Segment other = (Segment) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
 
 }
