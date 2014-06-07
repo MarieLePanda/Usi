@@ -10,21 +10,22 @@ import java.util.ArrayList;
  *
  * @author lug13995
  */
-abstract class MetaModelObject {
-    private static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
-    private static ArrayList<String> listOfTypeObject = new ArrayList<String>();
-
+public abstract class MetaModelObject {
+    protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
+    protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie"};
+    String test;
     public ArrayList<MetaModelObject> getListObject() {
         return listObject;
     }
     
-    public ArrayList<String> getListOfTypeObject() {
+    public ArrayList<MetaModelObject> getListObject(String filtre) {
+        return listObject;        
+    }
+    
+    public String[] getListOfTypeObject() {
         return listOfTypeObject;
     }
     
-    public static ArrayList<String> getListOfTypeObject(String type) {
-        return listOfTypeObject;
-    }
     
     public abstract void addObjectToMetaModel();
     
@@ -38,5 +39,5 @@ abstract class MetaModelObject {
     
     public abstract void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget);
     
-    public abstract void sizeObject();
+    public abstract int sizeObject();
 }

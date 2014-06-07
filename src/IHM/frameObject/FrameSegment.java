@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package IHM.frameObject;
+import java.awt.Dialog;
 import java.util.*;
 import javax.swing.*;
 import myObject.*;
@@ -13,12 +14,11 @@ import myObject.*;
  */
 public class FrameSegment extends javax.swing.JFrame {
 
-    private Segment segment;
+    private Segment segment = null;
     /**
      * Creates new form FrameSegment
      */
     public FrameSegment() {
-        segment = null;
         initComponents();
     }
     
@@ -38,6 +38,7 @@ public class FrameSegment extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -61,6 +62,7 @@ public class FrameSegment extends javax.swing.JFrame {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabelName.setText("Nom");
 
@@ -188,12 +190,28 @@ public class FrameSegment extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Architecture", jPanel3);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 28;
+        gridBagConstraints.ipady = 91;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(25, 10, 0, 10);
+        getContentPane().add(jTabbedPane1, gridBagConstraints);
+
         jButtonSave.setText("Valider");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 59, 15, 0);
+        getContentPane().add(jButtonSave, gridBagConstraints);
 
         jButtonCancel.setText("Annuler");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -201,47 +219,23 @@ public class FrameSegment extends javax.swing.JFrame {
                 jButtonCancelActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jButtonSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCancel)
-                .addGap(106, 106, 106))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCancel)
-                    .addComponent(jButtonSave))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 124, 15, 0);
+        getContentPane().add(jButtonCancel, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
   private void loadValue(){
+      System.out.println("Je load");
       jTextFieldName.setText(this.segment.getName());
       jLabelIdValue.setText(Integer.toString(this.segment.getId()));
       jTextAreaDescription.setText(this.segment.getDescription());
       //jComboBoxResponsible.setSelectedIndex(1);
       jComboBoxResponsible.setSelectedItem(this.segment.getResponsible());
-      
-      System.out.println(this.segment.getResponsible().equals(jComboBoxResponsible.getSelectedItem()));
-      System.out.println(this.segment.getResponsible().equals(jComboBoxResponsible.getSelectedItem()));
-      
       jComboBoxResponsibleDeputy.setSelectedItem(this.segment.getResponsibledeputy());
       
   }
@@ -252,13 +246,23 @@ public class FrameSegment extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
-        Segment segment;
-        segment = new Segment(Integer.parseInt(jLabelIdValue.getText()), jTextFieldName.getText(), jTextAreaDescription.getText(), 
-        (Responsible) jComboBoxResponsible.getSelectedItem(), (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), 
-        (ArrayList<myObject.Process>) new ArrayList<myObject.Process>());
-        segment.updateObject();
-        JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " modifier");
-        this.dispose();
+        if(segment == null){
+            segment = new Segment(jTextFieldName.getText(), jTextAreaDescription.getText(), 
+            (Responsible) jComboBoxResponsible.getSelectedItem(), (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), 
+            (ArrayList<myObject.Process>) new ArrayList<myObject.Process>());
+            segment.createObject();
+            JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " créer");
+            this.dispose();
+                
+            
+        }else{
+            segment = new Segment(Integer.parseInt(jLabelIdValue.getText()), jTextFieldName.getText(), jTextAreaDescription.getText(), 
+            (Responsible) jComboBoxResponsible.getSelectedItem(), (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), 
+            (ArrayList<myObject.Process>) new ArrayList<myObject.Process>());
+            segment.updateObject();
+            JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " modifier");
+            this.dispose();
+        }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed

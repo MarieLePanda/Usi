@@ -6,17 +6,22 @@ package IHM;
 
 import IHM.frameObject.*;
 import data.IHM.DataIHM;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.sql.Date;
 import javax.swing.JTree;
 import javax.swing.WindowConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeModel;
 import myObject.*;
 
 /**
  *
  * @author lug13995
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame implements WindowFocusListener {
 
     /**
      * Creates new form MainFrame
@@ -40,15 +45,50 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultMutableTreeNode root;
         root = DataIHM.initTree();
         jTreeMetaModel = new javax.swing.JTree(root);
+        jButtonCreateObject = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                formPropertyChange(evt);
+            }
+        });
 
         jTreeMetaModel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTreeMetaModelMouseClicked(evt);
             }
         });
+        jTreeMetaModel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTreeMetaModelFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTreeMetaModel);
+
+        jButtonCreateObject.setText("Nouveau objet");
+        jButtonCreateObject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreateObjectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,12 +97,18 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 390, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonCreateObject)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
+                .addComponent(jButtonCreateObject)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -73,13 +119,44 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
         if(node != null){
             if(node.getUserObject() instanceof Segment){
-                System.out.println("C'est un segment");
                 FrameSegment win = new FrameSegment((Segment) node.getUserObject());
-                    win.setVisible(true);
-                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }
         }
     }//GEN-LAST:event_jTreeMetaModelMouseClicked
+
+    private void jTreeMetaModelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTreeMetaModelFocusGained
+        // TODO add your handling code here:
+        //A supprimer
+    }//GEN-LAST:event_jTreeMetaModelFocusGained
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        //A supprimer
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+        //A supprimer
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+        // TODO add your handling code here:
+        //A supprimer
+    }//GEN-LAST:event_formPropertyChange
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        jTreeMetaModel.setModel(new javax.swing.JTree(DataIHM.initTree()).getModel());
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jButtonCreateObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateObjectActionPerformed
+        // TODO add your handling code here:
+        FrameNewObject win = new FrameNewObject();
+        win.setVisible(true);
+        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButtonCreateObjectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,7 +193,17 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCreateObject;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables
+
+
+    public void windowGainedFocus(WindowEvent e) {
+        System.out.println("focus");
+    }
+
+    public void windowLostFocus(WindowEvent e) {
+        System.out.println("Nofocus");
+    }
 }

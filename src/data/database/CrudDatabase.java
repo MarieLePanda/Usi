@@ -4,6 +4,7 @@
  */
 package data.database;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import myObject.*;
@@ -18,6 +19,25 @@ public class CrudDatabase {
         ConnectionSql.getConnection();
         System.out.print("Creation de l'application en base de données");
         System.out.println(application);
+        
+    }
+    
+    
+    public static void createSegment(Segment segment){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "INSERT INTO `segment` ( `name`, `description`, `Responsibleid`, `ResponsibleidDeputy`) VALUES" +
+                        "(?, ?, ?, ?);";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, segment.getName());
+            preparedStatement.setString(2, segment.getDescription());
+            preparedStatement.setInt(3, segment.getResponsible().getId());
+            preparedStatement.setInt(4, segment.getResponsibledeputy().getId());
+            preparedStatement.execute();
+            
+        }catch(SQLException e){
+            System.out.println(e.toString() + " " + e.getMessage());
+        }
     }
     
     public static void updateSegment(Segment segment){
@@ -33,9 +53,9 @@ public class CrudDatabase {
             preparedStatement.executeUpdate();
             
         }catch(SQLException e){
-            System.out.println("Erreur data.database.CrudDatabase.updateSegment " + e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
         }catch(NullPointerException e){
-            System.out.println("Erreur data.database.CrudDatabase.updateSegment " + e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
         }
         
     }
