@@ -6,6 +6,7 @@ package IHM.frameObject;
 import java.awt.Dialog;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import myObject.*;
 
 /**
@@ -58,10 +59,17 @@ public class FrameSegment extends javax.swing.JFrame {
         jLabelListProcess = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListProcess = new javax.swing.JList();
+        jButtonAddProcess = new javax.swing.JButton();
+        jButtonRemoveProcess = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabelName.setText("Nom");
@@ -161,11 +169,25 @@ public class FrameSegment extends javax.swing.JFrame {
         jLabelListProcess.setText("Quariter soutient");
 
         jListProcess.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            myObject.Process[] tabProcess = data.IHM.DataIHM.getListProcess(segment);
+            public int getSize() { return tabProcess.length; }
+            public Object getElementAt(int i) { return tabProcess[i]; }
         });
         jScrollPane2.setViewportView(jListProcess);
+
+        jButtonAddProcess.setText("Ajouter quartier");
+        jButtonAddProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddProcessActionPerformed(evt);
+            }
+        });
+
+        jButtonRemoveProcess.setText("Enlever quartier");
+        jButtonRemoveProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveProcessActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -175,7 +197,12 @@ public class FrameSegment extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelListProcess)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jButtonAddProcess)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonRemoveProcess))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -185,7 +212,11 @@ public class FrameSegment extends javax.swing.JFrame {
                 .addComponent(jLabelListProcess)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddProcess)
+                    .addComponent(jButtonRemoveProcess))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Architecture", jPanel3);
@@ -270,6 +301,47 @@ public class FrameSegment extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    private void jButtonAddProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProcessActionPerformed
+        // TODO add your handling code here:
+        if(segment != null){
+            FrameAssoToSegment win = new FrameAssoToSegment(segment);
+            win.setVisible(true);
+            win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        }else{
+            JOptionPane.showMessageDialog(null,"Merci de d'abord valider la création de votre zone");
+        }
+    }//GEN-LAST:event_jButtonAddProcessActionPerformed
+
+    private void jButtonRemoveProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveProcessActionPerformed
+        // TODO add your handling code here:
+        if(segment != null){
+            if(jListProcess.getSelectedValue() == null)
+            {
+                JOptionPane.showMessageDialog(null,"Choisiez d'abord un quartier à enelver");
+            }else{
+                int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment dissocier " + jListProcess.getSelectedValue() + 
+                                                                   " à votre zone " + segment.getName() + " ?");
+                if(dialogResult == JOptionPane.YES_OPTION){
+                   myObject.Process process = (myObject.Process) jListProcess.getSelectedValue();
+                   jListProcess.remove(jListProcess.getSelectedIndex());
+                   data.database.CrudDatabase.updateAssoProcessToSegment(process);
+                   JOptionPane.showMessageDialog(null, "Association supprimée");
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Merci de d'abord valider la création de votre zone");
+        }
+    }//GEN-LAST:event_jButtonRemoveProcessActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        jListProcess.setModel(new javax.swing.AbstractListModel() {
+            myObject.Process[] tabProcess = data.IHM.DataIHM.getListProcess(segment);
+            public int getSize() { return tabProcess.length; }
+            public Object getElementAt(int i) { return tabProcess[i]; }
+        });
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
@@ -305,7 +377,9 @@ public class FrameSegment extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddProcess;
     private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonRemoveProcess;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox jComboBoxResponsible;
     private javax.swing.JComboBox jComboBoxResponsibleDeputy;

@@ -5,10 +5,7 @@
 package data.IHM;
 
 import data.database.ConnectionSql;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
 import myObject.*;
@@ -56,12 +53,13 @@ public class DataIHM {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
-                segment.add(new DefaultMutableTreeNode(new Segment(
-                        res.getInt(1), res.getString(2),res.getString(3), getResponsible(res.getInt(4)),
-                        getResponsible(res.getInt(5)), new ArrayList<myObject.Process>())));
+                Segment objectSegment = new Segment(res.getInt(1), res.getString(2),res.getString(3), getResponsible(res.getInt(4)),
+                        getResponsible(res.getInt(5)), new ArrayList<myObject.Process>());
+                segment.add(new DefaultMutableTreeNode(objectSegment));
+                objectSegment.addObjectToMetaModel();
             }
         }catch(SQLException e){
-            System.out.println("Function loadTreeSegment : " + e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
         }
         
        return segment;
@@ -76,12 +74,13 @@ public class DataIHM {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
-                process.add(new DefaultMutableTreeNode(new myObject.Process(
-                        res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), res.getDate(5), null,
-                        getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>())));
+                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
+                process.add(new DefaultMutableTreeNode(objectProcess));
+                //objectProcess.addObjectToMetaModel();
             }
         }catch(SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
         }
         return process;
     }
@@ -102,7 +101,7 @@ public class DataIHM {
                         getResponsible(res.getInt(8)), new ArrayList<Application>())));
             }
         }catch(SQLException e){
-            System.out.println("Function loadTreeCaâbility : " + e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
         }
         return capability;
     }
@@ -151,7 +150,7 @@ public class DataIHM {
                         new ArrayList<Application>(), new ArrayList<Interface>(), new ArrayList<Interface>(), new ArrayList<Technology>())));
             }
         }catch(SQLException e){
-            System.out.println("Function loadTreeApplication : " + e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
             
         }
         
@@ -173,9 +172,7 @@ public class DataIHM {
    
     public static Responsible[] loadResponsible(){
         ArrayList<Responsible> responsibles = new ArrayList<Responsible>();
-        /*responsibles.add(new Responsible(9999, null));
-        responsibles.add(new Responsible(1, "Panda"));
-        responsibles.add(new Responsible(2, "Marie"));*/
+
         Connection connection = ConnectionSql.getConnection();
         
         String sql = "SELECT * FROM responsible";
@@ -186,12 +183,33 @@ public class DataIHM {
                 responsibles.add(new Responsible(res.getInt(1), res.getString(2)));
             }
         }catch(SQLException e){
-            System.out.println("Function loadResponsible : " + e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
         }
         
         return responsibles.toArray(new Responsible[responsibles.size()]);
         
     }
+    
+    public static myObject.Process[] getProcess(){
+        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "SELECT * FROM process WHERE SEGMENTid is NULL";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
+                process.add(objectProcess);
+                //objectProcess.addObjectToMetaModel();
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " " + e.getMessage());
+        }
+        return process.toArray(new myObject.Process[process.size()]);
+    }  
+    
     
     public static Responsible getResponsible(int id){
         Responsible responsible = null;
@@ -207,7 +225,7 @@ public class DataIHM {
                 responsible = new Responsible(res.getInt(1), res.getString(2));
             }
         }catch(SQLException e){
-            System.out.println("Function getResponsible : " + e.getMessage());
+            System.out.println(e.toString() + " " + e.getMessage());
         }
         
         return responsible;
@@ -232,26 +250,28 @@ public class DataIHM {
         return lifecycle;    
     }
     
-    public static ArrayList<myObject.Process> getListProcess(Segment segment){
+    public static myObject.Process[] getListProcess(Segment segment){
+       
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
-        
-         Connection connection = ConnectionSql.getConnection();
-        
-        /*String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(0, segment.getId());
-            ResultSet res = preparedStatement.executeQuery();
-            while(res.next()){
-                listProcess.add(new myObject.Process(res.getInt("id"), res.getString("name"), res.getString("description"),
-                        res.getDate("ValidFrom"), res.getDate("ValidUntil"), segment, getResponsible(res.getInt("Responsibleid")),
-                        getResponsible(res.getInt("ResponsibleidDeputy"))));
+        if(segment !=null){
+            Connection connection = ConnectionSql.getConnection();
+
+            String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, segment.getId());
+                ResultSet res = preparedStatement.executeQuery();
+                while(res.next()){
+                    listProcess.add(new myObject.Process(res.getInt("id"), res.getString("name"), res.getString("description"),
+                            res.getDate("ValidFrom"), res.getDate("ValidUntil"), segment, getResponsible(res.getInt("Responsibleid")),
+                            getResponsible(res.getInt("ResponsibleidDeputy")), new ArrayList<Capability>()));
+                }
+            }catch(SQLException e){
+                System.out.println(e.toString() + " getListProcess " + e.getMessage());
             }
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }*/
+        }
         
-        return listProcess;
+        return listProcess.toArray(new myObject.Process[listProcess.size()]);
         
     }
     

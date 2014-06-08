@@ -11,16 +11,16 @@ import java.util.ArrayList;
  * @author lug13995
  */
 public abstract class MetaModelObject {
-    protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
+   // protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
     protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie"};
-    String test;
-    public ArrayList<MetaModelObject> getListObject() {
+
+    /*public ArrayList<MetaModelObject> getListObject() {
         return listObject;
     }
     
     public ArrayList<MetaModelObject> getListObject(String filtre) {
         return listObject;        
-    }
+    }*/
     
     public String[] getListOfTypeObject() {
         return listOfTypeObject;

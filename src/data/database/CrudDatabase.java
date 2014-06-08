@@ -60,5 +60,34 @@ public class CrudDatabase {
         
     }
     
+    public static void updateAssoProcessToSegment(Segment segment, myObject.Process process){
+        
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "update process SET SEGMENTid = ? WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, segment.getId());
+            preparedStatement.setInt(2, process.getId());
+            preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e.toString() + " " + e.getMessage());
+        }
+    }
+    
+    public static void updateAssoProcessToSegment(myObject.Process process){
+        
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "update process SET SEGMENTid = NULL WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, process.getId());
+            preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e.toString() + " updateAssoProcessToSegment " + e.getMessage());
+        }
+    }
+        
    
 }

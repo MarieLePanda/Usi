@@ -137,12 +137,13 @@ public class Segment extends MetaModelObject{
 
     @Override
     public void addObjectToMetaModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //MetaModelObject.listObject.add(this);
     }
 
     @Override
     public void createObject() {
         data.database.CrudDatabase.createSegment(this);
+        //ddObjectToMetaModel();
     }
 
     @Override

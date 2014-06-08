@@ -559,7 +559,7 @@ public class Application extends MetaModelObject{
 
     @Override
     public void addObjectToMetaModel() {
-       super.getListObject().add(this);
+      // super.getListObject().add(this);
     }
 
     @Override
