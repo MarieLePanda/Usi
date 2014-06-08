@@ -261,7 +261,6 @@ public class FrameSegment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
   private void loadValue(){
-      System.out.println("Je load");
       jTextFieldName.setText(this.segment.getName());
       jLabelIdValue.setText(Integer.toString(this.segment.getId()));
       jTextAreaDescription.setText(this.segment.getDescription());

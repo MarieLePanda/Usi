@@ -5,8 +5,10 @@
 package data.database;
 
 
+import static data.IHM.DataIHM.getResponsible;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
 import myObject.*;
 
 /**
@@ -38,6 +40,7 @@ public class CrudDatabase {
         }catch(SQLException e){
             System.out.println(e.toString() + " " + e.getMessage());
         }
+        
     }
     
     public static void updateSegment(Segment segment){
@@ -87,6 +90,29 @@ public class CrudDatabase {
         }catch(SQLException e){
             System.out.println(e.toString() + " updateAssoProcessToSegment " + e.getMessage());
         }
+    }
+    
+    public static void deleteSegment(Segment segment){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "update process SET SEGMENTid = NULL WHERE id = ?";
+        for(myObject.Process process : segment.getListProcess()){
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, process.getId());
+                preparedStatement.executeUpdate();
+            }catch(SQLException e){
+                System.out.println(e.toString() + " deleteSegment " + e.getMessage());
+            }
+        }
+        sql = "DELETE FROM segment WHERE segment.id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, segment.getId());
+            preparedStatement.execute();
+        }catch(SQLException e){
+            System.out.println(e.toString() + " deleteSegment " + e.getMessage());
+        }
+        
     }
         
    

@@ -11,6 +11,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.sql.Date;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.WindowConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -46,6 +48,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
         root = DataIHM.initTree();
         jTreeMetaModel = new javax.swing.JTree(root);
         jButtonCreateObject = new javax.swing.JButton();
+        jButtonEditObject = new javax.swing.JButton();
+        jButtonDeleteObject = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -83,10 +87,24 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
         });
         jScrollPane1.setViewportView(jTreeMetaModel);
 
-        jButtonCreateObject.setText("Nouveau objet");
+        jButtonCreateObject.setText("Créer objet");
         jButtonCreateObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCreateObjectActionPerformed(evt);
+            }
+        });
+
+        jButtonEditObject.setText("Modifier objet");
+        jButtonEditObject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditObjectActionPerformed(evt);
+            }
+        });
+
+        jButtonDeleteObject.setText("Supprimer objet");
+        jButtonDeleteObject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteObjectActionPerformed(evt);
             }
         });
 
@@ -95,18 +113,25 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 390, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonCreateObject)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonCreateObject)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonEditObject)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonDeleteObject)))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 11, Short.MAX_VALUE)
-                .addComponent(jButtonCreateObject)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCreateObject)
+                    .addComponent(jButtonEditObject)
+                    .addComponent(jButtonDeleteObject))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -116,14 +141,14 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
 
     private void jTreeMetaModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTreeMetaModelMouseClicked
         // TODO add your handling code here:
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
+        /*DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
         if(node != null){
             if(node.getUserObject() instanceof Segment){
                 FrameSegment win = new FrameSegment((Segment) node.getUserObject());
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }
-        }
+        }*/
     }//GEN-LAST:event_jTreeMetaModelMouseClicked
 
     private void jTreeMetaModelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTreeMetaModelFocusGained
@@ -157,6 +182,40 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButtonCreateObjectActionPerformed
+
+    private void jButtonEditObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditObjectActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
+        if(node != null){
+            if(node.getUserObject() instanceof Segment){
+                FrameSegment win = new FrameSegment((Segment) node.getUserObject());
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
+        }
+    }//GEN-LAST:event_jButtonEditObjectActionPerformed
+
+    private void jButtonDeleteObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteObjectActionPerformed
+        // TODO add your handling code here:
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
+        if(node != null){
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'objet " + node.toString());
+            {
+                MetaModelObject objectDelete = (MetaModelObject) node.getUserObject();
+                if(dialogResult == JOptionPane.YES_OPTION){
+                    objectDelete.deleteObject();
+                    JOptionPane.showMessageDialog(null,"Objet supprimé");
+                }
+            }
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à supprimer");
+        }
+    }//GEN-LAST:event_jButtonDeleteObjectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,6 +253,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreateObject;
+    private javax.swing.JButton jButtonDeleteObject;
+    private javax.swing.JButton jButtonEditObject;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables

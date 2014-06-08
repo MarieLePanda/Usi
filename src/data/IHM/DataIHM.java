@@ -53,13 +53,14 @@ public class DataIHM {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
+                
                 Segment objectSegment = new Segment(res.getInt(1), res.getString(2),res.getString(3), getResponsible(res.getInt(4)),
-                        getResponsible(res.getInt(5)), new ArrayList<myObject.Process>());
+                        getResponsible(res.getInt(5)), getProcess(res.getInt(1)));
                 segment.add(new DefaultMutableTreeNode(objectSegment));
                 objectSegment.addObjectToMetaModel();
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println(e.toString() + " loadTreeSegment " + e.getMessage());
         }
         
        return segment;
@@ -80,7 +81,7 @@ public class DataIHM {
                 //objectProcess.addObjectToMetaModel();
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println(e.toString() + " loadTreeProcess " + e.getMessage());
         }
         return process;
     }
@@ -101,7 +102,7 @@ public class DataIHM {
                         getResponsible(res.getInt(8)), new ArrayList<Application>())));
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println(e.toString() + " loadTreeCapability " + e.getMessage());
         }
         return capability;
     }
@@ -150,7 +151,7 @@ public class DataIHM {
                         new ArrayList<Application>(), new ArrayList<Interface>(), new ArrayList<Interface>(), new ArrayList<Technology>())));
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println(e.toString() + " loadTreeApplication " + e.getMessage());
             
         }
         
@@ -183,7 +184,7 @@ public class DataIHM {
                 responsibles.add(new Responsible(res.getInt(1), res.getString(2)));
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println(e.toString() + " loadResponsible " + e.getMessage());
         }
         
         return responsibles.toArray(new Responsible[responsibles.size()]);
@@ -205,9 +206,30 @@ public class DataIHM {
                 //objectProcess.addObjectToMetaModel();
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println(e.toString() + " getProcess " + e.getMessage());
         }
         return process.toArray(new myObject.Process[process.size()]);
+    }
+    
+    public static ArrayList<myObject.Process> getProcess(int segmentId){
+        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, segmentId);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
+                process.add(objectProcess);
+                //objectProcess.addObjectToMetaModel();
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }
+        return process;
     }  
     
     
@@ -225,7 +247,7 @@ public class DataIHM {
                 responsible = new Responsible(res.getInt(1), res.getString(2));
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println(e.toString() + " getResponsible " + e.getMessage());
         }
         
         return responsible;
