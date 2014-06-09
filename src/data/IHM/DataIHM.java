@@ -189,49 +189,7 @@ public class DataIHM {
         
         return responsibles.toArray(new Responsible[responsibles.size()]);
         
-    }
-    
-    public static myObject.Process[] getProcess(){
-        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
-        Connection connection = ConnectionSql.getConnection();
-        
-        String sql = "SELECT * FROM process WHERE SEGMENTid is NULL";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet res = preparedStatement.executeQuery();
-            while(res.next()){
-                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
-                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
-                process.add(objectProcess);
-                //objectProcess.addObjectToMetaModel();
-            }
-        }catch(SQLException e){
-            System.out.println(e.toString() + " getProcess " + e.getMessage());
-        }
-        return process.toArray(new myObject.Process[process.size()]);
-    }
-    
-    public static ArrayList<myObject.Process> getProcess(int segmentId){
-        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
-        Connection connection = ConnectionSql.getConnection();
-        
-        String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, segmentId);
-            ResultSet res = preparedStatement.executeQuery();
-            while(res.next()){
-                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
-                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
-                process.add(objectProcess);
-                //objectProcess.addObjectToMetaModel();
-            }
-        }catch(SQLException e){
-            System.out.println(e.toString() + " getProcess " + e.getMessage());
-        }
-        return process;
-    }  
-    
+    }    
     
     public static Responsible getResponsible(int id){
         Responsible responsible = null;
@@ -272,6 +230,51 @@ public class DataIHM {
         return lifecycle;    
     }
     
+    //Need to manage segment
+    //Return process witchout segment
+     public static myObject.Process[] getProcess(){
+        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "SELECT * FROM process WHERE SEGMENTid is NULL";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
+                process.add(objectProcess);
+                //objectProcess.addObjectToMetaModel();
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }
+        return process.toArray(new myObject.Process[process.size()]);
+    }
+    
+    //Return process link to segment for create new segment
+    public static ArrayList<myObject.Process> getProcess(int segmentId){
+        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, segmentId);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
+                process.add(objectProcess);
+                //objectProcess.addObjectToMetaModel();
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }
+        return process;
+    }  
+    
+    //Return process link to segment
     public static myObject.Process[] getListProcess(Segment segment){
        
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
@@ -297,24 +300,71 @@ public class DataIHM {
         
     }
     
-    public static Segment getSegment(int id){
-        Segment segment = null;
-        
-                 Connection connection = ConnectionSql.getConnection();
-        
-        String sql = "SELECT * FROM responsible WHERE id = ?";
+    //Need to manage process
+    
+    public static Segment[] getListSegment(){
+        ArrayList<Segment> segment = new ArrayList<Segment>();
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "SELECT * FROM segment";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
-                segment = new Segment(res.getInt(1), res.getString(2),res.getString(3), getResponsible(res.getInt(4)),
-                getResponsible(res.getInt(5)), new ArrayList<myObject.Process>());
+                
+                Segment objectSegment = new Segment(res.getInt(1), res.getString(2),res.getString(3), getResponsible(res.getInt(4)),
+                        getResponsible(res.getInt(5)), getProcess(res.getInt(1)));
+                segment.add(objectSegment);
+                objectSegment.addObjectToMetaModel();
             }
         }catch(SQLException e){
-            System.out.println("Function getSegment : " + e.getMessage());
+            System.out.println(e.toString() + " loadTreeSegment " + e.getMessage());
         }
         
-        return segment;
+       return segment.toArray(new Segment[segment.size()]);
+    }
+    
+    public static ArrayList<Capability> getCapabilities(int processId){
+        ArrayList<Capability> capabilities = new ArrayList<Capability>();
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "SELECT * FROM capability WHERE PROCESSid = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, processId);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                Capability objectCapability = new Capability(res.getInt(1), null, res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Application>());
+                capabilities.add(objectCapability);
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getCapabilities " + e.getMessage());
+        }
+        return capabilities;
+    }  
+    
+    public static Capability[] getListcapability(myObject.Process process){
+       
+        ArrayList<Capability> listCapability = new ArrayList<Capability>();
+        if(process !=null){
+            Connection connection = ConnectionSql.getConnection();
+
+            String sql = "SELECT * FROM capability WHERE PROCESSid = ?";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, process.getId());
+                ResultSet res = preparedStatement.executeQuery();
+                while(res.next()){
+                    listCapability.add(new Capability(res.getInt("id"), process, res.getString("name"), res.getString("description"),
+                            res.getDate("ValidFrom"), res.getDate("ValidUntil"), getResponsible(res.getInt("Responsibleid")),
+                            getResponsible(res.getInt("ResponsibleidDeputy")), new ArrayList<Application>()));
+                }
+            }catch(SQLException e){
+                System.out.println(e.toString() + " getListProcess " + e.getMessage());
+            }
+        }
+        
+        return listCapability.toArray(new Capability[listCapability.size()]);
+        
     }
 }

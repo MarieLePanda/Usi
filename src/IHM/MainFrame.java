@@ -192,6 +192,11 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }
+            else if(node.getUserObject() instanceof myObject.Process){
+                FrameProcess win = new FrameProcess((myObject.Process) node.getUserObject());
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
         }
         else{
             JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");

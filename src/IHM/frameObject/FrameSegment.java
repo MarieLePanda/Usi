@@ -24,8 +24,6 @@ public class FrameSegment extends javax.swing.JFrame {
     }
     
     public FrameSegment(Segment segment){
-        System.out.println(segment.getId());
-        System.out.println(segment.getName());
         this.segment = segment;
         initComponents();
         loadValue();
@@ -264,7 +262,6 @@ public class FrameSegment extends javax.swing.JFrame {
       jTextFieldName.setText(this.segment.getName());
       jLabelIdValue.setText(Integer.toString(this.segment.getId()));
       jTextAreaDescription.setText(this.segment.getDescription());
-      //jComboBoxResponsible.setSelectedIndex(1);
       jComboBoxResponsible.setSelectedItem(this.segment.getResponsible());
       jComboBoxResponsibleDeputy.setSelectedItem(this.segment.getResponsibledeputy());
       

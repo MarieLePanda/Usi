@@ -4,17 +4,26 @@
  */
 package IHM.frameObject;
 
+import myObject.Capability;
+
 /**
  *
  * @author lug13995
  */
 public class FrameProcess extends javax.swing.JFrame {
 
+    private myObject.Process process;
     /**
      * Creates new form FrameProcess
      */
     public FrameProcess() {
         initComponents();
+    }
+    
+    public FrameProcess(myObject.Process process){
+        this.process = process;
+        initComponents();
+        loadValue();
     }
 
     /**
@@ -26,6 +35,7 @@ public class FrameProcess extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        capability1 = new myObject.Capability();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabelName = new javax.swing.JLabel();
@@ -107,11 +117,11 @@ public class FrameProcess extends javax.swing.JFrame {
 
         jLabelResponsible.setText("Responsable");
 
-        jComboBoxResponsible.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxResponsible.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.loadResponsible()));
 
         jLabel1.setText("Responsable suppléant");
 
-        jComboBoxResponsibleDeputy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxResponsibleDeputy.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.loadResponsible()));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,14 +154,14 @@ public class FrameProcess extends javax.swing.JFrame {
 
         jLabelSupportSegment.setText("Supporte la zone");
 
-        jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListSegment()));
 
         jLabel2.setText("Ilot soutient");
 
         jListCapability.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            Capability[] tabCapability = data.IHM.DataIHM.getListcapability(process);
+            public int getSize() { return tabCapability.length; }
+            public Object getElementAt(int i) { return tabCapability[i]; }
         });
         jScrollPane2.setViewportView(jListCapability);
 
@@ -251,6 +261,18 @@ public class FrameProcess extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadValue() {
+        jTextFieldName.setText(process.getName());
+        jLabelValId.setText(Integer.toString(process.getId()));
+        jTextAreaDescription.setText(process.getDescription());
+        jComboBoxResponsible.setSelectedItem(process.getResponsible());
+        jComboBoxResponsibleDeputy.setSelectedItem(process.getResponsibleDeputy());
+        jComboBoxSupportSegment.setSelectedItem(process.getSegment());
+        jCalendarComboBoxValidFrom.setDate(process.getValidFrom());
+        jCalendarComboBoxValidUnitl.setDate(process.getValideUntil());
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -286,6 +308,7 @@ public class FrameProcess extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private myObject.Capability capability1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxValidFrom;
@@ -314,4 +337,6 @@ public class FrameProcess extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
+
+
 }
