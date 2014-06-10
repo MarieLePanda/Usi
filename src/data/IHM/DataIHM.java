@@ -68,21 +68,60 @@ public class DataIHM {
     
     public static DefaultMutableTreeNode loadTreeProcess(){
         DefaultMutableTreeNode process = new DefaultMutableTreeNode("Quartier");
+        ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
         
         String sql = "SELECT * FROM process";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
-            while(res.next()){
-                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
-                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
-                process.add(new DefaultMutableTreeNode(objectProcess));
-                //objectProcess.addObjectToMetaModel();
+            while(res.next()){                
+                listProcess.add( new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>()));
+            
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " loadTreeProcess " + e.getMessage());
+            System.out.println(e.toString() + " loadTreeProcess 1 " + e.getMessage());
         }
+        for(myObject.Process p : listProcess){
+            sql = "SELECT * FROM Segment WHERE id = ?";
+            Connection connectionSeg = ConnectionSql.getConnection();
+            try{
+                PreparedStatement preparedStatementSeg = connectionSeg.prepareStatement(sql);
+                    preparedStatementSeg.setInt(1, p.getId());
+                ResultSet seg = preparedStatementSeg.executeQuery();
+                seg.next(); 
+                p.setSegment(new Segment(seg.getInt(1), seg.getString(2),seg.getString(3), getResponsible(seg.getInt(4)),
+                        getResponsible(seg.getInt(5)), getProcess(seg.getInt(1))));
+            }
+            catch(SQLException e){
+            System.out.println(e.toString() + " loadTreeProcess 2 " + e.getMessage());
+            }
+        }
+            for(myObject.Process p : listProcess){
+                ArrayList<Capability> capabilities = new ArrayList<Capability>();
+                try{
+                    connection = ConnectionSql.getConnection();
+                    sql = "SELECT * FROM capability WHERE PROCESSid = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                    preparedStatement.setInt(1, p.getId());
+                    ResultSet res = preparedStatement.executeQuery();
+                    while(res.next()){
+                        Capability objectCapability = new Capability(res.getInt(1), null, res.getString(3),res.getString(4), res.getDate(5), 
+                            res.getDate(6), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Application>());
+                            capabilities.add(objectCapability);
+                    }
+                    p.setListCapability(capabilities);
+                }catch(SQLException e){
+                    System.out.println(e.toString() + " loadTreeProcess 3 " + e.getMessage());
+                }
+        
+            }
+            for(myObject.Process p : listProcess){
+                process.add(new DefaultMutableTreeNode(p));
+            }
+            
+        
         return process;
     }
     
@@ -300,9 +339,7 @@ public class DataIHM {
         
     }
     
-    //Need to manage process
-    
-    public static Segment[] getListSegment(){
+        public static Segment[] getListSegment(){
         ArrayList<Segment> segment = new ArrayList<Segment>();
         Connection connection = ConnectionSql.getConnection();
         String sql = "SELECT * FROM segment";
@@ -322,6 +359,10 @@ public class DataIHM {
         
        return segment.toArray(new Segment[segment.size()]);
     }
+        
+    //Need to manage process
+    /*
+
     
     public static ArrayList<Capability> getCapabilities(int processId){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
@@ -366,5 +407,5 @@ public class DataIHM {
         
         return listCapability.toArray(new Capability[listCapability.size()]);
         
-    }
+    }*/
 }

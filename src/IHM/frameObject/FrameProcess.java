@@ -4,7 +4,12 @@
  */
 package IHM.frameObject;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import myObject.Capability;
+import myObject.Responsible;
+import myObject.Segment;
 
 /**
  *
@@ -17,6 +22,7 @@ public class FrameProcess extends javax.swing.JFrame {
      * Creates new form FrameProcess
      */
     public FrameProcess() {
+        process = new myObject.Process();
         initComponents();
     }
     
@@ -61,8 +67,8 @@ public class FrameProcess extends javax.swing.JFrame {
         jCalendarComboBoxValidFrom = new de.wannawork.jcalendar.JCalendarComboBox();
         jLabel3 = new javax.swing.JLabel();
         jCalendarComboBoxValidUnitl = new de.wannawork.jcalendar.JCalendarComboBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonCreate = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,11 +161,16 @@ public class FrameProcess extends javax.swing.JFrame {
         jLabelSupportSegment.setText("Supporte la zone");
 
         jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListSegment()));
+        jComboBoxSupportSegment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSupportSegmentActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ilot soutient");
 
         jListCapability.setModel(new javax.swing.AbstractListModel() {
-            Capability[] tabCapability = data.IHM.DataIHM.getListcapability(process);
+            Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
             public int getSize() { return tabCapability.length; }
             public Object getElementAt(int i) { return tabCapability[i]; }
         });
@@ -227,9 +238,14 @@ public class FrameProcess extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Lifecycle", jPanel4);
 
-        jButton1.setText("jButton1");
+        jButtonCreate.setText("Valider");
+        jButtonCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreateActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButtonCancel.setText("Annuler");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,9 +257,9 @@ public class FrameProcess extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addComponent(jButton1)
+                .addComponent(jButtonCreate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(jButtonCancel)
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
@@ -253,13 +269,39 @@ public class FrameProcess extends javax.swing.JFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonCreate)
+                    .addComponent(jButtonCancel))
                 .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBoxSupportSegmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSupportSegmentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxSupportSegmentActionPerformed
+
+    private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
+        // TODO add your handling code here:
+        if(process.getName() == null){
+            process = new myObject.Process(jTextFieldName.getText(), jTextAreaDescription.getText(),
+                    (java.sql.Date) jCalendarComboBoxValidFrom.getDate(), (java.sql.Date) jCalendarComboBoxValidUnitl.getDate(),
+                    (Segment) jComboBoxSupportSegment.getSelectedItem(), (Responsible) jComboBoxResponsible.getSelectedItem(), 
+                    (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), new ArrayList<Capability>());
+            process.createObject();
+            JOptionPane.showMessageDialog(null,"Zone " + process.getName() + " créer");
+            this.dispose();
+                
+            
+        }else{
+            /*process = new Segment(Integer.parseInt(jLabelIdValue.getText()), jTextFieldName.getText(), jTextAreaDescription.getText(), 
+            (Responsible) jComboBoxResponsible.getSelectedItem(), (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), 
+            (ArrayList<myObject.Process>) new ArrayList<myObject.Process>());
+            segment.updateObject();
+            JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " modifier");
+            this.dispose();*/
+        }
+    }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void loadValue() {
         jTextFieldName.setText(process.getName());
@@ -267,10 +309,10 @@ public class FrameProcess extends javax.swing.JFrame {
         jTextAreaDescription.setText(process.getDescription());
         jComboBoxResponsible.setSelectedItem(process.getResponsible());
         jComboBoxResponsibleDeputy.setSelectedItem(process.getResponsibleDeputy());
+        System.out.println(process.getSegment());
         jComboBoxSupportSegment.setSelectedItem(process.getSegment());
         jCalendarComboBoxValidFrom.setDate(process.getValidFrom());
         jCalendarComboBoxValidUnitl.setDate(process.getValideUntil());
-        
         
     }
     /**
@@ -309,8 +351,8 @@ public class FrameProcess extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private myObject.Capability capability1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonCreate;
     private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxValidFrom;
     private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxValidUnitl;
     private javax.swing.JComboBox jComboBoxResponsible;

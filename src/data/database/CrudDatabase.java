@@ -114,6 +114,49 @@ public class CrudDatabase {
         }
         
     }
+    
+    
+        public static void createProcess(myObject.Process process){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "INSERT INTO `process` (`name`, `description`, `validFrom`, `validUntil`, `SEGMENTid`, `Responsibleid`, `ResponsibleidDeputy`) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?);";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, process.getName());
+            preparedStatement.setString(2, process.getDescription());
+            preparedStatement.setDate(3, process.getValidFrom());
+            preparedStatement.setDate(4, process.getValideUntil());
+            preparedStatement.setInt(5, process.getSegment().getId());
+            preparedStatement.setInt(6, process.getResponsible().getId());
+            preparedStatement.setInt(7, process.getResponsibleDeputy().getId());
+            preparedStatement.execute();
+            
+        }catch(SQLException e){
+            System.out.println(e.toString() + " createProcess " + e.getMessage());
+        }
         
+    }
+    
+    public static void updateProcess(myObject.Process process){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "update process SET `name = ?, `description` = ?, `validFrom` = ?, `validUntil` = ?, "
+                + "`SEGMENTid` = ?, `Responsibleid` = ?, `ResponsibleidDeputy` = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, process.getName());
+            preparedStatement.setString(2, process.getDescription());
+            preparedStatement.setDate(3, process.getValidFrom());
+            preparedStatement.setDate(4, process.getValideUntil());
+            preparedStatement.setInt(5, process.getSegment().getId());
+            preparedStatement.setInt(6, process.getResponsible().getId());
+            preparedStatement.setInt(7, process.getResponsibleDeputy().getId());
+            preparedStatement.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println(e.toString() + " updateProcess " + e.getMessage());
+        }        
+    }
+  
+    
    
 }

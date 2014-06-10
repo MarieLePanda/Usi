@@ -84,6 +84,11 @@ public class FrameNewObject extends javax.swing.JFrame {
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }
+            else if(jComboBoxTypeObject.getSelectedItem().equals("Quartier")){
+                FrameProcess win = new FrameProcess();
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
         }
         this.dispose();
     }//GEN-LAST:event_jComboBoxTypeObjectActionPerformed

@@ -142,12 +142,13 @@ public class Process extends MetaModelObject{
 	}
 	
 	public Process(){
-		
+            this.name = null;
+            this.listCapability = new ArrayList<Capability>();
 	}
 	
 	/**
-	 * @param id
 	 * @param name
+         * @param description
 	 * @param validFrom
 	 * @param valideUntil
 	 * @param segment
@@ -155,11 +156,11 @@ public class Process extends MetaModelObject{
 	 * @param responsibleDeputy
 	 * @param listCapability
 	 */
-	public Process(int id, String name, Date validFrom, Date valideUntil,
+	public Process(String name, String description, Date validFrom, Date valideUntil,
 			Segment segment, Responsible responsible,
 			Responsible responsibleDeputy, ArrayList<Capability> listCapability) {
-		this.id = id;
 		this.name = name;
+                this.description = description;
 		this.validFrom = validFrom;
 		this.valideUntil = valideUntil;
 		this.segment = segment;
@@ -208,7 +209,7 @@ public class Process extends MetaModelObject{
 
     @Override
     public void createObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        data.database.CrudDatabase.createProcess(this);
     }
 
     @Override
