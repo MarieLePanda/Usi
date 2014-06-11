@@ -214,12 +214,12 @@ public class Process extends MetaModelObject{
 
     @Override
     public void deleteObject() {
-        data.database.CrudDatabase.deleteProcess(this);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void updateObject() {
-        data.database.CrudDatabase.updateProcess(this);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

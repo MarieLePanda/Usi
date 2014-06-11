@@ -186,22 +186,16 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
     private void jButtonEditObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditObjectActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
-        
         if(node != null){
-            MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
-            if(__aucun.getName().equals("__Aucun"))
-                JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
-            else{
-                if(node.getUserObject() instanceof Segment){
-                    FrameSegment win = new FrameSegment((Segment) node.getUserObject());
-                    win.setVisible(true);
-                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                }
-                else if(node.getUserObject() instanceof myObject.Process){
-                    FrameProcess win = new FrameProcess((myObject.Process) node.getUserObject());
-                    win.setVisible(true);
-                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                }
+            if(node.getUserObject() instanceof Segment){
+                FrameSegment win = new FrameSegment((Segment) node.getUserObject());
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
+            else if(node.getUserObject() instanceof myObject.Process){
+                FrameProcess win = new FrameProcess((myObject.Process) node.getUserObject());
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }
         }
         else{
@@ -211,25 +205,21 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
 
     private void jButtonDeleteObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteObjectActionPerformed
         // TODO add your handling code here:
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
         if(node != null){
-            MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
-            if(__aucun.getName().equals("__Aucun"))
-                JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
-            else{
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'objet " + node.toString());
-                {
-                    MetaModelObject objectDelete = (MetaModelObject) node.getUserObject();
-                    if(dialogResult == JOptionPane.YES_OPTION){
-                        objectDelete.deleteObject();
-                        JOptionPane.showMessageDialog(null,"Objet supprimé");
-                    }
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'objet " + node.toString());
+            {
+                MetaModelObject objectDelete = (MetaModelObject) node.getUserObject();
+                if(dialogResult == JOptionPane.YES_OPTION){
+                    objectDelete.deleteObject();
+                    JOptionPane.showMessageDialog(null,"Objet supprimé");
                 }
             }
+            
         }
         else{
             JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à supprimer");
-        }     
+        }
     }//GEN-LAST:event_jButtonDeleteObjectActionPerformed
 
     /**

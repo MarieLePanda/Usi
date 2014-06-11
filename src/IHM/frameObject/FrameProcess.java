@@ -6,10 +6,7 @@ package IHM.frameObject;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collection;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.WindowConstants;
 import myObject.Capability;
 import myObject.Responsible;
 import myObject.Segment;
@@ -65,8 +62,6 @@ public class FrameProcess extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListCapability = new javax.swing.JList();
-        jButtonAddCapability = new javax.swing.JButton();
-        jButtonRemoveCapability = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabelValidFrom = new javax.swing.JLabel();
         jCalendarComboBoxValidFrom = new de.wannawork.jcalendar.JCalendarComboBox();
@@ -76,11 +71,6 @@ public class FrameProcess extends javax.swing.JFrame {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         jLabelName.setText("Nom");
 
@@ -177,28 +167,14 @@ public class FrameProcess extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Ilots soutient");
+        jLabel2.setText("Ilot soutient");
 
-        jListCapability.setModel(new javax.swing.DefaultListModel() {
+        jListCapability.setModel(new javax.swing.AbstractListModel() {
             Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
             public int getSize() { return tabCapability.length; }
             public Object getElementAt(int i) { return tabCapability[i]; }
         });
         jScrollPane2.setViewportView(jListCapability);
-
-        jButtonAddCapability.setText("Ajouter ilot");
-        jButtonAddCapability.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddCapabilityActionPerformed(evt);
-            }
-        });
-
-        jButtonRemoveCapability.setText("Supprimer ilot");
-        jButtonRemoveCapability.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRemoveCapabilityActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -210,12 +186,7 @@ public class FrameProcess extends javax.swing.JFrame {
                     .addComponent(jLabelSupportSegment)
                     .addComponent(jComboBoxSupportSegment, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(jButtonAddCapability)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonRemoveCapability))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -229,11 +200,7 @@ public class FrameProcess extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAddCapability)
-                    .addComponent(jButtonRemoveCapability))
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Architecture", jPanel3);
@@ -279,11 +246,6 @@ public class FrameProcess extends javax.swing.JFrame {
         });
 
         jButtonCancel.setText("Annuler");
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -323,78 +285,23 @@ public class FrameProcess extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(process.getName() == null){
             process = new myObject.Process(jTextFieldName.getText(), jTextAreaDescription.getText(),
-                    new Date (jCalendarComboBoxValidFrom.getDate().getTime()), new Date (jCalendarComboBoxValidUnitl.getDate().getTime()),
+                    (java.sql.Date) jCalendarComboBoxValidFrom.getDate(), (java.sql.Date) jCalendarComboBoxValidUnitl.getDate(),
                     (Segment) jComboBoxSupportSegment.getSelectedItem(), (Responsible) jComboBoxResponsible.getSelectedItem(), 
                     (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), new ArrayList<Capability>());
             process.createObject();
-            JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " créer");
+            JOptionPane.showMessageDialog(null,"Zone " + process.getName() + " créer");
             this.dispose();
                 
             
         }else{
-           /*ArrayList<Capability> listCapability = new ArrayList<Capability>();
-           for(int i = 0; i < jListCapability.getModel().getSize(); i++){
-               listCapability.add((Capability) jListCapability.getModel().getElementAt(i));
-           }*/
-           process.setName(jTextFieldName.getText());
-           process.setDescription(jTextAreaDescription.getText());
-           process.setValidFrom(new Date (jCalendarComboBoxValidFrom.getDate().getTime()));
-           process.setValideUntil(new Date (jCalendarComboBoxValidUnitl.getDate().getTime()));
-           process.setSegment((Segment) jComboBoxSupportSegment.getSelectedItem());
-           process.setResponsible((Responsible) jComboBoxResponsible.getSelectedItem());
-           process.setResponsibleDeputy((Responsible) jComboBoxResponsibleDeputy.getSelectedItem());
-           process.updateObject();
-           JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " modifier");
-           this.dispose();
+            /*process = new Segment(Integer.parseInt(jLabelIdValue.getText()), jTextFieldName.getText(), jTextAreaDescription.getText(), 
+            (Responsible) jComboBoxResponsible.getSelectedItem(), (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), 
+            (ArrayList<myObject.Process>) new ArrayList<myObject.Process>());
+            segment.updateObject();
+            JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " modifier");
+            this.dispose();*/
         }
     }//GEN-LAST:event_jButtonCreateActionPerformed
-
-    private void jButtonAddCapabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddCapabilityActionPerformed
-        // TODO add your handling code here:
-        if(process.getName() != null){
-            FrameAssoToSegment win = new FrameAssoToSegment(process);
-            win.setVisible(true);
-            win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        }else{
-            JOptionPane.showMessageDialog(null,"Merci de d'abord valider la création de votre quartier");
-        }
-    }//GEN-LAST:event_jButtonAddCapabilityActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-        process.setListCapability(data.IHM.DataIHM.getCapability(process.getId()));
-        jListCapability.setModel(new javax.swing.DefaultListModel() {
-            Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
-            public int getSize() { return tabCapability.length; }
-            public Object getElementAt(int i) { return tabCapability[i]; }
-        });
-    }//GEN-LAST:event_formWindowActivated
-
-    private void jButtonRemoveCapabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveCapabilityActionPerformed
-        // TODO add your handling code here:
-        if(process != null){
-            if(jListCapability.getSelectedValue() == null)
-            {
-                JOptionPane.showMessageDialog(null,"Choisiez d'abord un ilot à enelver");
-            }else{
-                int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment dissocier " + jListCapability.getSelectedValue() + 
-                                                                   " à votre quariter " + process.getName() + " ?");
-                if(dialogResult == JOptionPane.YES_OPTION){
-                   Capability capability = (Capability) jListCapability.getSelectedValue();
-                   jListCapability.remove(jListCapability.getSelectedIndex());
-                   data.database.CrudDatabase.updateAssoCapabilityToProcess(capability);
-                   JOptionPane.showMessageDialog(null, "Association supprimée");
-                }
-            }
-        }else{
-            JOptionPane.showMessageDialog(null,"Merci de d'abord valider la création de votre quartier");
-        }
-    }//GEN-LAST:event_jButtonRemoveCapabilityActionPerformed
-
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void loadValue() {
         jTextFieldName.setText(process.getName());
@@ -444,10 +351,8 @@ public class FrameProcess extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private myObject.Capability capability1;
-    private javax.swing.JButton jButtonAddCapability;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonCreate;
-    private javax.swing.JButton jButtonRemoveCapability;
     private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxValidFrom;
     private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxValidUnitl;
     private javax.swing.JComboBox jComboBoxResponsible;

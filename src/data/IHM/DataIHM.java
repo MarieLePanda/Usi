@@ -271,11 +271,11 @@ public class DataIHM {
     
     //Need to manage segment
     //Return process witchout segment
-     public static myObject.Process[] getFreeProcess(){
+     public static myObject.Process[] getProcess(){
         ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
         
-        String sql = "SELECT * FROM process WHERE SEGMENTid = 100";
+        String sql = "SELECT * FROM process WHERE SEGMENTid is NULL";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -358,30 +358,13 @@ public class DataIHM {
         }
         
        return segment.toArray(new Segment[segment.size()]);
-    }    
-        
-    public static Capability[] getFreeCapability(){
-        ArrayList<Capability> capabilities = new ArrayList<Capability>();
-        
-        Connection connection = ConnectionSql.getConnection();
-        
-        String sql = "SELECT * FROM capability WHERE PROCESSid = 100";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet res = preparedStatement.executeQuery();
-            while(res.next()){
-                capabilities.add(new Capability(res.getInt(1), null, res.getString(3), res.getString(4),
-                        res.getDate(5), res.getDate(6), getResponsible(res.getInt(7)),
-                        getResponsible(res.getInt(8)), new ArrayList<Application>()));
-            }
-        }catch(SQLException e){
-            System.out.println("getFreeCapability " + e.toString());
-        }
-        
-        return capabilities.toArray(new Capability[capabilities.size()]);
     }
+        
+    //Need to manage process
+    /*
+
     
-     public static ArrayList<Capability> getCapability(int processId){
+    public static ArrayList<Capability> getCapabilities(int processId){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
         Connection connection = ConnectionSql.getConnection();
         
@@ -391,14 +374,38 @@ public class DataIHM {
             preparedStatement.setInt(1, processId);
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
-                capabilities.add(new Capability(res.getInt(1), null, res.getString(3), res.getString(4),
-                        res.getDate(5), res.getDate(6), getResponsible(res.getInt(7)),
-                        getResponsible(res.getInt(8)), new ArrayList<Application>()));
+                Capability objectCapability = new Capability(res.getInt(1), null, res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Application>());
+                capabilities.add(objectCapability);
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " getProcess " + e.getMessage());
+            System.out.println(e.toString() + " getCapabilities " + e.getMessage());
         }
         return capabilities;
     }  
     
+    public static Capability[] getListcapability(myObject.Process process){
+       
+        ArrayList<Capability> listCapability = new ArrayList<Capability>();
+        if(process !=null){
+            Connection connection = ConnectionSql.getConnection();
+
+            String sql = "SELECT * FROM capability WHERE PROCESSid = ?";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, process.getId());
+                ResultSet res = preparedStatement.executeQuery();
+                while(res.next()){
+                    listCapability.add(new Capability(res.getInt("id"), process, res.getString("name"), res.getString("description"),
+                            res.getDate("ValidFrom"), res.getDate("ValidUntil"), getResponsible(res.getInt("Responsibleid")),
+                            getResponsible(res.getInt("ResponsibleidDeputy")), new ArrayList<Application>()));
+                }
+            }catch(SQLException e){
+                System.out.println(e.toString() + " getListProcess " + e.getMessage());
+            }
+        }
+        
+        return listCapability.toArray(new Capability[listCapability.size()]);
+        
+    }*/
 }

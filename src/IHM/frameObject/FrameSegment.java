@@ -164,7 +164,7 @@ public class FrameSegment extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Organisation", jPanel2);
 
-        jLabelListProcess.setText("Quariters soutient");
+        jLabelListProcess.setText("Quariter soutient");
 
         jListProcess.setModel(new javax.swing.AbstractListModel() {
             myObject.Process[] tabProcess = data.IHM.DataIHM.getListProcess(segment);

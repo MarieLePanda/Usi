@@ -5,7 +5,9 @@
 package IHM.frameObject;
 
 import javax.swing.JOptionPane;
-import myObject.*;
+import javax.swing.WindowConstants;
+import myObject.Process;
+import myObject.Segment;
 
 /**
  *
@@ -13,7 +15,7 @@ import myObject.*;
  */
 public class FrameAssoToSegment extends javax.swing.JFrame {
 
-    private MetaModelObject object;
+    private Segment segment;
     /**
      * Creates new form FrameAssoToSegment
      */
@@ -22,15 +24,9 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
        
     }
         
-    public FrameAssoToSegment(MetaModelObject object) {
-        this.object = object;
+    public FrameAssoToSegment(Segment segment) {
+        this.segment = segment;
         initComponents();
-        if(object instanceof Segment){
-            initComboBoxListToSegment();
-        }else if(object instanceof myObject.Process){
-            initComboBoxListToProcess();
-        }
-        
     }
 
     /**
@@ -47,9 +43,9 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Choisisser le l'objet à associer");
+        jLabel1.setText("Choisisser le quartier à associer à la zone");
 
-        jComboBoxListProcess.setModel(new javax.swing.DefaultComboBoxModel());
+        jComboBoxListProcess.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getProcess()));
         jComboBoxListProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxListProcessActionPerformed(evt);
@@ -65,7 +61,7 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxListProcess, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,10 +78,11 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
 
     private void jComboBoxListProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListProcessActionPerformed
         // TODO add your handling code here:
-        if(object instanceof Segment){
-            excuteComboboxListToSegment();
-        }else if(object instanceof myObject.Process){
-            excuteComboboxListToProcess();
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment associer " + jComboBoxListProcess.getSelectedItem() + 
+                " à votre zone " + segment.getName() + " ?");
+        if(dialogResult == JOptionPane.YES_OPTION){
+            data.database.CrudDatabase.updateAssoProcessToSegment(segment, (Process) jComboBoxListProcess.getSelectedItem());
+            JOptionPane.showMessageDialog(null, "Association créée");
         }
         this.dispose();
     }//GEN-LAST:event_jComboBoxListProcessActionPerformed
@@ -128,30 +125,4 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxListProcess;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
-
-    private void initComboBoxListToSegment() {
-        jComboBoxListProcess.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getFreeProcess()));
-    }
-    
-        private void initComboBoxListToProcess() {
-        jComboBoxListProcess.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getFreeCapability()));
-    }
-    
-    private void excuteComboboxListToSegment(){
-        int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment associer " + jComboBoxListProcess.getSelectedItem() + 
-                    " à votre zone " + object.getName() + " ?");
-        if(dialogResult == JOptionPane.YES_OPTION){
-            data.database.CrudDatabase.updateAssoProcessToSegment((Segment) object, (myObject.Process) jComboBoxListProcess.getSelectedItem());
-            JOptionPane.showMessageDialog(null, "Association créée");
-        }
-    }
-    
-    private void excuteComboboxListToProcess(){
-        int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment associer " + jComboBoxListProcess.getSelectedItem() + 
-                    " à votre quartier " + object.getName() + " ?");
-        if(dialogResult == JOptionPane.YES_OPTION){
-            data.database.CrudDatabase.updateAssoCapabilityToProcess((myObject.Process) object, (Capability) jComboBoxListProcess.getSelectedItem());
-            JOptionPane.showMessageDialog(null, "Association créée");
-        }
-    }
 }
