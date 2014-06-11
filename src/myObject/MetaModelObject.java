@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public abstract class MetaModelObject {
    // protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
     protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie"};
-
+    protected String name;
     /*public ArrayList<MetaModelObject> getListObject() {
         return listObject;
     }
@@ -26,6 +26,9 @@ public abstract class MetaModelObject {
         return listOfTypeObject;
     }
     
+    public String getName(){
+        return name;
+    }
     
     public abstract void addObjectToMetaModel();
     
