@@ -247,7 +247,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelListProcess">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Quariter soutient"/>
+                <Property name="text" type="java.lang.String" value="Quariters soutient"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
