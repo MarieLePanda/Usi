@@ -1,29 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Main frame of the application. We found all object existing in the metamodel
  */
 package IHM;
 
 import IHM.frameObject.*;
 import data.IHM.DataIHM;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
-import java.sql.Date;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JTree;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeModel;
 import myObject.*;
 
 /**
- *
- * @author lug13995
+ * Create a main frame witch data loaded
+ * @author Mary
  */
-public class MainFrame extends javax.swing.JFrame implements WindowFocusListener {
+public class MainFrame extends javax.swing.JFrame{
 
     /**
      * Creates new form MainFrame
@@ -141,14 +131,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
 
     private void jTreeMetaModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTreeMetaModelMouseClicked
         // TODO add your handling code here:
-        /*DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
-        if(node != null){
-            if(node.getUserObject() instanceof Segment){
-                FrameSegment win = new FrameSegment((Segment) node.getUserObject());
-                win.setVisible(true);
-                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            }
-        }*/
+        // A supprimer
     }//GEN-LAST:event_jTreeMetaModelMouseClicked
 
     private void jTreeMetaModelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTreeMetaModelFocusGained
@@ -171,11 +154,19 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
         //A supprimer
     }//GEN-LAST:event_formPropertyChange
 
+    /**
+     * Windows reload her-self the list of process in the Jlist
+     * @param evt 
+     */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         jTreeMetaModel.setModel(new javax.swing.JTree(DataIHM.initTree()).getModel());
     }//GEN-LAST:event_formWindowActivated
 
+    /**
+     * To create a new object, call a new frame
+     * @param evt 
+     */
     private void jButtonCreateObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateObjectActionPerformed
         // TODO add your handling code here:
         FrameNewObject win = new FrameNewObject();
@@ -183,6 +174,10 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButtonCreateObjectActionPerformed
 
+    /**
+     * To edit a existing object, call a new frame
+     * @param evt 
+     */
     private void jButtonEditObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditObjectActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
@@ -209,6 +204,10 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
         }
     }//GEN-LAST:event_jButtonEditObjectActionPerformed
 
+    /**
+     * To delete a existing object
+     * @param evt 
+     */
     private void jButtonDeleteObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteObjectActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
@@ -273,13 +272,4 @@ public class MainFrame extends javax.swing.JFrame implements WindowFocusListener
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables
-
-
-    public void windowGainedFocus(WindowEvent e) {
-        System.out.println("focus");
-    }
-
-    public void windowLostFocus(WindowEvent e) {
-        System.out.println("Nofocus");
-    }
 }

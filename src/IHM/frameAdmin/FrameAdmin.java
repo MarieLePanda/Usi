@@ -1,32 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Admin frame, only admin account can acces. You can create, edit or delete user
  */
 package IHM.frameAdmin;
 
 import myObject.User;
 import genmdp.MotDePasse;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class FrameAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form FrameAdmin
      */
-    
     public FrameAdmin() {
         
         initComponents();
-        
-        /*jComboBoxListUser.addItem(new User (1, "Panda", "panda", true));
-        jComboBoxListUser.addItem(new User(2, "Marie", "marie", false));
-        jComboBoxListUser.addItem(new User(3, "Mary", "mary", false));*/
         pack();
     }
 
@@ -167,7 +159,11 @@ public class FrameAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
         }
     }//GEN-LAST:event_jComboBoxListUserActionPerformed
-
+    
+    /**
+     * To save change in user
+     * @param evt 
+     */
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         if(jComboBoxListUser.getSelectedItem() != null){
             User currentUser = (User) jComboBoxListUser.getSelectedItem();
@@ -182,6 +178,10 @@ public class FrameAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
+    /**
+     * To delete a user
+     * @param evt 
+     */
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
 
          if(jComboBoxListUser.getSelectedItem() != null){
@@ -199,6 +199,10 @@ public class FrameAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
+    /**
+     * To create a new user, call a new frame
+     * @param evt 
+     */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         // TODO add your handling code here:
         FrameCreateUser win = new FrameCreateUser();
@@ -206,6 +210,10 @@ public class FrameAdmin extends javax.swing.JFrame {
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
+    /**
+     * To generate a new password
+     * @param evt 
+     */
     private void jButtonChangePwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangePwdActionPerformed
         if(jComboBoxListUser.getSelectedItem() != null){
             MotDePasse mdp = new MotDePasse(true, true, true);

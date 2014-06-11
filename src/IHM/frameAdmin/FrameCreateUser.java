@@ -1,6 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Frame to create a new user
  */
 package IHM.frameAdmin;
 
@@ -9,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class FrameCreateUser extends javax.swing.JFrame {
 
@@ -89,6 +88,10 @@ public class FrameCreateUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * To valide data of a new user
+     * @param evt 
+     */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         if(jTextFieldLogin.getText().isEmpty() || new String(jPasswordFieldPdw.getPassword()).isEmpty()){
             JOptionPane.showMessageDialog(null, "Des champs sont vide");

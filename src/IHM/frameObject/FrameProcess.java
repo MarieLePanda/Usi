@@ -1,34 +1,33 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Frame to create or edit a process
  */
 package IHM.frameObject;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
-import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.WindowConstants;
-import myObject.Capability;
-import myObject.Responsible;
-import myObject.Segment;
+import java.util.*;
+import javax.swing.*;
+import myObject.*;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class FrameProcess extends javax.swing.JFrame {
 
     private myObject.Process process;
+    
     /**
-     * Creates new form FrameProcess
+     * Creates new form FrameProcess when user create a new process
      */
     public FrameProcess() {
         process = new myObject.Process();
         initComponents();
     }
     
+    /**
+     * Creates new form FrameProcess when user update a existing process
+     * @param process process to update
+     */
     public FrameProcess(myObject.Process process){
         this.process = process;
         initComponents();
@@ -317,8 +316,13 @@ public class FrameProcess extends javax.swing.JFrame {
 
     private void jComboBoxSupportSegmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSupportSegmentActionPerformed
         // TODO add your handling code here:
+        //A supprimer
     }//GEN-LAST:event_jComboBoxSupportSegmentActionPerformed
 
+    /**
+     * Create or update a process
+     * @param evt 
+     */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         // TODO add your handling code here:
         if(process.getName() == null){
@@ -332,10 +336,6 @@ public class FrameProcess extends javax.swing.JFrame {
                 
             
         }else{
-           /*ArrayList<Capability> listCapability = new ArrayList<Capability>();
-           for(int i = 0; i < jListCapability.getModel().getSize(); i++){
-               listCapability.add((Capability) jListCapability.getModel().getElementAt(i));
-           }*/
            process.setName(jTextFieldName.getText());
            process.setDescription(jTextAreaDescription.getText());
            process.setValidFrom(new Date (jCalendarComboBoxValidFrom.getDate().getTime()));
@@ -349,6 +349,10 @@ public class FrameProcess extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
+    /**
+     * To add a capability, call a new frame
+     * @param evt 
+     */
     private void jButtonAddCapabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddCapabilityActionPerformed
         // TODO add your handling code here:
         if(process.getName() != null){
@@ -360,6 +364,10 @@ public class FrameProcess extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonAddCapabilityActionPerformed
 
+    /**
+     * Windows reload her-self the list of capability in the Jlist
+     * @param evt 
+     */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         process.setListCapability(data.IHM.DataIHM.getCapability(process.getId()));
@@ -370,6 +378,10 @@ public class FrameProcess extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_formWindowActivated
 
+    /**
+     * To remove a capability, call a new frame
+     * @param evt 
+     */
     private void jButtonRemoveCapabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveCapabilityActionPerformed
         // TODO add your handling code here:
         if(process != null){
@@ -391,11 +403,18 @@ public class FrameProcess extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRemoveCapabilityActionPerformed
 
+    /**
+     * Close the frame
+     * @param evt 
+     */
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    /**
+     * load the value of the process
+     */
     private void loadValue() {
         jTextFieldName.setText(process.getName());
         jLabelValId.setText(Integer.toString(process.getId()));
@@ -474,6 +493,4 @@ public class FrameProcess extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
-
-
 }

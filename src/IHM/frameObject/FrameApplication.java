@@ -1,6 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Application frame to create or edit a application
  */
 package IHM.frameObject;
 
@@ -8,13 +7,10 @@ package IHM.frameObject;
 import data.IHM.DataIHM;
 import java.util.ArrayList;
 import myObject.*;
-import java.sql.Date;
-import javax.swing.ComboBoxModel;
-
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class FrameApplication extends javax.swing.JFrame {
 
@@ -645,16 +641,23 @@ public class FrameApplication extends javax.swing.JFrame {
 
     private void jTextFieldOperatingCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldOperatingCostActionPerformed
         // TODO add your handling code here:
+        //A supprimer
     }//GEN-LAST:event_jTextFieldOperatingCostActionPerformed
 
     private void jTextFieldInvestmentStrategyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInvestmentStrategyActionPerformed
         // TODO add your handling code here:
+        //A supprimer
     }//GEN-LAST:event_jTextFieldInvestmentStrategyActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
+        //A suprimmer
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    /**
+     * Save data of application
+     * @param evt 
+     */
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
 

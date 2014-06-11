@@ -1,12 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Capability frame to create or edit capability
  */
 package IHM.frameObject;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class FrameCapability extends javax.swing.JFrame {
 

@@ -1,6 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Frame to create a new object
  */
 package IHM.frameObject;
 import javax.swing.JOptionPane;
@@ -15,6 +14,7 @@ import myObject.*;
 public class FrameNewObject extends javax.swing.JFrame {
 
     MetaModelObject stat = new Segment();    
+    
     /**
      * Creates new form FrameNewObject
      */
@@ -75,6 +75,10 @@ public class FrameNewObject extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Launch good frame to create a new object
+     * @param evt 
+     */
     private void jComboBoxTypeObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeObjectActionPerformed
         // TODO add your handling code here:
         int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment créer un nouveau objet de type " + jComboBoxTypeObject.getSelectedItem() + " ?");
@@ -95,11 +99,13 @@ public class FrameNewObject extends javax.swing.JFrame {
 
     private void jComboBoxTypeObjectItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTypeObjectItemStateChanged
         // TODO add your handling code here:
+        //A supprmier
         
     }//GEN-LAST:event_jComboBoxTypeObjectItemStateChanged
 
     private void jComboBoxTypeObjectPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBoxTypeObjectPropertyChange
         // TODO add your handling code here:
+        //A supprmier
     }//GEN-LAST:event_jComboBoxTypeObjectPropertyChange
 
     /**

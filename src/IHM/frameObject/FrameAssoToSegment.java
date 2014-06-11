@@ -1,6 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Frame to chose an object to associate
  */
 package IHM.frameObject;
 
@@ -9,19 +8,23 @@ import myObject.*;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class FrameAssoToSegment extends javax.swing.JFrame {
 
     private MetaModelObject object;
+    
     /**
      * Creates new form FrameAssoToSegment
      */
-    
     public FrameAssoToSegment() {
        
     }
-        
+    
+    /**
+     * Creates new form FrameAssoToSegment
+     * @param object object selected to associate
+     */
     public FrameAssoToSegment(MetaModelObject object) {
         this.object = object;
         initComponents();
@@ -80,6 +83,10 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Select the good fonction
+     * @param evt 
+     */
     private void jComboBoxListProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListProcessActionPerformed
         // TODO add your handling code here:
         if(object instanceof Segment){
@@ -129,14 +136,23 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Load combobox if the object is a segment
+     */
     private void initComboBoxListToSegment() {
         jComboBoxListProcess.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getFreeProcess()));
     }
     
-        private void initComboBoxListToProcess() {
+    /**
+     * Load combobox if the object is a process
+     */
+    private void initComboBoxListToProcess() {
         jComboBoxListProcess.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getFreeCapability()));
     }
     
+    /**
+     * Link the process to segment
+     */
     private void excuteComboboxListToSegment(){
         int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment associer " + jComboBoxListProcess.getSelectedItem() + 
                     " à votre zone " + object.getName() + " ?");
@@ -146,6 +162,9 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Link the capability to process
+     */
     private void excuteComboboxListToProcess(){
         int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment associer " + jComboBoxListProcess.getSelectedItem() + 
                     " à votre quartier " + object.getName() + " ?");

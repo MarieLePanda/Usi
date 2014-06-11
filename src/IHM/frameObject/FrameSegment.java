@@ -1,28 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Frame to create or edit a segment
  */
 package IHM.frameObject;
-import java.awt.Dialog;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.ListDataListener;
 import myObject.*;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class FrameSegment extends javax.swing.JFrame {
 
     private Segment segment = null;
+    
     /**
-     * Creates new form FrameSegment
+     * Creates new form FrameSegment when user create a new segment
      */
     public FrameSegment() {
         initComponents();
     }
     
+    /**
+     * Creates new form FrameProcess when user update a existing process
+     * @param segment segment to update
+     */
     public FrameSegment(Segment segment){
         this.segment = segment;
         initComponents();
@@ -269,8 +271,13 @@ public class FrameSegment extends javax.swing.JFrame {
           
     private void jTextFieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNameActionPerformed
         // TODO add your handling code here:
+        //A supprimer
     }//GEN-LAST:event_jTextFieldNameActionPerformed
 
+    /**
+     * Create or update segment
+     * @param evt 
+     */
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
         if(segment == null){
@@ -292,11 +299,19 @@ public class FrameSegment extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
+    /**
+     * Close the frame
+     * @param evt 
+     */
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    /**
+     * To add a segment, call a new frame
+     * @param evt 
+     */
     private void jButtonAddProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProcessActionPerformed
         // TODO add your handling code here:
         if(segment != null){
@@ -308,6 +323,10 @@ public class FrameSegment extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonAddProcessActionPerformed
 
+    /**
+     * To remove a segment, call a new frame
+     * @param evt 
+     */
     private void jButtonRemoveProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveProcessActionPerformed
         // TODO add your handling code here:
         if(segment != null){
@@ -329,6 +348,10 @@ public class FrameSegment extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRemoveProcessActionPerformed
 
+    /**
+     * Windows reload her-self the list of process in the Jlist
+     * @param evt 
+     */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         jListProcess.setModel(new javax.swing.AbstractListModel() {
