@@ -15,12 +15,22 @@ import myObject.*;
 public class FrameProcess extends javax.swing.JFrame {
 
     private myObject.Process process;
+    private Capability capability;
+    private String type;
     
     /**
      * Creates new form FrameProcess when user create a new process
      */
-    public FrameProcess() {
-        process = new myObject.Process();
+    public FrameProcess(){
+        
+    }
+    
+    public FrameProcess(String type) {
+        this.type = type;
+        if(type.equals("Quartier"))
+            process = new myObject.Process();
+        else if(type.equals("Ilot"))
+            capability = new Capability();
         initComponents();
     }
     
@@ -29,7 +39,15 @@ public class FrameProcess extends javax.swing.JFrame {
      * @param process process to update
      */
     public FrameProcess(myObject.Process process){
+        type = "Quartier";
         this.process = process;
+        initComponents();
+        loadValue();
+    }
+        
+    public FrameProcess(Capability capability){
+        type = "Ilot";
+        this.capability = capability;
         initComponents();
         loadValue();
     }
@@ -169,7 +187,12 @@ public class FrameProcess extends javax.swing.JFrame {
 
         jLabelSupportSegment.setText("Supporte la zone");
 
-        jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListSegment()));
+        if(type.equals("Quartier")){
+            jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListAllSegment()));
+        }
+        else if(type.equals("Ilot")){
+            jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListAllProcess()));
+        }
         jComboBoxSupportSegment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSupportSegmentActionPerformed(evt);
@@ -178,11 +201,15 @@ public class FrameProcess extends javax.swing.JFrame {
 
         jLabel2.setText("Ilots soutient");
 
-        jListCapability.setModel(new javax.swing.DefaultListModel() {
-            Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
-            public int getSize() { return tabCapability.length; }
-            public Object getElementAt(int i) { return tabCapability[i]; }
-        });
+        if(type.equals("Quartier")){
+            jListCapability.setModel(new javax.swing.DefaultListModel() {
+                Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
+                public int getSize() { return tabCapability.length; }
+                public Object getElementAt(int i) { return tabCapability[i]; }
+            });
+        }else if(type.equals("Ilot")){
+
+        }
         jScrollPane2.setViewportView(jListCapability);
 
         jButtonAddCapability.setText("Ajouter ilot");
@@ -325,27 +352,50 @@ public class FrameProcess extends javax.swing.JFrame {
      */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         // TODO add your handling code here:
-        if(process.getName() == null){
-            process = new myObject.Process(jTextFieldName.getText(), jTextAreaDescription.getText(),
-                    new Date (jCalendarComboBoxValidFrom.getDate().getTime()), new Date (jCalendarComboBoxValidUnitl.getDate().getTime()),
-                    (Segment) jComboBoxSupportSegment.getSelectedItem(), (Responsible) jComboBoxResponsible.getSelectedItem(), 
-                    (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), new ArrayList<Capability>());
-            process.createObject();
-            JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " créer");
-            this.dispose();
-                
-            
-        }else{
-           process.setName(jTextFieldName.getText());
-           process.setDescription(jTextAreaDescription.getText());
-           process.setValidFrom(new Date (jCalendarComboBoxValidFrom.getDate().getTime()));
-           process.setValideUntil(new Date (jCalendarComboBoxValidUnitl.getDate().getTime()));
-           process.setSegment((Segment) jComboBoxSupportSegment.getSelectedItem());
-           process.setResponsible((Responsible) jComboBoxResponsible.getSelectedItem());
-           process.setResponsibleDeputy((Responsible) jComboBoxResponsibleDeputy.getSelectedItem());
-           process.updateObject();
-           JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " modifier");
-           this.dispose();
+        if(type.equals("Quartier")){
+            if(process.getName() == null){
+                process = new myObject.Process(jTextFieldName.getText(), jTextAreaDescription.getText(),
+                        new Date (jCalendarComboBoxValidFrom.getDate().getTime()), new Date (jCalendarComboBoxValidUnitl.getDate().getTime()),
+                        (Segment) jComboBoxSupportSegment.getSelectedItem(), (Responsible) jComboBoxResponsible.getSelectedItem(), 
+                        (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), new ArrayList<Capability>());
+                process.createObject();
+                JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " créer");
+                this.dispose();
+
+
+            }else{
+               process.setName(jTextFieldName.getText());
+               process.setDescription(jTextAreaDescription.getText());
+               process.setValidFrom(new Date (jCalendarComboBoxValidFrom.getDate().getTime()));
+               process.setValideUntil(new Date (jCalendarComboBoxValidUnitl.getDate().getTime()));
+               process.setSegment((Segment) jComboBoxSupportSegment.getSelectedItem());
+               process.setResponsible((Responsible) jComboBoxResponsible.getSelectedItem());
+               process.setResponsibleDeputy((Responsible) jComboBoxResponsibleDeputy.getSelectedItem());
+               process.updateObject();
+               JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " modifier");
+               this.dispose();
+            }
+        }else if(type.equals("Ilot")){
+            if(capability.getName() == null){
+                capability = new Capability((myObject.Process) jComboBoxSupportSegment.getSelectedItem(),jTextFieldName.getText(), jTextAreaDescription.getText(),
+                        new Date (jCalendarComboBoxValidFrom.getDate().getTime()), new Date (jCalendarComboBoxValidUnitl.getDate().getTime()),
+                        (Responsible) jComboBoxResponsible.getSelectedItem(), 
+                        (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), new ArrayList<Application>());
+                capability.createObject();
+                JOptionPane.showMessageDialog(null,"Ilot " + capability.getName() + " créer");
+                this.dispose();
+            }else{
+               capability.setName(jTextFieldName.getText());
+               capability.setDescription(jTextAreaDescription.getText());
+               capability.setValidFrom(new Date (jCalendarComboBoxValidFrom.getDate().getTime()));
+               capability.setValideUntil(new Date (jCalendarComboBoxValidUnitl.getDate().getTime()));
+               capability.setProcess((myObject.Process) jComboBoxSupportSegment.getSelectedItem());
+               capability.setResponsible((Responsible) jComboBoxResponsible.getSelectedItem());
+               capability.setResponsibleDeputy((Responsible) jComboBoxResponsibleDeputy.getSelectedItem());
+               capability.updateObject();
+               JOptionPane.showMessageDialog(null,"Ilot " + capability.getName() + " modifier");
+               this.dispose();
+            }
         }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 

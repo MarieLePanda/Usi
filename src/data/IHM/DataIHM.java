@@ -1,6 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Technical class to load data visible in the IHM
  */
 package data.IHM;
 
@@ -13,10 +12,14 @@ import myObject.*;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class DataIHM {
     
+    /**
+     * Create the tree
+     * @return model of tree
+     */
     public static DefaultMutableTreeNode initTree(){
         
         //Root/
@@ -44,6 +47,10 @@ public class DataIHM {
         return root;
     }
     
+    /**
+     * Create all segment existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeSegment(){
        DefaultMutableTreeNode segment = new DefaultMutableTreeNode(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             "Zone");
        Connection connection = ConnectionSql.getConnection();
@@ -66,6 +73,10 @@ public class DataIHM {
        return segment;
     }
     
+    /**
+     * Create all process existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeProcess(){
         DefaultMutableTreeNode process = new DefaultMutableTreeNode("Quartier");
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
@@ -76,9 +87,10 @@ public class DataIHM {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){                
-                listProcess.add( new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
-                        res.getDate(5), null, getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>()));
-            
+                myObject.Process p = ( new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                        res.getDate(5), new Segment(), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>()));
+                p.getSegment().setId(res.getInt(6));
+                listProcess.add(p);
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " loadTreeProcess 1 " + e.getMessage());
@@ -88,17 +100,18 @@ public class DataIHM {
             Connection connectionSeg = ConnectionSql.getConnection();
             try{
                 PreparedStatement preparedStatementSeg = connectionSeg.prepareStatement(sql);
-                    preparedStatementSeg.setInt(1, p.getId());
+                preparedStatementSeg.setInt(1, p.getSegment().getId());
                 ResultSet seg = preparedStatementSeg.executeQuery();
-                seg.next(); 
+                seg.next();
                 p.setSegment(new Segment(seg.getInt(1), seg.getString(2),seg.getString(3), getResponsible(seg.getInt(4)),
-                        getResponsible(seg.getInt(5)), getProcess(seg.getInt(1))));
+                    getResponsible(seg.getInt(5)), getProcess(seg.getInt(1))));
             }
             catch(SQLException e){
             System.out.println(e.toString() + " loadTreeProcess 2 " + e.getMessage());
             }
         }
             for(myObject.Process p : listProcess){
+                System.out.println(p.getSegment());
                 ArrayList<Capability> capabilities = new ArrayList<Capability>();
                 try{
                     connection = ConnectionSql.getConnection();
@@ -125,6 +138,10 @@ public class DataIHM {
         return process;
     }
     
+     /**
+     * Create all capability existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeCapability(){
         DefaultMutableTreeNode capability = new DefaultMutableTreeNode("Ilot");
         
@@ -146,12 +163,20 @@ public class DataIHM {
         return capability;
     }
     
+     /**
+     * Create all interface existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeInterface(){
         DefaultMutableTreeNode appInterface = new DefaultMutableTreeNode("Interface");
         
         return appInterface;
     }
     
+    /**
+     * Create all server existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeServer(){
         DefaultMutableTreeNode server = new DefaultMutableTreeNode("Serveur");
         
@@ -159,18 +184,30 @@ public class DataIHM {
         
     }
     
+    /**
+     * Create all database existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeDatabase(){
         DefaultMutableTreeNode database = new DefaultMutableTreeNode("base de donnée");
         
         return database;
     }
     
+    /**
+     * Create all technology existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeTechnology(){
         DefaultMutableTreeNode technology = new DefaultMutableTreeNode("Technologie");
         
         return technology;
     }
     
+    /**
+     * Create all application existing
+     * @return node of tree
+     */
     public static DefaultMutableTreeNode loadTreeApplication(){
         DefaultMutableTreeNode application = new DefaultMutableTreeNode("Application");
         Connection connection = ConnectionSql.getConnection();
@@ -197,19 +234,33 @@ public class DataIHM {
         return application; 
     }
     
+   /**
+     * Create all user existing
+     * @return array of user
+     */
    public static User[] loadUser(){
-       /*User[] users = new User[3];
-       users[0] = new User (1, "Panda", "panda", true);
-       users[1] = new User(2, "Marie", "marie", false);
-       users[2] = new User(3, "Mary", "mary", false);*/
        ArrayList<User> users = new ArrayList<User>();
-       users.add(new User (1, "Panda", "panda", true));
-       users.add(new User(2, "Marie", "marie", false));
-       users.add(new User(3, "Mary", "mary", false));
+       Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "SELECT * FROM user";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                users.add(new User(res.getInt(1), res.getString(2), res.getString(3), res.getBoolean(4)));
+            }
+        }catch(SQLException e){
+            System.out.println("loadUser " + e.toString());
+            
+        }
        
        return users.toArray(new User[users.size()]);
    }
    
+     /**
+     * Create all responsible existing
+     * @return array of responsible
+     */
     public static Responsible[] loadResponsible(){
         ArrayList<Responsible> responsibles = new ArrayList<Responsible>();
 
@@ -230,6 +281,11 @@ public class DataIHM {
         
     }    
     
+    /**
+     * create a specify responsible
+     * @param id the id of responsible that you want to have 
+     * @return the responsible witch id passed as parameter
+     */
     public static Responsible getResponsible(int id){
         Responsible responsible = null;
         
@@ -250,6 +306,11 @@ public class DataIHM {
         return responsible;
     }
     
+    /**
+     * Create a specify lifecycle
+     * @param id the id of lifecycle that you want to have 
+     * @return the lifecycle witch id passed as parameter
+     */
     public static Lifecycle getLifecycle(int id){
         Lifecycle lifecycle = null;
         Connection connection = ConnectionSql.getConnection();
@@ -270,8 +331,11 @@ public class DataIHM {
     }
     
     //Need to manage segment
-    //Return process witchout segment
-     public static myObject.Process[] getFreeProcess(){
+    /**
+     * Returns all process attached to any segment
+     * @return array of process
+     */
+    public static myObject.Process[] getFreeProcess(){
         ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
         
@@ -291,7 +355,11 @@ public class DataIHM {
         return process.toArray(new myObject.Process[process.size()]);
     }
     
-    //Return process link to segment for create new segment
+    /**
+     * Returns the process attached to a segment to build a segment
+     * @param segmentId Segment id that you want to have the list of process
+     * @return List of process witch segment id passed as parameter
+     */
     public static ArrayList<myObject.Process> getProcess(int segmentId){
         ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
@@ -313,7 +381,11 @@ public class DataIHM {
         return process;
     }  
     
-    //Return process link to segment
+     /**
+     * Returns the process attached to a segment to display a segment
+     * @param segment Segment that you want to have the list of process
+     * @return array of process witch segment id passed as parameter
+     */
     public static myObject.Process[] getListProcess(Segment segment){
        
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
@@ -339,7 +411,11 @@ public class DataIHM {
         
     }
     
-        public static Segment[] getListSegment(){
+    /**
+     * Returns all segment existing to display in the combobox
+     * @return array of segment
+     */
+    public static Segment[] getListAllSegment(){
         ArrayList<Segment> segment = new ArrayList<Segment>();
         Connection connection = ConnectionSql.getConnection();
         String sql = "SELECT * FROM segment";
@@ -359,7 +435,11 @@ public class DataIHM {
         
        return segment.toArray(new Segment[segment.size()]);
     }    
-        
+     
+    /**
+     * Returns all capability attached to any process
+     * @return array of capability
+     */
     public static Capability[] getFreeCapability(){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
         
@@ -381,7 +461,12 @@ public class DataIHM {
         return capabilities.toArray(new Capability[capabilities.size()]);
     }
     
-     public static ArrayList<Capability> getCapability(int processId){
+     /**
+     * Create a specify capability
+     * @param id the process id for which you want a list of capability
+     * @return aurray of capability witch id passed as parameter
+     */
+    public static ArrayList<Capability> getCapability(int processId){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
         Connection connection = ConnectionSql.getConnection();
         
@@ -399,6 +484,45 @@ public class DataIHM {
             System.out.println(e.toString() + " getProcess " + e.getMessage());
         }
         return capabilities;
-    }  
+    }
     
+    public static myObject.Process[] getListAllProcess(){
+        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "SELECT * FROM process";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                
+                myObject.Process objectProcess = new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), 
+                        res.getDate(4), res.getDate(5), getSegment(res.getInt(6)), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>());
+                process.add(objectProcess);
+            }
+        }catch(SQLException e){
+            System.out.println("getListAllProcess " + e.toString());
+        }
+        
+       return process.toArray(new myObject.Process[process.size()]);
+    }    
+    
+    public static Segment getSegment(int segmentId){
+        
+        Connection connection = ConnectionSql.getConnection();
+        Segment segment = null;
+        String sql = "SELECT * FROM segment WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, segmentId);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                segment = new Segment(res.getInt(1), res.getString(2),res.getString(3), getResponsible(res.getInt(4)),
+                        getResponsible(res.getInt(5)), getProcess(res.getInt(1)));
+                //objectProcess.addObjectToMetaModel();
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }
+        return segment;
+    }  
 }

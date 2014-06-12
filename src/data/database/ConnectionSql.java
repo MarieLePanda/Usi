@@ -1,18 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Technical class to manage the connection to the database
  */
 package data.database;
 
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class ConnectionSql {
     
-    
+    /**
+     * Returns a connection in admin mode database
+     * @return object Connection
+     */
     public static Connection getConnection(){
 
         try {
@@ -31,6 +34,7 @@ public class ConnectionSql {
             
         } catch ( SQLException e ) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,"getConnection " + e.toString());
         } 
         return connexion;
     }

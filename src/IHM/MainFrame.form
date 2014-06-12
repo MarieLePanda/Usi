@@ -41,7 +41,8 @@
                       <Component id="jButtonDeleteObject" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="383" max="32767" attributes="0"/>
+              <EmptySpace pref="282" max="32767" attributes="0"/>
+              <Component id="jButtonAdministration" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,6 +54,7 @@
                   <Component id="jButtonCreateObject" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonEditObject" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonDeleteObject" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAdministration" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="543" max="-2" attributes="0"/>
@@ -102,6 +104,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeleteObjectActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonAdministration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Administration"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAdministrationActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

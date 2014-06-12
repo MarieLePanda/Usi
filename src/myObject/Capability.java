@@ -145,6 +145,28 @@ public class Capability extends MetaModelObject{
 		
 	}
 
+        /**
+	 * @param name
+         * @param description
+	 * @param validFrom
+	 * @param valideUntil
+	 * @param process
+	 * @param responsible
+	 * @param responsibleDeputy
+	 * @param listApplication
+	 */
+	public Capability(Process process, String name, String description, Date validFrom, Date valideUntil,
+			Responsible responsible, Responsible responsibleDeputy,	ArrayList<Application> listApplication) {
+		this.name = name;
+                this.description = description;
+		this.validFrom = validFrom;
+		this.valideUntil = valideUntil;
+		this.process = process;
+		this.responsible = responsible;
+		this.responsibleDeputy = responsibleDeputy;
+		this.listApplication = listApplication;
+	}
+        
 	/**
 	 * @param id
 	 * @param name

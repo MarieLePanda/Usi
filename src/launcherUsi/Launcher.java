@@ -1,22 +1,28 @@
 package launcherUsi;
-import IHM.MainFrame;
-import IHM.frameObject.FrameApplication;
-
-import IHM.frameAdmin.FrameAdmin;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+import IHM.*;
+import javax.swing.*;
+import myObject.User;
 
 public class Launcher {
 
+    public static User userConnected = null;
 	public static void main(String[] args) {
             
     // TODO Auto-generated method stub
             
             Runnable r = new Runnable(){
                 public void run(){
-                    MainFrame win = new MainFrame();
-                    win.setVisible(true);
-                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    
+                    if(userConnected == null){
+                         WindowConnection win = new WindowConnection();
+                         win.setVisible(true);
+                         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);                        
+                    }
+                    else{
+                        MainFrame wind = new MainFrame();
+                        wind.setVisible(true);
+                        wind.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
 		}
             };
         

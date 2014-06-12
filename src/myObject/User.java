@@ -1,5 +1,11 @@
 package myObject;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class User {
 	
 	private int id;
@@ -19,7 +25,19 @@ public class User {
 		this.login = login;
 	}
 	public String getPassword() {
-		return password;
+            String hash;
+            hash = null;
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA-512");
+                md.update((login + "PandprodProtegeVotreMdp" +password).getBytes("UTF-8"));
+                byte[] digest = md.digest();
+                hash = new String (digest);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return hash;
 	}
 	public void setPassword(String password) {
 		this.password = password;
@@ -55,13 +73,16 @@ public class User {
 		return login;
 	}
 	
+        public void connection(){
+            login = login.toLowerCase();
+            data.database.CrudDatabase.connectionUser(this);
+        }
 	/***
 	 * Create current user in database
 	 * @return message of insert
 	 */
 	public void createUser(){
-		
-            throw new UnsupportedOperationException("Not supported yet.");
+            data.database.CrudDatabase.createUser(this);
 	}
 	
 	/***
@@ -69,8 +90,7 @@ public class User {
 	 * @return message of delete
 	 */
 	public void deleteUser(){
-		
-            throw new UnsupportedOperationException("Not supported yet.");
+            data.database.CrudDatabase.deleteUser(this);
 	}
 	
 	/***
@@ -78,8 +98,7 @@ public class User {
 	 * @return message of update
 	 */
 	public void updateUser(){
-		
-           throw new UnsupportedOperationException("Not supported yet.");
+            data.database.CrudDatabase.updateUser(this);
 	}
 
     @Override

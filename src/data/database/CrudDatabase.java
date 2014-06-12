@@ -4,11 +4,7 @@
  */
 package data.database;
 
-
-import static data.IHM.DataIHM.getResponsible;
 import java.sql.*;
-import java.util.ArrayList;
-import javax.swing.tree.DefaultMutableTreeNode;
 import myObject.*;
 
 /**
@@ -16,6 +12,68 @@ import myObject.*;
  * @author lug13995
  */
 public class CrudDatabase {
+    
+    public static void connectionUser(User user){
+        
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "SELECT * FROM `user` WHERE name = ? and password = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                launcherUsi.Launcher.userConnected = new User(res.getInt(1), res.getString(2), res.getString(3), res.getBoolean(4));
+            }
+        }catch(SQLException e){
+            System.out.println("connectionUser " + e.toString());
+        }
+    }
+    
+    public static void createUser(User user){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "INSERT INTO user (name, password, administrator) VALUES (?, ?, ?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setBoolean(3, user.getAdministrator());
+            preparedStatement.execute();
+            
+        }catch(SQLException e){
+            System.out.println("createUser " + e.toString());
+        }
+    }
+    
+    public static void updateUser(User user){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "UPDATE user SET id = ?, name = ?, password = ?, administrator = ? WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setBoolean(4, user.getAdministrator());
+            preparedStatement.setInt(5, user.getId());
+            preparedStatement.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println("updateUser " + e.toString());
+        }
+    }
+    
+    public static void deleteUser(User user) {
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "DELETE FROM user WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.execute();
+            
+        }catch(SQLException e){
+            System.out.println("deleteUser " + e.toString());
+        }
+    }
     
     public static void createApplication(Application application){
         ConnectionSql.getConnection();
@@ -207,6 +265,5 @@ public class CrudDatabase {
             System.out.println("deleteProcess 2 " + e.toString());
         }
         
-    }
-   
+    }   
 }

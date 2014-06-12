@@ -3,10 +3,12 @@
  */
 package IHM;
 
+import IHM.frameAdmin.FrameAdmin;
 import IHM.frameObject.*;
 import data.IHM.DataIHM;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import launcherUsi.Launcher;
 import myObject.*;
 
 /**
@@ -19,8 +21,9 @@ public class MainFrame extends javax.swing.JFrame{
      * Creates new form MainFrame
      */
     public MainFrame() {
-        
         initComponents();
+        if(Launcher.userConnected.getAdministrator() == false)
+            jButtonAdministration.setVisible(false);
 
     }
 
@@ -40,6 +43,7 @@ public class MainFrame extends javax.swing.JFrame{
         jButtonCreateObject = new javax.swing.JButton();
         jButtonEditObject = new javax.swing.JButton();
         jButtonDeleteObject = new javax.swing.JButton();
+        jButtonAdministration = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -98,6 +102,13 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
 
+        jButtonAdministration.setText("Administration");
+        jButtonAdministration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdministrationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,7 +123,8 @@ public class MainFrame extends javax.swing.JFrame{
                         .addComponent(jButtonEditObject)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonDeleteObject)))
-                .addContainerGap(383, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
+                .addComponent(jButtonAdministration))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +133,8 @@ public class MainFrame extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCreateObject)
                     .addComponent(jButtonEditObject)
-                    .addComponent(jButtonDeleteObject))
+                    .addComponent(jButtonDeleteObject)
+                    .addComponent(jButtonAdministration))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -155,7 +168,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_formPropertyChange
 
     /**
-     * Windows reload her-self the list of process in the Jlist
+     * Windows reload her-self the JTree
      * @param evt 
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -231,6 +244,13 @@ public class MainFrame extends javax.swing.JFrame{
         }     
     }//GEN-LAST:event_jButtonDeleteObjectActionPerformed
 
+    private void jButtonAdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrationActionPerformed
+        // TODO add your handling code here:
+        FrameAdmin win = new FrameAdmin();
+        win.setVisible(true);
+        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButtonAdministrationActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,6 +286,7 @@ public class MainFrame extends javax.swing.JFrame{
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdministration;
     private javax.swing.JButton jButtonCreateObject;
     private javax.swing.JButton jButtonDeleteObject;
     private javax.swing.JButton jButtonEditObject;

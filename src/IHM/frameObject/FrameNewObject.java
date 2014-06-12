@@ -88,8 +88,8 @@ public class FrameNewObject extends javax.swing.JFrame {
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }
-            else if(jComboBoxTypeObject.getSelectedItem().equals("Quartier")){
-                FrameProcess win = new FrameProcess();
+            else if(jComboBoxTypeObject.getSelectedItem().equals("Quartier") ||jComboBoxTypeObject.getSelectedItem().equals("Ilot")){
+                FrameProcess win = new FrameProcess((String)jComboBoxTypeObject.getSelectedItem());
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }

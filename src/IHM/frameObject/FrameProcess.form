@@ -281,12 +281,16 @@
             <Component class="javax.swing.JComboBox" name="jComboBoxSupportSegment">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListSegment())" type="code"/>
+                  <Connection code="new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListAllSegment())" type="code"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxSupportSegmentActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}&#xa;else if(type.equals(&quot;Ilot&quot;)){&#xa;jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListAllProcess()));&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(type.equals(&quot;Quartier&quot;)){"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -303,9 +307,13 @@
                 <Component class="javax.swing.JList" name="jListCapability">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.DefaultListModel() {&#xa;Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);&#xa;    public int getSize() { return tabCapability.length; }&#xa;    public Object getElementAt(int i) { return tabCapability[i]; }&#xa;    }" type="code"/>
+                      <Connection code="new javax.swing.DefaultListModel() {&#xa;    Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);&#xa;    public int getSize() { return tabCapability.length; }&#xa;    public Object getElementAt(int i) { return tabCapability[i]; }&#xa;}" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}else if(type.equals(&quot;Ilot&quot;)){&#xa;&#xa;}"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(type.equals(&quot;Quartier&quot;)){"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

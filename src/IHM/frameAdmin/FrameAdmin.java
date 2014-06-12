@@ -42,6 +42,11 @@ public class FrameAdmin extends javax.swing.JFrame {
         jButtonCreate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabelListUser.setText("Liste utilisateur :");
 
@@ -147,6 +152,7 @@ public class FrameAdmin extends javax.swing.JFrame {
 
     private void jCheckBoxAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxAdminActionPerformed
         // TODO add your handling code here:
+        //A supprimer
     }//GEN-LAST:event_jCheckBoxAdminActionPerformed
 
     private void jComboBoxListUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListUserActionPerformed
@@ -218,14 +224,28 @@ public class FrameAdmin extends javax.swing.JFrame {
         if(jComboBoxListUser.getSelectedItem() != null){
             MotDePasse mdp = new MotDePasse(true, true, true);
             User currentUser = (User) jComboBoxListUser.getSelectedItem();
-            currentUser.setPassword(mdp.generationMdp());
+            String visible = mdp.generationMdp();
+            currentUser.setPassword(visible);
             currentUser.updateUser();
-            JOptionPane.showMessageDialog(null,"Nouveau mot de passe pour l'utilisateur " + currentUser.getLogin() + " : " + currentUser.getPassword());
+            JOptionPane.showMessageDialog(null,"Nouveau mot de passe pour l'utilisateur " + currentUser.getLogin() + " : " + visible);
         }
         else{
             JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
         }
     }//GEN-LAST:event_jButtonChangePwdActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        jComboBoxListUser.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.loadUser()));
+        if(jComboBoxListUser.getSelectedItem() != null){
+            User currentUser = (User) jComboBoxListUser.getSelectedItem();
+            jTextFieldLogin.setText(currentUser.getLogin());
+            jCheckBoxAdmin.setSelected(currentUser.getAdministrator());
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
+        }        
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
