@@ -266,4 +266,68 @@ public class CrudDatabase {
         }
         
     }   
+     
+    public static void createCapability(Capability capability){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "INSERT INTO capability (PROCESSid, name, description, validFrom, validUntil, Responsibleid, ResponsibleidDeputy)"
+                + "VALUE (?, ?, ?, ?, ?, ?, ?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, capability.getProcess().getId());
+            preparedStatement.setString(2, capability.getName());
+            preparedStatement.setString(3, capability.getDescription());
+            preparedStatement.setDate(4, capability.getValidFrom());
+            preparedStatement.setDate(5, capability.getValideUntil());
+            preparedStatement.setInt(6, capability.getResponsible().getId());
+            preparedStatement.setInt(7, capability.getResponsibleDeputy().getId());
+            preparedStatement.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println("createCapability " + e.toString());
+        }
+        
+    }
+    
+    public static void updateCapability(Capability capability){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "update capability SET PROCESSid = ?, name = ?, description = ?, validFrom = ?, validUntil = ?, "
+                + "Responsibleid = ?, ResponsibleidDeputy = ? WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, capability.getProcess().getId());
+            preparedStatement.setString(2, capability.getName());
+            preparedStatement.setString(3, capability.getDescription());
+            preparedStatement.setDate(4, capability.getValidFrom());
+            preparedStatement.setDate(5, capability.getValideUntil());
+            preparedStatement.setInt(6, capability.getResponsible().getId());
+            preparedStatement.setInt(7, capability.getResponsibleDeputy().getId());
+            preparedStatement.setInt(8, capability.getId());
+            preparedStatement.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println("updateCapability " + e.toString());
+        }
+    }
+    
+         public static void deleteCapability(Capability capability){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "DELETE FROM capability_application WHERE CAPABILITYid = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, capability.getId());
+            preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            System.out.println("deleteCapability 1 " + e.toString());
+        }
+   
+        sql = "DELETE FROM capability WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, capability.getId());
+            preparedStatement.execute();
+        }catch(SQLException e){
+            System.out.println("deleteCapability 2 " + e.toString());
+        }
+        
+    }   
 }

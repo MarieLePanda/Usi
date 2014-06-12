@@ -206,17 +206,17 @@ public class Capability extends MetaModelObject{
 
     @Override
     public void createObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        data.database.CrudDatabase.createCapability(this);
     }
 
     @Override
     public void deleteObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        data.database.CrudDatabase.deleteCapability(this);
     }
 
     @Override
     public void updateObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        data.database.CrudDatabase.updateCapability(this);
     }
 
     @Override

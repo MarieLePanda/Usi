@@ -153,7 +153,7 @@ public class DataIHM {
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
                 capability.add(new DefaultMutableTreeNode(new Capability(
-                        res.getInt(1), null, res.getString(3), res.getString(4),
+                        res.getInt(1), getUniqueProcess(res.getInt(2)), res.getString(3), res.getString(4),
                         res.getDate(5), res.getDate(6), getResponsible(res.getInt(7)),
                         getResponsible(res.getInt(8)), new ArrayList<Application>())));
             }
@@ -525,4 +525,64 @@ public class DataIHM {
         }
         return segment;
     }  
+    
+        public static ArrayList<Application> getApplication(int capabilityId){
+        ArrayList<Application> applications = new ArrayList<Application>();
+        ArrayList<Integer> idApplication = new ArrayList<Integer>();
+        Connection connection = ConnectionSql.getConnection();
+        
+        String sql = "SELECT * FROM capability_application WHERE CAPABILITYid = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, capabilityId);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                idApplication.add(res.getInt(1));
+            }
+        }catch(SQLException e){
+            System.out.println("getApplication " + e.toString());
+        }
+        
+        sql = "SELECT * FROM application WHERE id = ?";
+        for(int i : idApplication){
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, i);
+                ResultSet res = preparedStatement.executeQuery();
+                while(res.next()){
+                    applications.add(new Application(
+                            res.getInt(1), res.getString(2), res.getString(3),
+                            res.getDate(4), res.getString(5), getResponsible(res.getInt(6)), getResponsible(res.getInt(7)), 
+                            getResponsible(res.getInt(8)), getResponsible(res.getInt(9)),
+                            getLifecycle(res.getInt(10)), null, res.getDate(12), res.getInt(13), res.getInt(14),
+                            res.getInt(15), res.getString(16), res.getString(17), res.getString(18), res.getString(19), null, res.getString(21),
+                            res.getString(22), res.getString(23), res.getString(24), new ArrayList<Capability>(), new ArrayList<Application>(), 
+                            new ArrayList<Application>(), new ArrayList<Interface>(), new ArrayList<Interface>(), new ArrayList<Technology>()));
+                }
+            }catch(SQLException e){
+                System.out.println("getApplication 2" + e.toString());
+
+            }
+        }
+        return applications;
+    }
+        
+        public static myObject.Process getUniqueProcess(int processId){
+            myObject.Process process = new myObject.Process();
+            Connection connection = ConnectionSql.getConnection();
+
+            String sql = "SELECT * FROM process WHERE id = ?";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, processId);
+                ResultSet res = preparedStatement.executeQuery();
+                while(res.next()){                
+                    process = ( new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                            res.getDate(5), new Segment(), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>()));
+                }
+            }catch(SQLException e){
+                System.out.println(e.toString() + " loadTreeProcess 1 " + e.getMessage());
+            }
+            return process;
+        }
 }

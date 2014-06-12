@@ -210,10 +210,15 @@ public class MainFrame extends javax.swing.JFrame{
                     win.setVisible(true);
                     win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 }
+                else if(node.getUserObject() instanceof Capability){
+                    FrameProcess win = new FrameProcess((Capability) node.getUserObject());
+                    win.setVisible(true);
+                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
+                }
             }
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
         }
     }//GEN-LAST:event_jButtonEditObjectActionPerformed
 

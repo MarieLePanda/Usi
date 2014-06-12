@@ -208,7 +208,12 @@ public class FrameProcess extends javax.swing.JFrame {
                 public Object getElementAt(int i) { return tabCapability[i]; }
             });
         }else if(type.equals("Ilot")){
-
+            capability.setListApplication(data.IHM.DataIHM.getApplication(capability.getId()));
+            jListCapability.setModel(new javax.swing.DefaultListModel() {
+                Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);
+                public int getSize() { return tabApplication.length; }
+                public Object getElementAt(int i) { return tabApplication[i]; }
+            });
         }
         jScrollPane2.setViewportView(jListCapability);
 
@@ -405,12 +410,16 @@ public class FrameProcess extends javax.swing.JFrame {
      */
     private void jButtonAddCapabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddCapabilityActionPerformed
         // TODO add your handling code here:
-        if(process.getName() != null){
-            FrameAssoToSegment win = new FrameAssoToSegment(process);
-            win.setVisible(true);
-            win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        }else{
-            JOptionPane.showMessageDialog(null,"Merci de d'abord valider la création de votre quartier");
+        if(type.equals("Quartier")){
+            if(process.getName() != null){
+                FrameAssoToSegment win = new FrameAssoToSegment(process);
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }else{
+                JOptionPane.showMessageDialog(null,"Merci de d'abord valider la création de votre quartier");
+            }
+        }else if(type.equals("Ilot")){
+            
         }
     }//GEN-LAST:event_jButtonAddCapabilityActionPerformed
 
@@ -420,12 +429,22 @@ public class FrameProcess extends javax.swing.JFrame {
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        process.setListCapability(data.IHM.DataIHM.getCapability(process.getId()));
-        jListCapability.setModel(new javax.swing.DefaultListModel() {
-            Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
-            public int getSize() { return tabCapability.length; }
-            public Object getElementAt(int i) { return tabCapability[i]; }
-        });
+        if(type.equals("Quartier")){
+            process.setListCapability(data.IHM.DataIHM.getCapability(process.getId()));
+            jListCapability.setModel(new javax.swing.DefaultListModel() {
+                Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
+                public int getSize() { return tabCapability.length; }
+                public Object getElementAt(int i) { return tabCapability[i]; }
+            });
+        }else if(type.equals("Ilot")){
+            capability.setListApplication(data.IHM.DataIHM.getApplication(capability.getId()));
+            jListCapability.setModel(new javax.swing.DefaultListModel() {
+                Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);
+                public int getSize() { return tabApplication.length; }
+                public Object getElementAt(int i) { return tabApplication[i]; }
+            });
+        }
+        
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -466,15 +485,28 @@ public class FrameProcess extends javax.swing.JFrame {
      * load the value of the process
      */
     private void loadValue() {
-        jTextFieldName.setText(process.getName());
-        jLabelValId.setText(Integer.toString(process.getId()));
-        jTextAreaDescription.setText(process.getDescription());
-        jComboBoxResponsible.setSelectedItem(process.getResponsible());
-        jComboBoxResponsibleDeputy.setSelectedItem(process.getResponsibleDeputy());
-        System.out.println(process.getSegment());
-        jComboBoxSupportSegment.setSelectedItem(process.getSegment());
-        jCalendarComboBoxValidFrom.setDate(process.getValidFrom());
-        jCalendarComboBoxValidUnitl.setDate(process.getValideUntil());
+        if(type.equals("Quartier")){
+            jTextFieldName.setText(process.getName());
+            jLabelValId.setText(Integer.toString(process.getId()));
+            jTextAreaDescription.setText(process.getDescription());
+            jComboBoxResponsible.setSelectedItem(process.getResponsible());
+            jComboBoxResponsibleDeputy.setSelectedItem(process.getResponsibleDeputy());
+            jComboBoxSupportSegment.setSelectedItem(process.getSegment());
+            jCalendarComboBoxValidFrom.setDate(process.getValidFrom());
+            jCalendarComboBoxValidUnitl.setDate(process.getValideUntil());
+        }else if(type.equals("Ilot")){
+            jTextFieldName.setText(capability.getName());
+            jLabelValId.setText(Integer.toString(capability.getId()));
+            jTextAreaDescription.setText(capability.getDescription());
+            jComboBoxResponsible.setSelectedItem(capability.getResponsible());
+            jComboBoxResponsibleDeputy.setSelectedItem(capability.getResponsibleDeputy());
+            jComboBoxSupportSegment.setSelectedItem(capability.getProcess());
+            System.out.println(capability.getProcess());
+            jCalendarComboBoxValidFrom.setDate(capability.getValidFrom());
+            jCalendarComboBoxValidUnitl.setDate(capability.getValideUntil());      
+            jLabelSupportSegment.setText("Support du quartier");
+            jLabel3.setText("Application soutient");
+        }
         
     }
     /**

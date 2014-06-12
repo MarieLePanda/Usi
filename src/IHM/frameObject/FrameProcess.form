@@ -311,7 +311,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}else if(type.equals(&quot;Ilot&quot;)){&#xa;&#xa;}"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}else if(type.equals(&quot;Ilot&quot;)){&#xa;            capability.setListApplication(data.IHM.DataIHM.getApplication(capability.getId()));&#xa;            jListCapability.setModel(new javax.swing.DefaultListModel() {&#xa;                Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);&#xa;                public int getSize() { return tabApplication.length; }&#xa;                public Object getElementAt(int i) { return tabApplication[i]; }&#xa;            });&#xa;}"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(type.equals(&quot;Quartier&quot;)){"/>
                   </AuxValues>
                 </Component>
