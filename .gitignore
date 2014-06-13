@@ -2,6 +2,8 @@
 /bin
 nproject/
 /nproject
+!nbproject/project.properties
+!nbproject/project.xml
 /nbproject/private/
 /build/
 .classpath
