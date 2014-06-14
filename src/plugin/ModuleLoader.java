@@ -20,18 +20,29 @@ import java.util.jar.Manifest;
  */
 public class ModuleLoader { 
     public static void loadPlugin(){
-        URLClassLoader systemClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
         try{
-           URL urlList[] = {new File("C:\\Users\\lug13995\\Documents\\GitHub\\UsiImportModule\\dist\\UsiImportModule.jar").toURL()};
-            ClassLoader loader = new URLClassLoader(urlList); 
-            String className = "usiimportmodule.PluginTest"; 
- 
-            IModule o = (IModule) Class.forName(className,true,loader).newInstance();
-            o.plug();
-        }
-        catch(Exception e){
-           e.printStackTrace();
-        }
+            URLClassLoader systemClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+            File file = new File("C:\\Users\\lug13995\\Documents\\GitHub\\UsiImportModule\\dist");
+            //C:\Users\lug13995\Documents\GitHub\UsiImportModule\dist
+            //.\\.
+            File[] files = file.listFiles();
+            for (File f : files){
+                try{
+                    URL urlList[] = {f.toURL()};
+                     ClassLoader loader = new URLClassLoader(urlList); 
+                     String className = "usiimportmodule.PluginTest"; 
+
+                     IModule o = (IModule) Class.forName(className,true,loader).newInstance();
+                     o.plug();
+                 }
+                catch(Exception e){
+                   System.out.println("loadPlugin 1" + e.toString());
+                }
+            }
+        }catch(Exception e){
+            System.out.println("loadPlugin 2" + e.toString());
+        } 
+       
     }
         
         
