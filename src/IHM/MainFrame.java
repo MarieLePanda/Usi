@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import launcherUsi.Launcher;
 import myObject.*;
+import plugin.IModule;
+import plugin.ModuleLoader;
 
 /**
  * Create a main frame witch data loaded
@@ -21,10 +23,15 @@ public class MainFrame extends javax.swing.JFrame{
      * Creates new form MainFrame
      */
     public MainFrame() {
+        ModuleLoader.loadPlugin();
         initComponents();
         if(Launcher.userConnected.getAdministrator() == false)
             jMenuAdministration.setVisible(false);
-
+        for(IModule m : ModuleLoader.listModule)
+        {
+           jMenuPlugin.add(new JMenuItem(m.getName()));
+        }
+        
     }
 
     /**
@@ -46,6 +53,7 @@ public class MainFrame extends javax.swing.JFrame{
         jMenuUpdate = new javax.swing.JMenu();
         jMenuDelete = new javax.swing.JMenu();
         jMenuAdministration = new javax.swing.JMenu();
+        jMenuPlugin = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -118,6 +126,9 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
         jMenuBar1.add(jMenuAdministration);
+
+        jMenuPlugin.setText("Plugin");
+        jMenuBar1.add(jMenuPlugin);
 
         setJMenuBar(jMenuBar1);
 
@@ -277,6 +288,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JMenu jMenuCreate;
     private javax.swing.JMenu jMenuDelete;
     private javax.swing.JMenu jMenuObject;
+    private javax.swing.JMenu jMenuPlugin;
     private javax.swing.JMenu jMenuUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;

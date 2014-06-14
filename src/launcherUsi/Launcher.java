@@ -13,7 +13,7 @@ public class Launcher {
 
     public static User userConnected = null;
 	public static void main(String[] args) {
-            ModuleLoader.loadPlugin();
+            
     // TODO Auto-generated method stub
             
             Runnable r = new Runnable(){

@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import javax.swing.ListModel;
 
 /**
  *
  * @author lug13995
  */
 public class ModuleLoader { 
+    public static ArrayList<IModule> listModule = new ArrayList<IModule>();
     public static void loadPlugin(){
         try{
             URLClassLoader systemClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
@@ -33,6 +35,7 @@ public class ModuleLoader {
                      String className = "usiimportmodule.PluginTest"; 
 
                      IModule o = (IModule) Class.forName(className,true,loader).newInstance();
+                     listModule.add(o);
                      o.plug();
                  }
                 catch(Exception e){
