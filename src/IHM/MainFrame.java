@@ -27,10 +27,13 @@ public class MainFrame extends javax.swing.JFrame{
         initComponents();
         if(Launcher.userConnected.getAdministrator() == false)
             jMenuAdministration.setVisible(false);
-        for(IModule m : ModuleLoader.listModule)
-        {
-           jMenuPlugin.add(new JMenuItem(m.getName()));
-        }
+        if(ModuleLoader.listModule.size() > 0){
+            for(IModule m : ModuleLoader.listModule)
+            {
+               jMenuPlugin.add(new JMenuItem(m.getName()));
+            }
+        }else
+            jMenuPlugin.add(new JMenuItem("<Aucun pluging>"));
         
     }
 
