@@ -24,8 +24,9 @@ public class ModuleLoader {
     public static void loadPlugin(){
         try{
             URLClassLoader systemClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-            File file = new File("C:\\Users\\lug13995\\Documents\\GitHub\\UsiImportModule\\dist");
+            File file = new File("E:\\Programme\\git\\WorkspaceJava\\UsiImportModule\\dist");
             //C:\Users\lug13995\Documents\GitHub\UsiImportModule\dist
+            //E:\Programme\git\WorkspaceJava\UsiImportModule\dist
             //.\\.
             File[] files = file.listFiles();
             for (File f : files){

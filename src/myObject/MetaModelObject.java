@@ -14,6 +14,7 @@ public abstract class MetaModelObject {
    // protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
     protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie"};
     protected String name;
+    protected int id;
     /*public ArrayList<MetaModelObject> getListObject() {
         return listObject;
     }
@@ -22,13 +23,36 @@ public abstract class MetaModelObject {
         return listObject;        
     }*/
     
+    
     public String[] getListOfTypeObject() {
         return listOfTypeObject;
     }
     
-    public String getName(){
-        return name;
+    /**
+     * @return the id
+     */
+    public int getId() {
+	return id;
     }
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+    	this.id = id;
+    }
+    /**
+     * @return the name
+     */
+    public String getName() {
+    	return name;
+    }
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
+    
     
     public abstract void addObjectToMetaModel();
     
@@ -43,4 +67,18 @@ public abstract class MetaModelObject {
     public abstract void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget);
     
     public abstract int sizeObject();
+    
+    public boolean equals(Object obj){
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MetaModelObject other = (MetaModelObject) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }

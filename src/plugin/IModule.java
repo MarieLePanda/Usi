@@ -12,6 +12,8 @@ public interface IModule {
     
     public void plug();
     
+    public void start();
+    
     public void unplug();
     
     public String getName();

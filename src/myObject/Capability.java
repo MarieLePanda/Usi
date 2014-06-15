@@ -6,8 +6,7 @@ import java.sql.Date;
 
 public class Capability extends MetaModelObject{
 	
-	private int id;
-	private String name, description;
+	private String description;
 	private Date validFrom;
 	private Date valideUntil;
 	private Process process;
@@ -15,33 +14,6 @@ public class Capability extends MetaModelObject{
 	private Responsible responsibleDeputy;
 	private ArrayList<Application> listApplication;
 	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
 	
          /**
 	 * @return the description
@@ -51,7 +23,7 @@ public class Capability extends MetaModelObject{
 	}
 	
 	/**
-	 * @param name the name to set
+	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -233,30 +205,4 @@ public class Capability extends MetaModelObject{
     public int sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Capability other = (Capability) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    
-	
-
 }

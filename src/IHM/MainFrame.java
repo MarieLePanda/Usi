@@ -6,6 +6,8 @@ package IHM;
 import IHM.frameAdmin.FrameAdmin;
 import IHM.frameObject.*;
 import data.IHM.DataIHM;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import launcherUsi.Launcher;
@@ -28,9 +30,18 @@ public class MainFrame extends javax.swing.JFrame{
         if(Launcher.userConnected.getAdministrator() == false)
             jMenuAdministration.setVisible(false);
         if(ModuleLoader.listModule.size() > 0){
-            for(IModule m : ModuleLoader.listModule)
+            for(final IModule m : ModuleLoader.listModule)
             {
-               jMenuPlugin.add(new JMenuItem(m.getName()));
+                ActionListener ls = new ActionListener() {
+
+                   public void actionPerformed(ActionEvent e) {
+                       m.start();
+                   }
+               };
+                JMenuItem jm = new JMenuItem(m.getName());
+                jm.addActionListener(ls);
+               jMenuPlugin.add(jm);
+               
             }
         }else
             jMenuPlugin.add(new JMenuItem("<Aucun pluging>"));
@@ -131,6 +142,11 @@ public class MainFrame extends javax.swing.JFrame{
         jMenuBar1.add(jMenuAdministration);
 
         jMenuPlugin.setText("Plugin");
+        jMenuPlugin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuPluginMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenuPlugin);
 
         setJMenuBar(jMenuBar1);
@@ -250,6 +266,10 @@ public class MainFrame extends javax.swing.JFrame{
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuAdministrationMouseClicked
+
+    private void jMenuPluginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuPluginMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuPluginMouseClicked
 
     /**
      * @param args the command line arguments

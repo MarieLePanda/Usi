@@ -1,15 +1,15 @@
 package myObject;
 
-import myObject.old.Synchronicity;
-import myObject.old.Security;
+import java.sql.Date;
 import java.util.ArrayList;
+import myObject.old.Security;
+import myObject.old.Synchronicity;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
+
 
 public class Interface extends MetaModelObject{
 
-	private int id;
-	private String name, description, dataTransfer;
+	private String description, dataTransfer;
 	private Date frequency, productionDate, decommissionDate;
 	private Responsible responsible, responsibleDeputy, responsibleDevelopment, responsibleOperation;
 	private Synchronicity synchronicity;
@@ -17,18 +17,6 @@ public class Interface extends MetaModelObject{
 	private Lifecycle lifecycle;
 	private ArrayList<Technology> listTechnology;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getDescription() {
 		return description;
 	}
@@ -203,28 +191,6 @@ public class Interface extends MetaModelObject{
     @Override
     public int sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Interface other = (Interface) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
     }
 	
 }
