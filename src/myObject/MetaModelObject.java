@@ -69,9 +69,10 @@ public abstract class MetaModelObject {
     public abstract int sizeObject();
     
     public boolean equals(Object obj){
-        if (obj == null) {
+        if (this == obj)
+            return true;
+        if (obj == null)
             return false;
-        }
         if (getClass() != obj.getClass()) {
             return false;
         }
