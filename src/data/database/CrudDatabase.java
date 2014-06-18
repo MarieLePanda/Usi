@@ -45,6 +45,7 @@ public class CrudDatabase {
         }
     }
     
+    
     public static void updateUser(User user){
         Connection connection = ConnectionSql.getConnection();
         String sql = "UPDATE user SET id = ?, name = ?, password = ?, administrator = ? WHERE id = ?";

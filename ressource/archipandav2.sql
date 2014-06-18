@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2014 at 05:24 PM
+-- Generation Time: Jun 12, 2014 at 06:51 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -62,14 +62,14 @@ CREATE TABLE IF NOT EXISTS `application` (
   KEY `FKAPPLICATIO172127` (`ResponsibleIdDevelopment`),
   KEY `FKAPPLICATIO506467` (`ResponsibleiIdOperation`),
   KEY `FKAPPLICATIO343749` (`Lifecycleid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
 
 --
 -- Dumping data for table `application`
 --
 
 INSERT INTO `application` (`id`, `name`, `description`, `production_date`, `TYPE_APPLICATIONid`, `Responsibleid`, `DATABASEid`, `ResponsibleIdDeputy`, `ResponsibleIdDevelopment`, `ResponsibleiIdOperation`, `Lifecycleid`, `decommissionDate`, `investmentCost`, `operatingCost`, `NumberOfUser`, `SECURITYidAvailability`, `SECURITYidConfidentiality`, `SECURITYidIntegrity`, `Categoryid`, `SERVERid`, `FITidBusiness`, `FITidIT`, `FITidCost`, `STRATEGYidIImportance`) VALUES
-(1, 'Visual Studio', NULL, NULL, 'EDI', 10004, 1, 10004, 10004, 10004, 2, NULL, NULL, NULL, NULL, 'Moyen', 'Faible', 'Faible', 'Local', 2, 'Faible', 'Moyen', 'Moyen', 'Faible');
+(100, '__Aucun', NULL, NULL, '', 10004, 100, 10004, 10004, 10004, 1, NULL, NULL, NULL, NULL, '', '', '', '', 2, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -119,14 +119,15 @@ CREATE TABLE IF NOT EXISTS `capability` (
   KEY `FKCAPABILITY871817` (`Responsibleid`),
   KEY `FKCAPABILITY261378` (`ResponsibleidDeputy`),
   KEY `FKCAPABILITY727797` (`PROCESSid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
 
 --
 -- Dumping data for table `capability`
 --
 
 INSERT INTO `capability` (`id`, `PROCESSid`, `name`, `description`, `validFrom`, `validUntil`, `Responsibleid`, `ResponsibleidDeputy`) VALUES
-(1, 1, 'Correction de bug', NULL, NULL, NULL, 10004, 10004);
+(100, 100, '__Aucun', NULL, NULL, NULL, 10004, 10004),
+(101, 100, 'testAsso', NULL, NULL, NULL, 10004, 10004);
 
 -- --------------------------------------------------------
 
@@ -170,14 +171,14 @@ CREATE TABLE IF NOT EXISTS `database` (
   KEY `FKDATABASE883786` (`RESPONSIBLEidOperation`),
   KEY `FKDATABASE638158` (`SERVERid`),
   KEY `FKDATABASE779742` (`Lifecycleid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
 
 --
 -- Dumping data for table `database`
 --
 
 INSERT INTO `database` (`id`, `name`, `description`, `RESPONSIBLEid`, `RESPONSIBLEidDeputy`, `RESPONSIBLEidDevelopment`, `RESPONSIBLEidOperation`, `SERVERid`, `investmentCost`, `operatingCost`, `productionDate`, `decommissionDate`, `Lifecycleid`) VALUES
-(1, 'Aucune', NULL, 10004, 10004, 10004, 10004, 2, 0, 0, NULL, NULL, 2);
+(100, '__Aucun', NULL, 10004, 10004, 10004, 10004, 2, 0, 0, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -213,7 +214,14 @@ CREATE TABLE IF NOT EXISTS `interface` (
   KEY `FKINTERFACE840815` (`ResponsibleidDevelopment`),
   KEY `FKINTERFACE934946` (`ResponsibleidOperation`),
   KEY `FKINTERFACE652467` (`Lifecycleid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
+
+--
+-- Dumping data for table `interface`
+--
+
+INSERT INTO `interface` (`id`, `name`, `description`, `dataTransfer`, `frequency`, `productionDate`, `decommissionDate`, `Responsibleid`, `ResponsibleidDeputy`, `ResponsibleidDevelopment`, `ResponsibleidOperation`, `Synchronicityid`, `SECURITYidAvaibility`, `SECURITYidConfidentiality`, `SECURITYidIntegrity`, `Lifecycleid`, `APPLICATIONProvide`, `APPLICATIONUse`) VALUES
+(100, '__Aucun', NULL, NULL, NULL, NULL, NULL, 10004, 10004, 10004, 10004, '', '', '', '', 1, 100, 100);
 
 -- --------------------------------------------------------
 
@@ -233,11 +241,11 @@ CREATE TABLE IF NOT EXISTS `lifecycle` (
 --
 
 INSERT INTO `lifecycle` (`id`, `libelleLifecycle`) VALUES
-(1, ''),
 (5, 'Démantelé et archivé'),
 (3, 'Exploitation en cours'),
 (2, 'Implémentation en cours'),
-(4, 'Inactif');
+(4, 'Inactif'),
+(1, '__Aucun');
 
 -- --------------------------------------------------------
 
@@ -251,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `process` (
   `description` varchar(500) DEFAULT NULL,
   `validFrom` date DEFAULT NULL,
   `validUntil` date DEFAULT NULL,
-  `SEGMENTid` int(10) NOT NULL,
+  `SEGMENTid` int(10) DEFAULT NULL,
   `Responsibleid` int(10) NOT NULL,
   `ResponsibleidDeputy` int(10) NOT NULL,
   PRIMARY KEY (`id`),
@@ -259,14 +267,19 @@ CREATE TABLE IF NOT EXISTS `process` (
   KEY `FKPROCESS57475` (`Responsibleid`),
   KEY `FKPROCESS219080` (`ResponsibleidDeputy`),
   KEY `FKPROCESS3385` (`SEGMENTid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=109 ;
 
 --
 -- Dumping data for table `process`
 --
 
 INSERT INTO `process` (`id`, `name`, `description`, `validFrom`, `validUntil`, `SEGMENTid`, `Responsibleid`, `ResponsibleidDeputy`) VALUES
-(1, 'Support applicatif', NULL, NULL, NULL, 1, 10004, 10004);
+(100, '__Aucun', NULL, NULL, NULL, 100, 10004, 10004),
+(101, 'Sales Strategy', 'rest', '2000-01-01', '2014-06-11', 101, 10005, 10004),
+(102, 'Public Communication', '', '2014-06-11', '2014-06-11', 102, 10004, 10004),
+(103, 'Project Management', '', '2014-06-11', '2014-06-11', 103, 10004, 10004),
+(106, 'Analyze & Monitor', '', '2014-06-12', '2014-06-12', 104, 10004, 10004),
+(108, 'testCrea', '', '2014-06-12', '2014-06-12', 102, 10004, 10004);
 
 -- --------------------------------------------------------
 
@@ -286,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `provider` (
 --
 
 INSERT INTO `provider` (`id`, `name`) VALUES
-(1, ''),
+(1, 'Aucun'),
 (4, 'Google'),
 (5, 'IBM'),
 (2, 'Microsoft'),
@@ -310,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `responsible` (
 --
 
 INSERT INTO `responsible` (`id`, `nom`) VALUES
-(10004, ''),
+(10004, '__Aucun'),
 (10005, 'Run Windows'),
 (10006, 'Run Linux'),
 (10007, 'Equipe projet');
@@ -331,14 +344,18 @@ CREATE TABLE IF NOT EXISTS `segment` (
   UNIQUE KEY `name` (`name`),
   KEY `FKSEGMENT186476` (`Responsibleid`),
   KEY `FKSEGMENT946719` (`ResponsibleidDeputy`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
 
 --
 -- Dumping data for table `segment`
 --
 
 INSERT INTO `segment` (`id`, `name`, `description`, `Responsibleid`, `ResponsibleidDeputy`) VALUES
-(1, 'Développement', 'panda modification', 10005, 10004);
+(100, '__Aucun', NULL, 10004, 10004),
+(101, 'Strategy', '', 10005, 10007),
+(102, 'Communication', '', 10004, 10004),
+(103, 'Governance', '', 10004, 10004),
+(104, 'Analysis', '', 10004, 10004);
 
 -- --------------------------------------------------------
 
@@ -378,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `server` (
 --
 
 INSERT INTO `server` (`id`, `name`, `description`, `TYPE_SERVERid`, `Responsibleid`, `ResponsibleidDeputy`, `ResponsibleidDevelopment`, `ResponsibleidOperation`, `RAMid`, `PROCESSEURid`, `OSid`, `investmentCost`, `operatingCost`, `Lifecycleid`, `productionCost`, `decommissionDate`, `productionDate`) VALUES
-(2, 'Aucun', NULL, 'Aucun', 10004, 10004, 10004, 10004, '0', '0', 'Aucun', NULL, NULL, 2, NULL, NULL, NULL),
+(2, '__Aucun', NULL, 'Aucun', 10004, 10004, 10004, 10004, '0', '0', 'Aucun', NULL, NULL, 2, NULL, NULL, NULL),
 (3, 'WIN1', 'serveur windows', 'Virtuel', 10004, 10004, 10004, 10004, '16', 'Xeon', 'Windows server 2008', 10000, 1000, 2, 2000, NULL, '2014-05-08'),
 (4, 'LIN1', 'Serveur physique linux', 'Physique', 10004, 10004, 10004, 10004, '32', 'Xeon', 'CentOS', 10000, 1000, 2, 1000, NULL, '2014-05-01');
 
@@ -403,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `technology` (
   UNIQUE KEY `name` (`name`),
   KEY `FKTECHNOLOGY854752` (`PROVIDERid`),
   KEY `FKTECHNOLOGY137277` (`Lifecycleid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
 
 --
 -- Dumping data for table `technology`
@@ -415,7 +432,8 @@ INSERT INTO `technology` (`id`, `name`, `description`, `PROVIDERid`, `Categoryid
 (3, 'Java 6', 'Machine virtuelle java', 3, 'Framework', 10000, 1000, '2014-05-14', NULL, 2),
 (4, 'Java 7', 'Machine virtuelle java', 3, 'Framework', 10000, 1000, '2014-05-06', NULL, 2),
 (5, 'Chrome', 'Navigateur web', 4, 'Navigateur', 10000, 1000, '2014-05-07', NULL, 2),
-(6, 'Firefox', 'Navigateur web', 6, 'Navigateur', 10000, 1000, '2014-05-12', NULL, 2);
+(6, 'Firefox', 'Navigateur web', 6, 'Navigateur', 10000, 1000, '2014-05-12', NULL, 2),
+(100, '__Aucun', NULL, 1, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -469,9 +487,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `password` varchar(150) NOT NULL,
+  `administrator` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `password`, `administrator`) VALUES
+(9, 'panda', 'Ny[bc%?]ZA14Oz/x2?>II_S"=^@	a?', 1),
+(10, 'Admin', 'F\rt>F>?x?UUV$G!@=x0?T', 1),
+(11, 'user', '0V?q67?e?TyO>Z	2-93''k879`/=', 0),
+(12, 'pandaRoux', '??iyY?P4iF(S]Vv<X0{HU*,', 0);
 
 --
 -- Constraints for dumped tables

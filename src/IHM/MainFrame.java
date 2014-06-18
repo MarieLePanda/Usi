@@ -6,10 +6,14 @@ package IHM;
 import IHM.frameAdmin.FrameAdmin;
 import IHM.frameObject.*;
 import data.IHM.DataIHM;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import launcherUsi.Launcher;
 import myObject.*;
+import plugin.IModule;
+import plugin.ModuleLoader;
 
 /**
  * Create a main frame witch data loaded
@@ -21,10 +25,27 @@ public class MainFrame extends javax.swing.JFrame{
      * Creates new form MainFrame
      */
     public MainFrame() {
+        ModuleLoader.loadPlugin();
         initComponents();
         if(Launcher.userConnected.getAdministrator() == false)
-            jButtonAdministration.setVisible(false);
+            jMenuAdministration.setVisible(false);
+        if(ModuleLoader.listModule.size() > 0){
+            for(final IModule m : ModuleLoader.listModule)
+            {
+                ActionListener ls = new ActionListener() {
 
+                   public void actionPerformed(ActionEvent e) {
+                       m.start();
+                   }
+               };
+                JMenuItem jm = new JMenuItem(m.getName());
+                jm.addActionListener(ls);
+               jMenuPlugin.add(jm);
+               
+            }
+        }else
+            jMenuPlugin.add(new JMenuItem("<Aucun pluging>"));
+        
     }
 
     /**
@@ -40,10 +61,13 @@ public class MainFrame extends javax.swing.JFrame{
         DefaultMutableTreeNode root;
         root = DataIHM.initTree();
         jTreeMetaModel = new javax.swing.JTree(root);
-        jButtonCreateObject = new javax.swing.JButton();
-        jButtonEditObject = new javax.swing.JButton();
-        jButtonDeleteObject = new javax.swing.JButton();
-        jButtonAdministration = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuObject = new javax.swing.JMenu();
+        jMenuCreate = new javax.swing.JMenu();
+        jMenuUpdate = new javax.swing.JMenu();
+        jMenuDelete = new javax.swing.JMenu();
+        jMenuAdministration = new javax.swing.JMenu();
+        jMenuPlugin = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -81,62 +105,63 @@ public class MainFrame extends javax.swing.JFrame{
         });
         jScrollPane1.setViewportView(jTreeMetaModel);
 
-        jButtonCreateObject.setText("Créer objet");
-        jButtonCreateObject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCreateObjectActionPerformed(evt);
-            }
-        });
+        jMenuObject.setText("Objet");
 
-        jButtonEditObject.setText("Modifier objet");
-        jButtonEditObject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditObjectActionPerformed(evt);
+        jMenuCreate.setText("Créer");
+        jMenuCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuCreateMouseClicked(evt);
             }
         });
+        jMenuObject.add(jMenuCreate);
 
-        jButtonDeleteObject.setText("Supprimer objet");
-        jButtonDeleteObject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteObjectActionPerformed(evt);
+        jMenuUpdate.setText("Modifier");
+        jMenuUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuUpdateMouseClicked(evt);
             }
         });
+        jMenuObject.add(jMenuUpdate);
 
-        jButtonAdministration.setText("Administration");
-        jButtonAdministration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAdministrationActionPerformed(evt);
+        jMenuDelete.setText("Supprimer");
+        jMenuDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuDeleteMouseClicked(evt);
             }
         });
+        jMenuObject.add(jMenuDelete);
+
+        jMenuBar1.add(jMenuObject);
+
+        jMenuAdministration.setText("Administration");
+        jMenuAdministration.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuAdministrationMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuAdministration);
+
+        jMenuPlugin.setText("Plugin");
+        jMenuPlugin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuPluginMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuPlugin);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonCreateObject)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonEditObject)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonDeleteObject)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
-                .addComponent(jButtonAdministration))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(383, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 11, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCreateObject)
-                    .addComponent(jButtonEditObject)
-                    .addComponent(jButtonDeleteObject)
-                    .addComponent(jButtonAdministration))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
 
         pack();
@@ -176,22 +201,14 @@ public class MainFrame extends javax.swing.JFrame{
         jTreeMetaModel.setModel(new javax.swing.JTree(DataIHM.initTree()).getModel());
     }//GEN-LAST:event_formWindowActivated
 
-    /**
-     * To create a new object, call a new frame
-     * @param evt 
-     */
-    private void jButtonCreateObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateObjectActionPerformed
+    private void jMenuCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCreateMouseClicked
         // TODO add your handling code here:
         FrameNewObject win = new FrameNewObject();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jButtonCreateObjectActionPerformed
+    }//GEN-LAST:event_jMenuCreateMouseClicked
 
-    /**
-     * To edit a existing object, call a new frame
-     * @param evt 
-     */
-    private void jButtonEditObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditObjectActionPerformed
+    private void jMenuUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuUpdateMouseClicked
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
         
@@ -215,18 +232,13 @@ public class MainFrame extends javax.swing.JFrame{
                     win.setVisible(true);
                     win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
-                }
             }
+        } else{
+            JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
         }
-    }//GEN-LAST:event_jButtonEditObjectActionPerformed
+    }//GEN-LAST:event_jMenuUpdateMouseClicked
 
-    /**
-     * To delete a existing object
-     * @param evt 
-     */
-    private void jButtonDeleteObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteObjectActionPerformed
+    private void jMenuDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuDeleteMouseClicked
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
         if(node != null){
@@ -243,18 +255,21 @@ public class MainFrame extends javax.swing.JFrame{
                     }
                 }
             }
-        }
-        else{
+        }else{
             JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à supprimer");
-        }     
-    }//GEN-LAST:event_jButtonDeleteObjectActionPerformed
+        }  
+    }//GEN-LAST:event_jMenuDeleteMouseClicked
 
-    private void jButtonAdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrationActionPerformed
+    private void jMenuAdministrationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAdministrationMouseClicked
         // TODO add your handling code here:
         FrameAdmin win = new FrameAdmin();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jButtonAdministrationActionPerformed
+    }//GEN-LAST:event_jMenuAdministrationMouseClicked
+
+    private void jMenuPluginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuPluginMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuPluginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -291,10 +306,13 @@ public class MainFrame extends javax.swing.JFrame{
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAdministration;
-    private javax.swing.JButton jButtonCreateObject;
-    private javax.swing.JButton jButtonDeleteObject;
-    private javax.swing.JButton jButtonEditObject;
+    private javax.swing.JMenu jMenuAdministration;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCreate;
+    private javax.swing.JMenu jMenuDelete;
+    private javax.swing.JMenu jMenuObject;
+    private javax.swing.JMenu jMenuPlugin;
+    private javax.swing.JMenu jMenuUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables

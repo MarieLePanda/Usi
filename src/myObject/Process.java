@@ -6,8 +6,7 @@ import java.util.ArrayList;
 
 public class Process extends MetaModelObject{
 
-	private int id;
-	private String name, description;
+	private String description;
 	private Date validFrom;
 	private Date valideUntil;
 	private Segment segment;
@@ -15,33 +14,6 @@ public class Process extends MetaModelObject{
 	private Responsible responsibleDeputy;
 	private ArrayList<Capability> listCapability;
 	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
 	
         /**
 	 * @return the description
@@ -230,28 +202,6 @@ public class Process extends MetaModelObject{
     @Override
     public void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Process other = (Process) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
     }
 
     @Override

@@ -1,35 +1,21 @@
 package myObject;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class Database extends MetaModelObject{
 
 
-	private int id, investmentCost, operatingCost;
-	private String name, description;
+	private int investmentCost, operatingCost;
+	private String description;
 	private Responsible responsible, responsibleDeputy, responsibleDevelopment, responsibleOperation;
 	private Server server;
 	private Date productionDate, decommissionDate;
 	private Lifecycle lifecycle;
 	private ArrayList<Technology> listTechnology;
 	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	/**
-	 * @return the investmentCost
-	 */
+
 	public int getInvestmentCost() {
 		return investmentCost;
 	}
@@ -50,18 +36,6 @@ public class Database extends MetaModelObject{
 	 */
 	public void setOperatingCost(int operatingCost) {
 		this.operatingCost = operatingCost;
-	}
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 	/**
 	 * @return the description
@@ -276,28 +250,5 @@ public class Database extends MetaModelObject{
     public int sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Database other = (Database) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-	
 	
 }

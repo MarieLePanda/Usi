@@ -8,62 +8,46 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import javax.swing.ListModel;
 
 /**
  *
  * @author lug13995
  */
 public class ModuleLoader { 
-	private static List<URL> urls = new ArrayList<URL>(); 
- 
-	private static List<String> getModuleClasses(){ 
-		List<String> classes = new ArrayList<String>(); 
- 
-		//On liste les fichiers de module  
-		File[] files = new File("dossier").listFiles(new ModuleFilter()); 
- 
-		for(File f : files){ 
-			JarFile jarFile = null; 
- 
-			try { 
-				//On ouvre le fichier JAR 
-				jarFile = new JarFile(f); 
- 
-				//On récupère le manifest 
-				Manifest manifest = jarFile.getManifest(); 
- 
-				//On récupère la classe 
-				String moduleClassName = manifest.getMainAttributes().getValue("Module-Class"); 
- 
-				classes.add(moduleClassName); 
- 
-				urls.add(f.toURI().toURL()); 
-			} catch (IOException e) { 
-				e.printStackTrace(); 
-			} finally { 
-				if(jarFile != null){ 
-					try { 
-						jarFile.close(); 
-					} catch (IOException e) { 
-						e.printStackTrace(); 
-					} 
-				} 
-			} 
-		} 
- 
-		return classes; 
-	} 
- 
-	private static class ModuleFilter implements FileFilter { 
-		@Override 
-		public boolean accept(File file) { 
-			return file.isFile() && file.getName().toLowerCase().endsWith(".jar"); 
-		} 
-	}
+    public static ArrayList<IModule> listModule = new ArrayList<IModule>();
+    public static void loadPlugin(){
+        try{
+            URLClassLoader systemClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+            File file = new File("E:\\Programme\\git\\WorkspaceJava\\UsiImportModule\\dist");
+            //C:\Users\lug13995\Documents\GitHub\UsiImportModule\dist
+            //E:\Programme\git\WorkspaceJava\UsiImportModule\dist
+            //.\\.
+            File[] files = file.listFiles();
+            for (File f : files){
+                try{
+                    URL urlList[] = {f.toURL()};
+                     ClassLoader loader = new URLClassLoader(urlList); 
+                     String className = "usiimportmodule.PluginTest"; 
+
+                     IModule o = (IModule) Class.forName(className,true,loader).newInstance();
+                     listModule.add(o);
+                     o.plug();
+                 }
+                catch(Exception e){
+                   System.out.println("loadPlugin 1" + e.toString());
+                }
+            }
+        }catch(Exception e){
+            System.out.println("loadPlugin 2" + e.toString());
+        } 
+       
+    }
         
         
 }

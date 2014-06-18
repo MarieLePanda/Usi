@@ -462,7 +462,6 @@ public class FrameProcess extends javax.swing.JFrame {
                                                                    " à votre quariter " + process.getName() + " ?");
                 if(dialogResult == JOptionPane.YES_OPTION){
                    Capability capability = (Capability) jListCapability.getSelectedValue();
-                   jListCapability.remove(jListCapability.getSelectedIndex());
                    data.database.CrudDatabase.updateAssoCapabilityToProcess(capability);
                    JOptionPane.showMessageDialog(null, "Association supprimée");
                 }
@@ -501,7 +500,6 @@ public class FrameProcess extends javax.swing.JFrame {
             jComboBoxResponsible.setSelectedItem(capability.getResponsible());
             jComboBoxResponsibleDeputy.setSelectedItem(capability.getResponsibleDeputy());
             jComboBoxSupportSegment.setSelectedItem(capability.getProcess());
-            System.out.println(capability.getProcess());
             jCalendarComboBoxValidFrom.setDate(capability.getValidFrom());
             jCalendarComboBoxValidUnitl.setDate(capability.getValideUntil());      
             jLabelSupportSegment.setText("Support du quartier");

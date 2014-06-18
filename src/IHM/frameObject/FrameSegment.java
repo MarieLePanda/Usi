@@ -338,7 +338,6 @@ public class FrameSegment extends javax.swing.JFrame {
                                                                    " à votre zone " + segment.getName() + " ?");
                 if(dialogResult == JOptionPane.YES_OPTION){
                    myObject.Process process = (myObject.Process) jListProcess.getSelectedValue();
-                   jListProcess.remove(jListProcess.getSelectedIndex());
                    data.database.CrudDatabase.updateAssoProcessToSegment(process);
                    JOptionPane.showMessageDialog(null, "Association supprimée");
                 }

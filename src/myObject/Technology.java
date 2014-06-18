@@ -1,14 +1,14 @@
 package myObject;
 
-import myObject.old.Category;
+import java.sql.Date;
 import java.util.ArrayList;
+import myObject.old.Category;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class Technology extends MetaModelObject{
 
-    private int id, investmentCost, operatingCost;
-    private String name, description;
+    private int investmentCost, operatingCost;
+    private String description;
     private Provider provider;
     private Category category;
     private Date productionDate, decommissionDate;
@@ -19,12 +19,6 @@ public class Technology extends MetaModelObject{
 	}
 	public void setInvestmentCost(int investmentCost) {
 		this.investmentCost = investmentCost;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public int getOperatingCost() {
 		return operatingCost;
@@ -37,12 +31,6 @@ public class Technology extends MetaModelObject{
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public Provider getProvider() {
 		return provider;
@@ -141,27 +129,4 @@ public class Technology extends MetaModelObject{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Technology other = (Technology) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-	
-    	
 }

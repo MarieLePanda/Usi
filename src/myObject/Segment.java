@@ -4,40 +4,11 @@ import java.util.ArrayList;
 
 public class Segment extends MetaModelObject{
 	
-	private int id;
-	private String name, description;
+	private String description;
 	private Responsible responsible;
 	private Responsible responsibledeputy;
 	private ArrayList<Process> listProcess;
 	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-        	
         /**
 	 * @return the description
 	 */
@@ -169,21 +140,6 @@ public class Segment extends MetaModelObject{
     @Override
     public int sizeObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Segment other = (Segment) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
     }
 
 }

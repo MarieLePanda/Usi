@@ -1,7 +1,13 @@
 package launcherUsi;
 import IHM.*;
+import java.io.File;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import javax.swing.*;
 import myObject.User;
+import plugin.IModule;
+import plugin.ModuleLoader;
 
 public class Launcher {
 
@@ -26,7 +32,12 @@ public class Launcher {
 		}
             };
         
-            SwingUtilities.invokeLater(r);
-	}
+            
+        SwingUtilities.invokeLater(r);
+        
+        
+    }
+        
+
 
 }
