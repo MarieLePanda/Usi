@@ -175,11 +175,6 @@ public class Process extends MetaModelObject{
 	}
 
     @Override
-    public void addObjectToMetaModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void createObject() {
         data.database.CrudDatabase.createProcess(this);
     }

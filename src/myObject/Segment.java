@@ -107,11 +107,6 @@ public class Segment extends MetaModelObject{
 	}
 
     @Override
-    public void addObjectToMetaModel() {
-        //MetaModelObject.listObject.add(this);
-    }
-
-    @Override
     public void createObject() {
         data.database.CrudDatabase.createSegment(this);
         //ddObjectToMetaModel();

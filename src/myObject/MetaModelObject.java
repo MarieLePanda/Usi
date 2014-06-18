@@ -15,13 +15,15 @@ public abstract class MetaModelObject {
     protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie"};
     protected String name;
     protected int id;
-    /*public ArrayList<MetaModelObject> getListObject() {
+    protected static ArrayList<MetaModelObject> listObject;
+    
+    public ArrayList<MetaModelObject> getListObject() {
         return listObject;
     }
     
     public ArrayList<MetaModelObject> getListObject(String filtre) {
         return listObject;        
-    }*/
+    }
     
     
     public String[] getListOfTypeObject() {
@@ -54,7 +56,9 @@ public abstract class MetaModelObject {
     }
     
     
-    public abstract void addObjectToMetaModel();
+    public void addObjectToMetaModel(){
+        listObject.add(this);
+    }
     
     public abstract void createObject();
     
@@ -67,6 +71,33 @@ public abstract class MetaModelObject {
     public abstract void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget);
     
     public abstract int sizeObject();
+    
+    public static ArrayList<Segment> listOfSegment(){
+        ArrayList<Segment> segments = new ArrayList<Segment>();
+        for(MetaModelObject s : listObject){
+            if(s instanceof Segment)
+                segments.add((Segment) s);
+        }
+        return segments;
+    }
+    
+    public static ArrayList<myObject.Process> listOfProcess(){
+        ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
+        for(MetaModelObject p : listObject){
+            if(p instanceof myObject.Process)
+                process.add((myObject.Process) p);
+        }
+        return process;
+    }
+    
+    public static ArrayList<Capability> listOfCapability(){
+        ArrayList<Capability> capabilities = new ArrayList<Capability>();
+        for(MetaModelObject c : listObject){
+            if(c instanceof Segment)
+                capabilities.add((Capability) c);
+        }
+        return capabilities;
+    }
     
     public boolean equals(Object obj){
         if (this == obj)

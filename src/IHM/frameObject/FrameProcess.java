@@ -188,7 +188,8 @@ public class FrameProcess extends javax.swing.JFrame {
         jLabelSupportSegment.setText("Supporte la zone");
 
         if(type.equals("Quartier")){
-            jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListAllSegment()));
+            ArrayList<Segment> segment = data.IHM.DataIHM.getListAllSegment();
+            jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(segment.toArray(new Segment[segment.size()])));
         }
         else if(type.equals("Ilot")){
             jComboBoxSupportSegment.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getListAllProcess()));
