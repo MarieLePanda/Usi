@@ -44,6 +44,11 @@ public class WindowConnection extends javax.swing.JFrame {
         jLabel2.setText("Mot de passe");
 
         jButtonConnection.setText("Connexion");
+        jButtonConnection.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonConnectionMouseClicked(evt);
+            }
+        });
         jButtonConnection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConnectionActionPerformed(evt);
@@ -101,6 +106,10 @@ public class WindowConnection extends javax.swing.JFrame {
             wind.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         }
     }//GEN-LAST:event_jButtonConnectionActionPerformed
+
+    private void jButtonConnectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConnectionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonConnectionMouseClicked
 
     /**
      * @param args the command line arguments

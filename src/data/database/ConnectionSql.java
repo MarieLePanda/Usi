@@ -24,9 +24,9 @@ public class ConnectionSql {
                 System.out.println(e.getMessage());
         }
         
-        String url = "jdbc:mysql://localhost:3306/archipandaV2";
+        String url = "jdbc:mysql://localhost:3306/Usi";
         String user = "root";
-        String password = "";
+        String password = "igjjr";
         Connection connexion = null;
         try {
             connexion = DriverManager.getConnection( url, user, password );

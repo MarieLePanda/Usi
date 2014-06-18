@@ -198,7 +198,7 @@ public class MainFrame extends javax.swing.JFrame{
         if(node != null){
             MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
             if(__aucun.getName().equals("__Aucun"))
-                JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
+                JOptionPane.showMessageDialog(null,"Seul un arabe peut le faire");
             else{
                 if(node.getUserObject() instanceof Segment){
                     FrameSegment win = new FrameSegment((Segment) node.getUserObject());

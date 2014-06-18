@@ -58,6 +58,7 @@ public class User {
             this.login = login;
             this.password = password;
             this.administrator = administrator;
+            
 	}
 	
 	public User(int id, String login, String password, boolean administrator) {
