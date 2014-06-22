@@ -74,5 +74,9 @@ public class Responsible {
             }
             return true;
         }
+        
+        public void createObject() {
+        data.database.CrudDatabase.createResponsible(this);
+    }
 
 }

@@ -14,11 +14,15 @@ public class Launcher {
     public static User userConnected = null;
 	public static void main(String[] args) {
             
+           // ImageIcon im1;  
+            //im1=new ImageIcon(Launcher.class.getResource("usi.jpg"));
+           // im1.paintIcon(this,)
     // TODO Auto-generated method stub
-            
+           
             Runnable r = new Runnable(){
                 public void run(){
-                    
+          
+            
                     if(userConnected == null){
                          WindowConnection win = new WindowConnection();
                          win.setVisible(true);

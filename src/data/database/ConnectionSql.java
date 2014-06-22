@@ -25,9 +25,9 @@ public class ConnectionSql {
                     System.out.println(e.getMessage());
             }
 
-            String url = "jdbc:mysql://localhost:3306/archipandaV2";
+            String url = "jdbc:mysql://localhost:3306/Usi";
             String user = "root";
-            String password = "";
+            String password = "igjjr";
             try {
                 connexion = DriverManager.getConnection( url, user, password );
 
@@ -37,22 +37,7 @@ public class ConnectionSql {
                 JOptionPane.showMessageDialog(null,"getConnection " + e.toString());
             } 
         }
-<<<<<<< HEAD
-        
-        String url = "jdbc:mysql://localhost:3306/Usi";
-        String user = "root";
-        String password = "igjjr";
-        Connection connexion = null;
-        try {
-            connexion = DriverManager.getConnection( url, user, password );
 
-            
-        } catch ( SQLException e ) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null,"getConnection " + e.toString());
-        } 
-=======
->>>>>>> origin/master
         return connexion;
     }
 }

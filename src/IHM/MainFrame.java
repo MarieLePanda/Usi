@@ -202,7 +202,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_formWindowActivated
 
     private void jMenuCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCreateMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:      
         FrameNewObject win = new FrameNewObject();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

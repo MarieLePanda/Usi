@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public abstract class MetaModelObject {
    // protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
-    protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie"};
+    protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie","Responsible"};
     protected String name;
     protected int id;
     /*public ArrayList<MetaModelObject> getListObject() {

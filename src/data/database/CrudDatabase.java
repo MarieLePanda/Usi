@@ -330,5 +330,19 @@ public class CrudDatabase {
             System.out.println("deleteCapability 2 " + e.toString());
         }
         
-    }   
+    }
+             public static void createResponsible(Responsible responsible){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "INSERT INTO responsible (id, nom)"
+                + "VALUE (NULL,?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            //preparedStatement.setInt(1, responsible.getId());
+            preparedStatement.setString(1, responsible.getName());
+            preparedStatement.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println("createResponsible " + e.toString());
+        }
+    }
 }
