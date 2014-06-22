@@ -52,7 +52,7 @@ public class DataIHM {
      * @return node of tree
      */
     public static DefaultMutableTreeNode loadTreeSegment(){
-       DefaultMutableTreeNode segment = new DefaultMutableTreeNode(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             "Zone");
+       DefaultMutableTreeNode segment = new DefaultMutableTreeNode("Zone");
        Connection connection = ConnectionSql.getConnection();
         
         String sql = "SELECT * FROM segment";
