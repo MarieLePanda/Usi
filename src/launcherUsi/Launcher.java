@@ -14,10 +14,11 @@ public class Launcher {
     public static User userConnected = null;
 	public static void main(String[] args) {
             
-           // ImageIcon im1;  
+           // ImageIcon im1;  PlagiaLyzerIcon
             //im1=new ImageIcon(Launcher.class.getResource("usi.jpg"));
            // im1.paintIcon(this,)
     // TODO Auto-generated method stub
+           //Launcher.class.getFrame().setIconImage(new ImageIcon(Launcher.class.getResource("usi.jpg")));
            
             Runnable r = new Runnable(){
                 public void run(){
@@ -41,6 +42,10 @@ public class Launcher {
         
         
     }
+
+   /* private Object getFrame() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
         
 
 

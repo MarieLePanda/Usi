@@ -339,7 +339,7 @@ public class CrudDatabase {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             //preparedStatement.setInt(1, responsible.getId());
             preparedStatement.setString(1, responsible.getName());
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
             
         }catch(SQLException e){
             System.out.println("createResponsible " + e.toString());
