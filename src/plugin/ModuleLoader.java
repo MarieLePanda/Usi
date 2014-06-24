@@ -25,7 +25,7 @@ public class ModuleLoader {
     public static ArrayList<IModule> listModule = new ArrayList<IModule>();
     public static void loadPlugin(){
         try{
-            File file = new File("E:\\Programme\\git\\WorkspaceJava\\UsiImportModule\\dist");
+            File file = new File("C:\\Users\\lug13995\\Documents\\GitHub\\UsiImportModule\\dist");
             //C:\Users\lug13995\Documents\GitHub\UsiImportModule\dist
             //E:\Programme\git\WorkspaceJava\UsiImportModule\dist
             //.\\.
@@ -50,7 +50,8 @@ public class ModuleLoader {
                             tmp = tmp.replaceAll("/",".");
                             tmpClass = Class.forName(tmp ,true,loader);  
                             for(int i = 0 ; i < tmpClass.getInterfaces().length; i ++ ){
-                                boolean b = tmpClass.getInterfaces()[i].toString().equals("interface plugin.IModule");
+                                System.out.println(tmpClass.getInterfaces()[i].toString());
+                                boolean b = tmpClass.getInterfaces()[i].toString().substring(tmpClass.getInterfaces()[i].toString().length()-7).equals("IModule");
                                 if(b) {
                                     tabClass.add(tmpClass);       
                                 }
