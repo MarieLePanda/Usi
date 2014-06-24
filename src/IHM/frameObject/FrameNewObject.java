@@ -2,6 +2,7 @@
  * Frame to create a new object
  */
 package IHM.frameObject;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import myObject.*;
@@ -20,7 +21,7 @@ public class FrameNewObject extends javax.swing.JFrame {
      */
     public FrameNewObject() {
         initComponents();
-        
+        setIcon();
     }
 
     /**
@@ -151,4 +152,8 @@ public class FrameNewObject extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxTypeObject;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+   private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

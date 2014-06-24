@@ -1,5 +1,6 @@
 package launcherUsi;
 import IHM.*;
+import java.awt.Toolkit;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -13,17 +14,14 @@ public class Launcher {
 
     public static User userConnected = null;
 	public static void main(String[] args) {
-            
-           // ImageIcon im1;  PlagiaLyzerIcon
-            //im1=new ImageIcon(Launcher.class.getResource("usi.jpg"));
-           // im1.paintIcon(this,)
-    // TODO Auto-generated method stub
-           //Launcher.class.getFrame().setIconImage(new ImageIcon(Launcher.class.getResource("usi.jpg")));
            
+          
+
             Runnable r = new Runnable(){
                 public void run(){
           
-            
+                	//userConnected.setLogin("panda");
+                	//userConnected.setPassword("admin");
                     if(userConnected == null){
                          WindowConnection win = new WindowConnection();
                          win.setVisible(true);

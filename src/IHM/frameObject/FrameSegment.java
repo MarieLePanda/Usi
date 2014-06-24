@@ -2,6 +2,7 @@
  * Frame to create or edit a segment
  */
 package IHM.frameObject;
+import java.awt.Toolkit;
 import java.util.*;
 import javax.swing.*;
 import myObject.*;
@@ -28,7 +29,9 @@ public class FrameSegment extends javax.swing.JFrame {
     public FrameSegment(Segment segment){
         this.segment = segment;
         initComponents();
+        setIcon();
         loadValue();
+        
     }
 
     /**
@@ -418,4 +421,8 @@ public class FrameSegment extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
+
+   private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

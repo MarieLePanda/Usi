@@ -4,22 +4,24 @@
  */
 package IHM;
 
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import launcherUsi.Launcher;
 import myObject.User;
-
 /**
  *
  * @author lug13995
  */
 public class WindowConnection extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form WindowConnection
      */
     public WindowConnection() {
         initComponents();
+        setIcon();
     }
 
     /**
@@ -152,4 +154,8 @@ public class WindowConnection extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordFieldPass;
     private javax.swing.JTextField jTextFieldLogin;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

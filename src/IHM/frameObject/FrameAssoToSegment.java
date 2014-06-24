@@ -3,6 +3,7 @@
  */
 package IHM.frameObject;
 
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import myObject.*;
 
@@ -14,10 +15,12 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
 
     private MetaModelObject object;
     
+    
     /**
      * Creates new form FrameAssoToSegment
      */
     public FrameAssoToSegment() {
+        
        
     }
     
@@ -28,6 +31,7 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
     public FrameAssoToSegment(MetaModelObject object) {
         this.object = object;
         initComponents();
+        setIcon();
         if(object instanceof Segment){
             initComboBoxListToSegment();
         }else if(object instanceof myObject.Process){
@@ -172,5 +176,9 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
             data.database.CrudDatabase.updateAssoCapabilityToProcess((myObject.Process) object, (Capability) jComboBoxListProcess.getSelectedItem());
             JOptionPane.showMessageDialog(null, "Association créée");
         }
+    }
+
+   private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
     }
 }

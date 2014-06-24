@@ -5,6 +5,7 @@ package IHM.frameAdmin;
 
 import myObject.User;
 import genmdp.MotDePasse;
+import java.awt.Toolkit;
 import javax.swing.*;
 
 /**
@@ -19,6 +20,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     public FrameAdmin() {
         
         initComponents();
+        setIcon();
         pack();
     }
 
@@ -292,4 +294,8 @@ public class FrameAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JTextField jTextFieldLogin;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

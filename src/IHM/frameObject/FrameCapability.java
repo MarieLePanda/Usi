@@ -3,6 +3,8 @@
  */
 package IHM.frameObject;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Mary
@@ -14,6 +16,7 @@ public class FrameCapability extends javax.swing.JFrame {
      */
     public FrameCapability() {
         initComponents();
+        setIcon();
     }
 
     /**
@@ -313,4 +316,8 @@ public class FrameCapability extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

@@ -5,6 +5,7 @@
  */
 
 package IHM.frameObject;
+import java.awt.Toolkit;
 import javax.swing.*;
 import myObject.*;
 
@@ -19,6 +20,7 @@ public class FrameResponsible extends javax.swing.JFrame {
      */
     public FrameResponsible() {
         initComponents();
+        setIcon();
     }
 
     /**
@@ -143,4 +145,8 @@ public class FrameResponsible extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+   private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

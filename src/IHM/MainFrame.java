@@ -6,8 +6,12 @@ package IHM;
 import IHM.frameAdmin.FrameAdmin;
 import IHM.frameObject.*;
 import data.IHM.DataIHM;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import launcherUsi.Launcher;
@@ -25,8 +29,11 @@ public class MainFrame extends javax.swing.JFrame{
      * Creates new form MainFrame
      */
     public MainFrame() {
+        
         ModuleLoader.loadPlugin();
         initComponents();
+        setIcon();
+           
         if(Launcher.userConnected.getAdministrator() == false)
             jMenuAdministration.setVisible(false);
         if(ModuleLoader.listModule.size() > 0){
@@ -316,4 +323,8 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

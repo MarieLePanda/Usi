@@ -5,6 +5,7 @@ package IHM.frameObject;
 
 
 import data.IHM.DataIHM;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import myObject.*;
 
@@ -19,6 +20,7 @@ public class FrameApplication extends javax.swing.JFrame {
      */
     public FrameApplication() {
         initComponents();
+        setIcon();
     }
 
     /**
@@ -798,4 +800,8 @@ public class FrameApplication extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldStrategicImportance;
     private javax.swing.JTextField jTextFieldType;
     // End of variables declaration//GEN-END:variables
+
+   private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }

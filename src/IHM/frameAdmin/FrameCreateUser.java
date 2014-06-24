@@ -3,6 +3,7 @@
  */
 package IHM.frameAdmin;
 
+import java.awt.Toolkit;
 import myObject.User;
 import javax.swing.JOptionPane;
 
@@ -17,6 +18,7 @@ public class FrameCreateUser extends javax.swing.JFrame {
      */
     public FrameCreateUser() {
         initComponents();
+        setIcon();
         pack();
     }
 
@@ -146,4 +148,8 @@ public class FrameCreateUser extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordFieldPdw;
     private javax.swing.JTextField jTextFieldLogin;
     // End of variables declaration//GEN-END:variables
+
+   private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
 }
