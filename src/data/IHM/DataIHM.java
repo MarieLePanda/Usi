@@ -247,7 +247,7 @@ public class DataIHM {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
-                users.add(new User(res.getInt(1), res.getString(2), res.getString(3), res.getBoolean(4)));
+                users.add(new User(res.getInt(1), res.getString(2), res.getString(3), res.getBoolean(4), res.getBoolean(5)));
             }
         }catch(SQLException e){
             System.out.println("loadUser " + e.toString());

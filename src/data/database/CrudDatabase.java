@@ -23,7 +23,7 @@ public class CrudDatabase {
             preparedStatement.setString(2, user.getPassword());
             ResultSet res = preparedStatement.executeQuery();
             while(res.next()){
-                launcherUsi.Launcher.userConnected = new User(res.getInt(1), res.getString(2), res.getString(3), res.getBoolean(4));
+                launcherUsi.Launcher.userConnected = new User(res.getInt(1), res.getString(2), res.getString(3), res.getBoolean(4), res.getBoolean(5));
             }
         }catch(SQLException e){
             System.out.println("connectionUser " + e.toString());
@@ -32,12 +32,13 @@ public class CrudDatabase {
     
     public static void createUser(User user){
         Connection connection = ConnectionSql.getConnection();
-        String sql = "INSERT INTO user (name, password, administrator) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO user (name, password, administrator, needChange) VALUES (?, ?, ?, ?)";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setBoolean(3, user.getAdministrator());
+            preparedStatement.setBoolean(4, user.getNeedChange());
             preparedStatement.execute();
             
         }catch(SQLException e){
@@ -48,14 +49,15 @@ public class CrudDatabase {
     
     public static void updateUser(User user){
         Connection connection = ConnectionSql.getConnection();
-        String sql = "UPDATE user SET id = ?, name = ?, password = ?, administrator = ? WHERE id = ?";
+        String sql = "UPDATE user SET id = ?, name = ?, password = ?, administrator = ?, needChange = ? WHERE id = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setBoolean(4, user.getAdministrator());
-            preparedStatement.setInt(5, user.getId());
+            preparedStatement.setBoolean(5, user.getNeedChange());
+            preparedStatement.setInt(6, user.getId());
             preparedStatement.executeUpdate();
             
         }catch(SQLException e){

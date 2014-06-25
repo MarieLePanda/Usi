@@ -5,12 +5,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.standard.MediaSize;
 
 public class User {
 	
 	private int id;
 	private String login, password;
 	private boolean administrator;
+        private boolean needChange;
 	
 	public int getId() {
 		return id;
@@ -25,19 +27,20 @@ public class User {
 		this.login = login;
 	}
 	public String getPassword() {
-            String hash;
-            hash = null;
+            StringBuffer hash = new StringBuffer();
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-512");
                 md.update((login + "PandprodProtegeVotreMdp" +password).getBytes("UTF-8"));
                 byte[] digest = md.digest();
-                hash = new String (digest);
-            } catch (NoSuchAlgorithmException ex) {
+                for (int i = 0; i < digest.length; i++) {
+                    hash.append(Integer.toString((digest[i] & 0xff) + 0x100, 16).substring(1));
+                }
+            }catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return hash;
+            return new String(hash);
 	}
 	public void setPassword(String password) {
 		this.password = password;
@@ -48,25 +51,38 @@ public class User {
 	public void setRole(boolean administrator) {
 		this.administrator = administrator;
 	}
+        public boolean getNeedChange() {
+		return needChange;
+	}
+	public void setNeedChange(boolean needChange) {
+		this.needChange = needChange;
+	}
 	
 	/***
 	 * Constructeur to create user witch database
 	 * @param login
 	 * @param password
 	 */
-	public User(String login, String password, boolean administrator){
+        public User(String login, String password){
+            this.login = login;
+            this.password = password;
+	}
+                
+	public User(String login, String password, boolean administrator, boolean needChange){
             this.login = login;
             this.password = password;
             this.administrator = administrator;
+            this.needChange = needChange;
             
 	}
 	
-	public User(int id, String login, String password, boolean administrator) {
+	public User(int id, String login, String password, boolean administrator, boolean needChange) {
 		super();
 		this.id = id;
 		this.login = login;
 		this.password = password;
 		this.administrator = administrator;
+                this.needChange = needChange;
 	}
 	
 	@Override

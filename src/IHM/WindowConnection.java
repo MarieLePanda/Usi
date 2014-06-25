@@ -4,6 +4,7 @@
  */
 package IHM;
 
+import IHM.frameAdmin.ChangePwd;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -96,16 +97,22 @@ public class WindowConnection extends javax.swing.JFrame {
 
     private void jButtonConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectionActionPerformed
         // TODO add your handling code here:
-        User user = new User(0, jTextFieldLogin.getText(), new String(jPasswordFieldPass.getPassword()), false);
+        User user = new User(jTextFieldLogin.getText(), new String(jPasswordFieldPass.getPassword()));
         user.connection();
         if(Launcher.userConnected == null){
             JOptionPane.showMessageDialog(null,"Login ou mot de passe erroné");
         }
         else{
             this.dispose();
-            MainFrame wind = new MainFrame();
-            wind.setVisible(true);
-            wind.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            if(Launcher.userConnected.getNeedChange()){
+                ChangePwd win = new ChangePwd(Launcher.userConnected);
+                win.setVisible(true);
+            }
+            else{
+                MainFrame wind = new MainFrame();
+                wind.setVisible(true);
+                wind.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
         }
     }//GEN-LAST:event_jButtonConnectionActionPerformed
 
