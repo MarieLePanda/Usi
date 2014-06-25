@@ -97,7 +97,7 @@ public class FrameCreateUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Des champs sont vide");
         }
         else{
-            User newUser = new User(jTextFieldLogin.getText(), new String(jPasswordFieldPdw.getPassword()), jCheckBoxAdmin.isSelected());
+            User newUser = new User(jTextFieldLogin.getText(), new String(jPasswordFieldPdw.getPassword()), jCheckBoxAdmin.isSelected(), true);
             newUser.createUser();
             JOptionPane.showMessageDialog(null,"Utilisateur " + newUser.getLogin() + " créé");
             this.dispose();
