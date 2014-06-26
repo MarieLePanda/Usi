@@ -636,7 +636,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jScrollPane9" max="32767" attributes="0"/>
@@ -648,7 +648,9 @@
                                           <Component id="jLabelLifecycle" min="-2" max="-2" attributes="0"/>
                                           <Component id="jComboBoxLifecycle" pref="200" max="32767" attributes="0"/>
                                           <Component id="jLabelProductionDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCalendarComboBoxProduction" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabelDecommissionDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCalendarComboBoxDecommissionDate" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabelInvestmentStrategy" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jTextFieldInvestmentStrategy" alignment="0" max="32767" attributes="0"/>
                                       </Group>
@@ -671,9 +673,13 @@
                       <Component id="jComboBoxLifecycle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabelProductionDate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jCalendarComboBoxProduction" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabelDecommissionDate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jCalendarComboBoxDecommissionDate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabelInvestmentStrategy" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jTextFieldInvestmentStrategy" min="-2" max="-2" attributes="0"/>
@@ -685,7 +691,7 @@
                       <Component id="jLabelReplacedBy" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane9" min="-2" pref="85" max="-2" attributes="0"/>
-                      <EmptySpace pref="70" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -713,10 +719,14 @@
                 <Property name="text" type="java.lang.String" value="Date de production"/>
               </Properties>
             </Component>
+            <Component class="de.wannawork.jcalendar.JCalendarComboBox" name="jCalendarComboBoxProduction">
+            </Component>
             <Component class="javax.swing.JLabel" name="jLabelDecommissionDate">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Date de d&#xe9;mant&#xe8;lement"/>
               </Properties>
+            </Component>
+            <Component class="de.wannawork.jcalendar.JCalendarComboBox" name="jCalendarComboBoxDecommissionDate">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelInvestmentStrategy">
               <Properties>

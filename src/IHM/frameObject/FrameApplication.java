@@ -14,8 +14,6 @@ import myObject.*;
  * @author Mary
  */
 public class FrameApplication extends javax.swing.JFrame {
-    private Object jCalendarComboBoxProduction;
-    private Object jCalendarComboBoxDecommissionDate;
 
     /**
      * Creates new form FrameApplication
@@ -23,7 +21,6 @@ public class FrameApplication extends javax.swing.JFrame {
     public FrameApplication() {
         initComponents();
         setIcon();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -84,7 +81,9 @@ public class FrameApplication extends javax.swing.JFrame {
         jLabelLifecycle = new javax.swing.JLabel();
         jComboBoxLifecycle = new javax.swing.JComboBox();
         jLabelProductionDate = new javax.swing.JLabel();
+        jCalendarComboBoxProduction = new de.wannawork.jcalendar.JCalendarComboBox();
         jLabelDecommissionDate = new javax.swing.JLabel();
+        jCalendarComboBoxDecommissionDate = new de.wannawork.jcalendar.JCalendarComboBox();
         jLabelInvestmentStrategy = new javax.swing.JLabel();
         jTextFieldInvestmentStrategy = new javax.swing.JTextField();
         jLabelReplace = new javax.swing.JLabel();
@@ -469,7 +468,9 @@ public class FrameApplication extends javax.swing.JFrame {
                                     .addComponent(jLabelLifecycle)
                                     .addComponent(jComboBoxLifecycle, 0, 200, Short.MAX_VALUE)
                                     .addComponent(jLabelProductionDate)
+                                    .addComponent(jCalendarComboBoxProduction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabelDecommissionDate)
+                                    .addComponent(jCalendarComboBoxDecommissionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabelInvestmentStrategy)
                                     .addComponent(jTextFieldInvestmentStrategy))
                                 .addComponent(jLabelReplace)))
@@ -485,9 +486,13 @@ public class FrameApplication extends javax.swing.JFrame {
                 .addComponent(jComboBoxLifecycle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelProductionDate)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCalendarComboBoxProduction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelDecommissionDate)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCalendarComboBoxDecommissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelInvestmentStrategy)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldInvestmentStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -499,7 +504,7 @@ public class FrameApplication extends javax.swing.JFrame {
                 .addComponent(jLabelReplacedBy)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lifecycle", jPanel8);
@@ -659,11 +664,11 @@ public class FrameApplication extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Application application = new Application(jTextFieldName.getText(), jTextAreaDescription.getText(), 
-            (java.sql.Date)jCalendarComboBoxProduction, jTextFieldType.getText(),
+            (java.sql.Date)jCalendarComboBoxProduction.getDate(), jTextFieldType.getText(),
             (Responsible) jComboBoxResponsible.getSelectedItem(),(Responsible) jComboBoxResponsibleDeputy.getSelectedItem(),
             (Responsible) jComboBoxResponsibleOperation.getSelectedItem(), (Responsible) jComboBoxResponsibleDevelopment.getSelectedItem(),
             (Lifecycle) jComboBoxLifecycle.getSelectedItem(), (Database) jComboBoxDatabaseUse.getSelectedItem(),
-            (java.sql.Date) jCalendarComboBoxDecommissionDate, Integer.parseInt(jTextFieldInvestmentCost.getText()),
+            (java.sql.Date) jCalendarComboBoxDecommissionDate.getDate(), Integer.parseInt(jTextFieldInvestmentCost.getText()),
             Integer.parseInt(jTextFieldOperatingCost.getText()), Integer.parseInt(jTextFieldNumberOfUser.getText()),
             jTextFieldSecurityAvailability.getText(), jTextFieldSecurityConfidentiality.getText(),
             jTextFieldSecurityIntegrity.getText(),
@@ -715,6 +720,8 @@ public class FrameApplication extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
+    private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxDecommissionDate;
+    private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxProduction;
     private javax.swing.JComboBox jComboBoxDatabaseUse;
     private javax.swing.JComboBox jComboBoxHostBy;
     private javax.swing.JComboBox jComboBoxLifecycle;
