@@ -21,6 +21,7 @@ public class FrameAdmin extends javax.swing.JFrame {
         
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
         pack();
     }
 

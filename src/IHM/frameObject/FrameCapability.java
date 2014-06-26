@@ -17,6 +17,7 @@ public class FrameCapability extends javax.swing.JFrame {
     public FrameCapability() {
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
     }
 
     /**

@@ -23,6 +23,7 @@ public class WindowConnection extends javax.swing.JFrame {
     public WindowConnection() {
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -105,7 +106,7 @@ public class WindowConnection extends javax.swing.JFrame {
         else{
             this.dispose();
             if(Launcher.userConnected.getNeedChange()){
-                ChangePwd win = new ChangePwd(Launcher.userConnected);
+                ChangePwd win = new ChangePwd();
                 win.setVisible(true);
             }
             else{
@@ -131,7 +132,7 @@ public class WindowConnection extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

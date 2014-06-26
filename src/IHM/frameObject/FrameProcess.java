@@ -23,7 +23,7 @@ public class FrameProcess extends javax.swing.JFrame {
      * Creates new form FrameProcess when user create a new process
      */
     public FrameProcess(){
-        
+        this.setLocationRelativeTo(null);
     }
     
     public FrameProcess(String type) {
@@ -34,6 +34,7 @@ public class FrameProcess extends javax.swing.JFrame {
             capability = new Capability();
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
     }
     
     /**

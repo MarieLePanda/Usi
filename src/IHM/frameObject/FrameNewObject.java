@@ -22,6 +22,7 @@ public class FrameNewObject extends javax.swing.JFrame {
     public FrameNewObject() {
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
     }
 
     /**

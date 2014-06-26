@@ -21,6 +21,7 @@ public class FrameResponsible extends javax.swing.JFrame {
     public FrameResponsible() {
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
     }
 
     /**

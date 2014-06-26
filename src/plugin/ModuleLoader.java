@@ -25,10 +25,10 @@ public class ModuleLoader {
     public static ArrayList<IModule> listModule = new ArrayList<IModule>();
     public static void loadPlugin(){
         try{
-            File file = new File("C:\\Users\\lug13995\\Documents\\GitHub\\UsiImportModule\\dist");
+            File file = new File(".\\.");
             //C:\Users\lug13995\Documents\GitHub\UsiImportModule\dist
             //E:\Programme\git\WorkspaceJava\UsiImportModule\dist
-            //.\\.
+            //.\.
             Class tmpClass = null;
             ArrayList<Class> tabClass = new ArrayList<Class>();
             File[] files = file.listFiles();

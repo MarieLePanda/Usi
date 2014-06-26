@@ -20,9 +20,10 @@ public class ChangePwd extends javax.swing.JFrame {
     /**
      * Creates new form ChangePwd
      */
-    public ChangePwd(User user) {
+    public ChangePwd() {
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
     }
 
     /**

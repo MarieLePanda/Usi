@@ -19,6 +19,7 @@ public class FrameCreateUser extends javax.swing.JFrame {
     public FrameCreateUser() {
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
         pack();
     }
 

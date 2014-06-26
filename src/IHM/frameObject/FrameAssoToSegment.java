@@ -20,7 +20,7 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
      * Creates new form FrameAssoToSegment
      */
     public FrameAssoToSegment() {
-        
+        this.setLocationRelativeTo(null);
        
     }
     
@@ -37,7 +37,7 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
         }else if(object instanceof myObject.Process){
             initComboBoxListToProcess();
         }
-        
+        this.setLocationRelativeTo(null);
     }
 
     /**

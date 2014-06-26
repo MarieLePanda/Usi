@@ -33,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame{
         ModuleLoader.loadPlugin();
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
            
         if(Launcher.userConnected.getAdministrator() == false)
             jMenuAdministration.setVisible(false);
@@ -289,7 +290,7 @@ public class MainFrame extends javax.swing.JFrame{
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
