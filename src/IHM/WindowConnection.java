@@ -21,6 +21,7 @@ public class WindowConnection extends javax.swing.JFrame {
      * Creates new form WindowConnection
      */
     public WindowConnection() {
+        
         initComponents();
         setIcon();
         this.setLocationRelativeTo(null);
