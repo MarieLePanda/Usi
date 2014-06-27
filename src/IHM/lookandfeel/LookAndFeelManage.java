@@ -5,6 +5,7 @@
 package IHM.lookandfeel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -16,18 +17,18 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class LookAndFeelManage {
     
-    public static ArrayList<String> nameLook = new ArrayList<String>();
+    public static HashMap nameLook = new HashMap();
     
     public static void loadDefautLook(){
 
         //nameLook.add("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        nameLook.add("de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
-        nameLook.add("de.javasoft.plaf.synthetica.SyntheticaSilverMoonLookAndFeel");
-        nameLook.add("de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel");
-        nameLook.add("de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel");
-        nameLook.add("de.javasoft.plaf.synthetica.SyntheticaBlackMoonLookAndFeel");
-        nameLook.add("de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel");
-        nameLook.add("de.javasoft.plaf.synthetica.SyntheticaBlueLightLookAndFeel");
+        nameLook.put("Greeb Dream", "de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
+        nameLook.put("Silver Moon", "de.javasoft.plaf.synthetica.SyntheticaSilverMoonLookAndFeel");
+        nameLook.put("Blue Moon", "de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel");
+        nameLook.put("Black Star", "de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel");
+        nameLook.put("Black Moon", "de.javasoft.plaf.synthetica.SyntheticaBlackMoonLookAndFeel");
+        nameLook.put("Blue Ice", "de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel");
+        nameLook.put("Blue Ligt", "de.javasoft.plaf.synthetica.SyntheticaBlueLightLookAndFeel");
         try {
             UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
         } catch (InstantiationException ex) {

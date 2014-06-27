@@ -58,16 +58,16 @@ public class MainFrame extends javax.swing.JFrame{
         }else
             jMenuPlugin.add(new JMenuItem("<Aucun pluging>"));
         
-        for(final String lf : LookAndFeelManage.nameLook)
+        for(final Object lf : LookAndFeelManage.nameLook.keySet())
             {
                 ActionListener ls = new ActionListener() {
 
                    public void actionPerformed(ActionEvent e) {
-                       LookAndFeelManage.changeLook(lf);
+                       LookAndFeelManage.changeLook((String) LookAndFeelManage.nameLook.get(lf));
                        JOptionPane.showMessageDialog(null,"Thème changé");
                    }
                };
-                JMenuItem jm = new JMenuItem(lf);
+                JMenuItem jm = new JMenuItem((String) lf);
                 jm.addActionListener(ls);
                jMenuLook.add(jm);
                
