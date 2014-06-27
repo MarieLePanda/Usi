@@ -17,6 +17,23 @@ public class Server extends MetaModelObject{
     private String os;
     private Date productionDate, decommissionDate;
     private ArrayList<Technology> listTechnology;
+    private Lifecycle lifecycle;
+
+    public int getOperatingCost() {
+        return operatingCost;
+    }
+
+    public void setOperatingCost(int operatingCost) {
+        this.operatingCost = operatingCost;
+    }
+
+    public Lifecycle getLifecycle() {
+        return lifecycle;
+    }
+
+    public void setLifecycle(Lifecycle lifecycle) {
+        this.lifecycle = lifecycle;
+    }
     
 	public int getProductionCost() {
 		return productionCost;
@@ -121,17 +138,16 @@ public class Server extends MetaModelObject{
 	 * @param responsibleOperation
 	 * @param ram
 	 * @param processeur
+         * @param lifecycle
 	 * @param os
 	 * @param productionDate
 	 * @param decommissionDate
 	 * @param listTechnology
 	 */
-	public Server(int id, int investmentCost, int operatingCost,
-			int productionCost, String name, String description,
-			String typseServer, Responsible responsible,
-			Responsible responsibleDeputy, Responsible responsibleDevelopment,
-			Responsible responsibleOperation, String ram, String processeur,
-			String os, Date productionDate, Date decommissionDate,
+	public Server(int id, String name, String description, String typseServer,
+                        Responsible responsible, Responsible responsibleDeputy, Responsible responsibleDevelopment,
+			Responsible responsibleOperation, String ram, String processeur, String os, int investmentCost, int operatingCost, Lifecycle lifecycle,
+                        int productionCost,Date productionDate, Date decommissionDate,
 			ArrayList<Technology> listTechnology) {
 		this.id = id;
 		this.investmentCost = investmentCost;
@@ -150,6 +166,8 @@ public class Server extends MetaModelObject{
 		this.productionDate = productionDate;
 		this.decommissionDate = decommissionDate;
 		this.listTechnology = listTechnology;
+                this.lifecycle = lifecycle;
+                
 	}
 	
 	@Override

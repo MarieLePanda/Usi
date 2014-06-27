@@ -162,6 +162,41 @@ public class Database extends MetaModelObject{
 		
 	}
 	
+         /**
+	 * @param id
+	 * @param investmentCost
+	 * @param operatingCost
+	 * @param name
+	 * @param description
+	 * @param responsible
+	 * @param responsibleDeputy
+	 * @param responsibleDevelopment
+	 * @param responsibleOperation
+	 * @param server
+	 * @param productionDate
+	 * @param decommissionDate
+	 * @param lifecycle
+	 */
+	public Database(int id, String name, String description, Responsible responsible,
+			Responsible responsibleDeputy, Responsible responsibleDevelopment,
+			Responsible responsibleOperation, Server server, int investmentCost, int operatingCost,
+			Date productionDate, Date decommissionDate, Lifecycle lifecycle
+			) {
+		this.id = id;
+		this.investmentCost = investmentCost;
+		this.operatingCost = operatingCost;
+		this.name = name;
+		this.description = description;
+		this.responsible = responsible;
+		this.responsibleDeputy = responsibleDeputy;
+		this.responsibleDevelopment = responsibleDevelopment;
+		this.responsibleOperation = responsibleOperation;
+		this.server = server;
+		this.productionDate = productionDate;
+		this.decommissionDate = decommissionDate;
+		this.lifecycle = lifecycle;
+	}
+        
 	/**
 	 * @param id
 	 * @param investmentCost
@@ -178,10 +213,9 @@ public class Database extends MetaModelObject{
 	 * @param lifecycle
 	 * @param listTechnology
 	 */
-	public Database(int id, int investmentCost, int operatingCost, String name,
-			String description, Responsible responsible,
+	public Database(int id, String name, String description, Responsible responsible,
 			Responsible responsibleDeputy, Responsible responsibleDevelopment,
-			Responsible responsibleOperation, Server server,
+			Responsible responsibleOperation, Server server, int investmentCost, int operatingCost,
 			Date productionDate, Date decommissionDate, Lifecycle lifecycle,
 			ArrayList<Technology> listTechnology) {
 		this.id = id;

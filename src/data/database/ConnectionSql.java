@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,7 +32,8 @@ public class ConnectionSql {
             conf[3] = "";
             
            	try {
-                    FileReader fichierLecture = new FileReader("C:\\Users\\lug13995\\Documents\\GitHub\\Usi\\src\\conf\\conf.txt");
+                    FileReader fichierLecture = new FileReader("C:\\Users\\MKSJ\\Documents\\GitHub\\Usi\\src\\conf\\conf.txt");
+                    //C:\Users\MKSJ\Documents\GitHub\Usi\src\conf\conf.txt
                     //C:\Users\lug13995\Documents\GitHub\Usi\src\conf\conf.txt
                     //.\conf\conf.txt
                     BufferedReader fichier = new BufferedReader(fichierLecture);
@@ -51,7 +54,7 @@ public class ConnectionSql {
                 }
         }
 
-        if(connexion == null){
+        //if(connexion == null){
             try {
                 Class.forName( "com.mysql.jdbc.Driver" );
             } catch ( ClassNotFoundException e ) {
@@ -70,8 +73,16 @@ public class ConnectionSql {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(null,"getConnection " + e.toString());
             } 
-        }
+        //}
 
         return connexion;
+    }
+    
+    public static void closeConnection(Connection Connection){
+        try {
+            Connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionSql.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

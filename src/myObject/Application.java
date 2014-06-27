@@ -9,7 +9,7 @@ import java.sql.Date;
 public class Application extends MetaModelObject{
 	
 	private int investmentCost, operatingCost, numberUser;
-	private String description;
+	private String description, investmentStrategy;
 	private Date productionDate, decommissionDate;
 	private String typeApplication;
 	private Responsible responsible, responsibleDeputy, responsibleOperation, responsibleDevelopment;
@@ -156,6 +156,14 @@ public class Application extends MetaModelObject{
 	 */
 	public void setInvestmentCost(int investmentCost) {
 		this.investmentCost = investmentCost;
+	}
+        
+        public String getInvestmentStrategy() {
+		return investmentStrategy;
+	}
+
+	public void setInvestmentStrategy(String investmentStrategy) {
+		this.investmentStrategy = investmentStrategy;
 	}
 	/**
 	 * @return the operatingCost
@@ -402,7 +410,7 @@ public class Application extends MetaModelObject{
 			Responsible responsible, Responsible responsibleDeputy,
 			Responsible responsibleOperation,
 			Responsible responsibleDevelopment, Lifecycle lifecycle,
-			Database database, Date decommissionDate, int investmentCost,
+			Database database, Date decommissionDate, int investmentCost, String investmentStrategy,
 			int operatingCost, int numberUser, String securityAvailability,
 			String securityConfidentiality, String securityIntegrity,
 			String category, Server server, String fitBusiness, String fitIT,
@@ -436,6 +444,7 @@ public class Application extends MetaModelObject{
 		this.fitIT = fitIT;
 		this.fitCost = fitCost;
 		this.strategyImportance = strategyImportance;
+                this.investmentStrategy = investmentStrategy;
 		this.listCapability = listCapability;
 		this.listSubstitute = listSubstitute;
 		this.listReplace = listReplace;

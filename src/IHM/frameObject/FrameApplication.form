@@ -191,17 +191,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBoxResponsibleOperation" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabelResponsibleOperation" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxResponsibleDevelopment" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelResponsibleDevelopment" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxResponsibleDeputy" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelResponsibleDeputy" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxResponsible" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelResponsible" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxResponsible" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="jComboBoxResponsibleDeputy" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jComboBoxResponsibleDevelopment" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jComboBoxResponsibleOperation" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="281" max="32767" attributes="0"/>
+                      <EmptySpace pref="219" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -466,14 +466,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane7" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jLabelUsedTechnology" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelHostBy" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBoxHostBy" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelDatabaseUse" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBoxDatabaseUse" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxDatabaseUse" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jComboBoxHostBy" alignment="0" pref="200" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="307" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="235" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -495,7 +495,7 @@
                       <Component id="jLabelDatabaseUse" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jComboBoxDatabaseUse" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="324" max="32767" attributes="0"/>
+                      <EmptySpace pref="396" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -552,13 +552,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxDatabaseUse">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getAllDatabase())" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -657,6 +652,8 @@
                               </Group>
                               <Component id="jLabelReplacedBy" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jCalendarComboBoxProductionDate" max="32767" attributes="0"/>
+                          <Component id="jCalendarComboBoxDecommissioningDate" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="230" max="32767" attributes="0"/>
                   </Group>
@@ -671,9 +668,13 @@
                       <Component id="jComboBoxLifecycle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabelProductionDate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jCalendarComboBoxProductionDate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="jLabelDecommissionDate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jCalendarComboBoxDecommissioningDate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="jLabelInvestmentStrategy" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jTextFieldInvestmentStrategy" min="-2" max="-2" attributes="0"/>
@@ -698,13 +699,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxLifecycle">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getAllLifecycle())" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -782,6 +778,10 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="de.wannawork.jcalendar.JCalendarComboBox" name="jCalendarComboBoxProductionDate">
+            </Component>
+            <Component class="de.wannawork.jcalendar.JCalendarComboBox" name="jCalendarComboBoxDecommissioningDate">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel9">

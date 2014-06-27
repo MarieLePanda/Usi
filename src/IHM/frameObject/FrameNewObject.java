@@ -94,8 +94,11 @@ public class FrameNewObject extends javax.swing.JFrame {
                 FrameProcess win = new FrameProcess((String)jComboBoxTypeObject.getSelectedItem());
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            }
-            else  if(jComboBoxTypeObject.getSelectedItem().equals("Responsible")){
+            }else if(jComboBoxTypeObject.getSelectedItem().equals("Application")){
+                FrameApplication win = new FrameApplication();
+                win.setVisible(true);
+                win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }else  if(jComboBoxTypeObject.getSelectedItem().equals("Responsible")){
                 FrameResponsible win = new FrameResponsible();
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

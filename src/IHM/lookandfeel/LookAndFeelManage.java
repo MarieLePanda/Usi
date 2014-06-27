@@ -30,7 +30,7 @@ public class LookAndFeelManage {
         nameLook.put("Blue Ice", "de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel");
         nameLook.put("Blue Ligt", "de.javasoft.plaf.synthetica.SyntheticaBlueLightLookAndFeel");
         try {
-            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
+            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueLightLookAndFeel");
         } catch (InstantiationException ex) {
             Logger.getLogger(LookAndFeelManage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {

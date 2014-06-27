@@ -4,6 +4,7 @@
 package data.IHM;
 
 import data.database.ConnectionSql;
+import static data.database.ConnectionSql.closeConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -68,6 +69,8 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " loadTreeSegment " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         
        return segment;
@@ -94,12 +97,14 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " loadTreeProcess 1 " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         for(myObject.Process p : listProcess){
             sql = "SELECT * FROM Segment WHERE id = ?";
-            Connection connectionSeg = ConnectionSql.getConnection();
+            connection = ConnectionSql.getConnection();
             try{
-                PreparedStatement preparedStatementSeg = connectionSeg.prepareStatement(sql);
+                PreparedStatement preparedStatementSeg = connection.prepareStatement(sql);
                 preparedStatementSeg.setInt(1, p.getSegment().getId());
                 ResultSet seg = preparedStatementSeg.executeQuery();
                 seg.next();
@@ -108,33 +113,33 @@ public class DataIHM {
             }
             catch(SQLException e){
             System.out.println(e.toString() + " loadTreeProcess 2 " + e.getMessage());
+            }finally{
+            closeConnection(connection);
             }
         }
-            for(myObject.Process p : listProcess){
-                System.out.println(p.getSegment());
-                ArrayList<Capability> capabilities = new ArrayList<Capability>();
-                try{
-                    connection = ConnectionSql.getConnection();
-                    sql = "SELECT * FROM capability WHERE PROCESSid = ?";
-                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                    preparedStatement.setInt(1, p.getId());
-                    ResultSet res = preparedStatement.executeQuery();
-                    while(res.next()){
-                        Capability objectCapability = new Capability(res.getInt(1), null, res.getString(3),res.getString(4), res.getDate(5), 
-                            res.getDate(6), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Application>());
-                            capabilities.add(objectCapability);
-                    }
-                    p.setListCapability(capabilities);
-                }catch(SQLException e){
-                    System.out.println(e.toString() + " loadTreeProcess 3 " + e.getMessage());
+        for(myObject.Process p : listProcess){
+            connection = ConnectionSql.getConnection();
+            ArrayList<Capability> capabilities = new ArrayList<Capability>();
+            try{
+                sql = "SELECT * FROM capability WHERE PROCESSid = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, p.getId());
+                ResultSet res = preparedStatement.executeQuery();
+                while(res.next()){
+                    Capability objectCapability = new Capability(res.getInt(1), null, res.getString(3),res.getString(4), res.getDate(5), 
+                        res.getDate(6), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Application>());
+                        capabilities.add(objectCapability);
                 }
-        
+                p.setListCapability(capabilities);
+            }catch(SQLException e){
+                System.out.println(e.toString() + " loadTreeProcess 3 " + e.getMessage());
+            }finally{
+                closeConnection(connection);
             }
-            for(myObject.Process p : listProcess){
-                process.add(new DefaultMutableTreeNode(p));
-            }
-            
-        
+        }
+        for(myObject.Process p : listProcess){
+            process.add(new DefaultMutableTreeNode(p));
+        }
         return process;
     }
     
@@ -159,6 +164,8 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " loadTreeCapability " + e.getMessage());
+        }finally{
+                closeConnection(connection);
         }
         return capability;
     }
@@ -211,7 +218,6 @@ public class DataIHM {
     public static DefaultMutableTreeNode loadTreeApplication(){
         DefaultMutableTreeNode application = new DefaultMutableTreeNode("Application");
         Connection connection = ConnectionSql.getConnection();
-        
         String sql = "SELECT * FROM application";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -227,10 +233,10 @@ public class DataIHM {
                         new ArrayList<Application>(), new ArrayList<Interface>(), new ArrayList<Interface>(), new ArrayList<Technology>())));
             }
         }catch(SQLException e){
-            System.out.println(e.toString() + " loadTreeApplication " + e.getMessage());
-            
+            System.out.println(e.toString() + " loadTreeApplication " + e.getMessage());  
+        }finally{
+                closeConnection(connection);
         }
-        
         return application; 
     }
     
@@ -238,10 +244,9 @@ public class DataIHM {
      * Create all user existing
      * @return array of user
      */
-   public static User[] loadUser(){
-       ArrayList<User> users = new ArrayList<User>();
-       Connection connection = ConnectionSql.getConnection();
-        
+    public static User[] loadUser(){
+        ArrayList<User> users = new ArrayList<User>();
+        Connection connection = ConnectionSql.getConnection();
         String sql = "SELECT * FROM user";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -251,9 +256,9 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println("loadUser " + e.toString());
-            
-        }
-       
+        }finally{
+            closeConnection(connection);
+        }       
        return users.toArray(new User[users.size()]);
    }
    
@@ -263,9 +268,7 @@ public class DataIHM {
      */
     public static Responsible[] loadResponsible(){
         ArrayList<Responsible> responsibles = new ArrayList<Responsible>();
-
         Connection connection = ConnectionSql.getConnection();
-        
         String sql = "SELECT * FROM responsible";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -275,10 +278,10 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " loadResponsible " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
-        
-        return responsibles.toArray(new Responsible[responsibles.size()]);
-        
+        return responsibles.toArray(new Responsible[responsibles.size()]);     
     }    
     
     /**
@@ -301,8 +304,9 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " getResponsible " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
-        
         return responsible;
     }
     
@@ -314,7 +318,6 @@ public class DataIHM {
     public static Lifecycle getLifecycle(int id){
         Lifecycle lifecycle = null;
         Connection connection = ConnectionSql.getConnection();
-        
         String sql = "SELECT * FROM lifecycle WHERE id = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -325,9 +328,28 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println("Function getlifecycle : " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
-        
         return lifecycle;    
+    }
+    
+        public static Lifecycle[] getAllLifecycle(){
+        ArrayList<Lifecycle> listLifecycle = new ArrayList<Lifecycle>();
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "SELECT * FROM lifecycle";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                listLifecycle.add(new Lifecycle(res.getInt(1), res.getString(2)));
+            }
+        }catch(SQLException e){
+            System.out.println("Function getlifecycle : " + e.getMessage());
+        }finally{
+            closeConnection(connection);
+        }
+        return listLifecycle.toArray(new Lifecycle[listLifecycle.size()]);    
     }
     
     //Need to manage segment
@@ -338,7 +360,6 @@ public class DataIHM {
     public static myObject.Process[] getFreeProcess(){
         ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
-        
         String sql = "SELECT * FROM process WHERE SEGMENTid = 100";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -351,6 +372,8 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         return process.toArray(new myObject.Process[process.size()]);
     }
@@ -377,6 +400,8 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         return process;
     }  
@@ -391,7 +416,6 @@ public class DataIHM {
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
         if(segment !=null){
             Connection connection = ConnectionSql.getConnection();
-
             String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
             try{
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -404,9 +428,10 @@ public class DataIHM {
                 }
             }catch(SQLException e){
                 System.out.println(e.toString() + " getListProcess " + e.getMessage());
+            }finally{
+                closeConnection(connection);
             }
         }
-        
         return listProcess.toArray(new myObject.Process[listProcess.size()]);
         
     }
@@ -431,8 +456,9 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " loadTreeSegment " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
-        
        return segment.toArray(new Segment[segment.size()]);
     }    
      
@@ -441,10 +467,8 @@ public class DataIHM {
      * @return array of capability
      */
     public static Capability[] getFreeCapability(){
-        ArrayList<Capability> capabilities = new ArrayList<Capability>();
-        
+        ArrayList<Capability> capabilities = new ArrayList<Capability>();       
         Connection connection = ConnectionSql.getConnection();
-        
         String sql = "SELECT * FROM capability WHERE PROCESSid = 100";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -456,8 +480,9 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println("getFreeCapability " + e.toString());
-        }
-        
+        }finally{
+            closeConnection(connection);
+        }        
         return capabilities.toArray(new Capability[capabilities.size()]);
     }
     
@@ -469,7 +494,6 @@ public class DataIHM {
     public static ArrayList<Capability> getCapability(int processId){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
         Connection connection = ConnectionSql.getConnection();
-        
         String sql = "SELECT * FROM capability WHERE PROCESSid = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -482,6 +506,8 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         return capabilities;
     }
@@ -501,6 +527,8 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println("getListAllProcess " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
         
        return process.toArray(new myObject.Process[process.size()]);
@@ -522,11 +550,13 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println(e.toString() + " getProcess " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         return segment;
     }  
     
-        public static ArrayList<Application> getApplication(int capabilityId){
+    public static ArrayList<Application> getApplication(int capabilityId){
         ArrayList<Application> applications = new ArrayList<Application>();
         ArrayList<Integer> idApplication = new ArrayList<Integer>();
         Connection connection = ConnectionSql.getConnection();
@@ -541,8 +571,10 @@ public class DataIHM {
             }
         }catch(SQLException e){
             System.out.println("getApplication " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
-        
+        connection = ConnectionSql.getConnection();
         sql = "SELECT * FROM application WHERE id = ?";
         for(int i : idApplication){
             try{
@@ -554,35 +586,117 @@ public class DataIHM {
                             res.getInt(1), res.getString(2), res.getString(3),
                             res.getDate(4), res.getString(5), getResponsible(res.getInt(6)), getResponsible(res.getInt(7)), 
                             getResponsible(res.getInt(8)), getResponsible(res.getInt(9)),
-                            getLifecycle(res.getInt(10)), null, res.getDate(12), res.getInt(13), res.getInt(14),
-                            res.getInt(15), res.getString(16), res.getString(17), res.getString(18), res.getString(19), null, res.getString(21),
+                            getLifecycle(res.getInt(10)), getdatabase(res.getInt(11)), res.getDate(12), res.getInt(13), res.getInt(14),
+                            res.getInt(15), res.getString(16), res.getString(17), res.getString(18), res.getString(19), getServer(res.getInt(20)), res.getString(21),
                             res.getString(22), res.getString(23), res.getString(24), new ArrayList<Capability>(), new ArrayList<Application>(), 
                             new ArrayList<Application>(), new ArrayList<Interface>(), new ArrayList<Interface>(), new ArrayList<Technology>()));
                 }
             }catch(SQLException e){
                 System.out.println("getApplication 2" + e.toString());
-
+            }finally{
+                closeConnection(connection);
             }
         }
         return applications;
     }
         
-        public static myObject.Process getUniqueProcess(int processId){
-            myObject.Process process = new myObject.Process();
-            Connection connection = ConnectionSql.getConnection();
-
-            String sql = "SELECT * FROM process WHERE id = ?";
-            try{
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, processId);
-                ResultSet res = preparedStatement.executeQuery();
-                while(res.next()){                
-                    process = ( new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
-                            res.getDate(5), new Segment(), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>()));
-                }
-            }catch(SQLException e){
-                System.out.println(e.toString() + " loadTreeProcess 1 " + e.getMessage());
+    public static myObject.Process getUniqueProcess(int processId){
+        myObject.Process process = new myObject.Process();
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "SELECT * FROM process WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, processId);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){                
+                process = ( new myObject.Process(res.getInt(1), res.getString(2),res.getString(3), res.getDate(4), 
+                    res.getDate(5), new Segment(), getResponsible(res.getInt(7)), getResponsible(res.getInt(8)), new ArrayList<Capability>()));
             }
-            return process;
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getUniqueProcess " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
+        return process;
+    }
+    
+    public static Database[] getAllDatabase(){
+        ArrayList<Database> listDatabase = new ArrayList<Database>();
+        Connection connection = data.database.ConnectionSql.getConnection();
+        String sql = "SELECT * FROM database";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                listDatabase.add(new Database(res.getInt(1), res.getString(2), res.getString(3), getResponsible(res.getInt(4)), getResponsible(res.getInt(5)), getResponsible(res.getInt(6)),
+                getResponsible(res.getInt(7)), getServer(res.getInt(8)), res.getInt(9), res.getInt(10), res.getDate(11), res.getDate(12), getLifecycle(res.getInt(13))));
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getAllDatabase " + e.getMessage());
+        }finally{
+            closeConnection(connection);
+        }        
+        return listDatabase.toArray(new Database[listDatabase.size()]);
+    }
+    
+    public static Database getdatabase(int id){
+        Database database = new Database();
+        Connection connection = data.database.ConnectionSql.getConnection();
+        String sql = "SELECT * FROM database WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                database = new Database(res.getInt(1), res.getString(2), res.getString(3), getResponsible(res.getInt(4)), getResponsible(res.getInt(5)), getResponsible(res.getInt(6)),
+                getResponsible(res.getInt(7)), getServer(res.getInt(8)), res.getInt(9), res.getInt(10), res.getDate(11), res.getDate(12), getLifecycle(res.getInt(13)));
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getdatabase " + e.getMessage());
+        }finally{
+            closeConnection(connection);
+        }
+        return database;
+    }
+    
+    public static Server[] getAllServer(){
+        ArrayList<Server> listServer = new ArrayList<Server>();
+        Connection connection = data.database.ConnectionSql.getConnection();
+        String sql = "SELECT * FROM database";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                listServer.add(new Server(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), getResponsible(res.getInt(5)), getResponsible(res.getInt(6)), getResponsible(res.getInt(7)), 
+                        getResponsible(res.getInt(8)), res.getString(9), res.getString(10), res.getString(11), res.getInt(12), res.getInt(13), getLifecycle(res.getInt(14)), res.getInt(15), res.getDate(16), 
+                        res.getDate(17), new ArrayList<Technology>()));
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getAllServer " + e.getMessage());
+        }finally{
+            closeConnection(connection);
+        }        
+        return listServer.toArray(new Server[listServer.size()]);
+    }
+    
+    public static Server getServer(int id){
+        Server server = null;
+        Connection connection = data.database.ConnectionSql.getConnection();
+        String sql = "SELECT * FROM database WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+               server = new Server(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), getResponsible(res.getInt(5)), getResponsible(res.getInt(6)), getResponsible(res.getInt(7)), 
+                        getResponsible(res.getInt(8)), res.getString(9), res.getString(10), res.getString(11), res.getInt(12), res.getInt(13), getLifecycle(res.getInt(14)), res.getInt(15), res.getDate(16), 
+                        res.getDate(17), new ArrayList<Technology>());
+            }
+        }catch(SQLException e){
+            System.out.println(e.toString() + " getServer " + e.getMessage());
+        }finally{
+            closeConnection(connection);
+        }        
+        return server;
+    }
 }

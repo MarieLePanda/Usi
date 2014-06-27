@@ -6,6 +6,7 @@ package IHM.frameObject;
 
 import data.IHM.DataIHM;
 import java.awt.Toolkit;
+import java.sql.Date;
 import java.util.ArrayList;
 import myObject.*;
 
@@ -14,8 +15,7 @@ import myObject.*;
  * @author Mary
  */
 public class FrameApplication extends javax.swing.JFrame {
-    private Object jCalendarComboBoxProduction;
-    private Object jCalendarComboBoxDecommissionDate;
+    private Application application = null;
 
     /**
      * Creates new form FrameApplication
@@ -23,6 +23,14 @@ public class FrameApplication extends javax.swing.JFrame {
     public FrameApplication() {
         initComponents();
         setIcon();
+        this.setLocationRelativeTo(null);
+    }
+    
+    public FrameApplication(Application appliation) {
+        initComponents();
+        this.application = appliation;
+        setIcon();
+        loadValue();
         this.setLocationRelativeTo(null);
     }
 
@@ -93,6 +101,8 @@ public class FrameApplication extends javax.swing.JFrame {
         jLabelReplacedBy = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         jListReplacedBy = new javax.swing.JList();
+        jCalendarComboBoxProductionDate = new de.wannawork.jcalendar.JCalendarComboBox();
+        jCalendarComboBoxDecommissioningDate = new de.wannawork.jcalendar.JCalendarComboBox();
         jPanel9 = new javax.swing.JPanel();
         jLabelCategory = new javax.swing.JLabel();
         jTextFieldCategory = new javax.swing.JTextField();
@@ -208,16 +218,16 @@ public class FrameApplication extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxResponsibleOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelResponsibleOperation)
-                    .addComponent(jComboBoxResponsibleDevelopment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelResponsibleDevelopment)
-                    .addComponent(jComboBoxResponsibleDeputy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelResponsibleDeputy)
-                    .addComponent(jComboBoxResponsible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelResponsible))
-                .addContainerGap(281, Short.MAX_VALUE))
+                    .addComponent(jLabelResponsible)
+                    .addComponent(jComboBoxResponsible, 0, 200, Short.MAX_VALUE)
+                    .addComponent(jComboBoxResponsibleDeputy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxResponsibleDevelopment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxResponsibleOperation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,7 +350,7 @@ public class FrameApplication extends javax.swing.JFrame {
 
         jLabelDatabaseUse.setText("Base de données liée");
 
-        jComboBoxDatabaseUse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDatabaseUse.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getAllDatabase()));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -351,13 +361,13 @@ public class FrameApplication extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane7)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelUsedTechnology)
                             .addComponent(jLabelHostBy)
-                            .addComponent(jComboBoxHostBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelDatabaseUse)
-                            .addComponent(jComboBoxDatabaseUse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 307, Short.MAX_VALUE)))
+                            .addComponent(jComboBoxDatabaseUse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxHostBy, 0, 200, Short.MAX_VALUE))
+                        .addGap(0, 235, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -375,7 +385,7 @@ public class FrameApplication extends javax.swing.JFrame {
                 .addComponent(jLabelDatabaseUse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBoxDatabaseUse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Technology Compnets", jPanel6);
@@ -421,7 +431,7 @@ public class FrameApplication extends javax.swing.JFrame {
 
         jLabelLifecycle.setText("Cycle de vie");
 
-        jComboBoxLifecycle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxLifecycle.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getAllLifecycle()));
 
         jLabelProductionDate.setText("Date de production");
 
@@ -473,7 +483,9 @@ public class FrameApplication extends javax.swing.JFrame {
                                     .addComponent(jLabelInvestmentStrategy)
                                     .addComponent(jTextFieldInvestmentStrategy))
                                 .addComponent(jLabelReplace)))
-                        .addComponent(jLabelReplacedBy)))
+                        .addComponent(jLabelReplacedBy))
+                    .addComponent(jCalendarComboBoxProductionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCalendarComboBoxDecommissioningDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(230, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -485,9 +497,13 @@ public class FrameApplication extends javax.swing.JFrame {
                 .addComponent(jComboBoxLifecycle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelProductionDate)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCalendarComboBoxProductionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabelDecommissionDate)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCalendarComboBoxDecommissioningDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabelInvestmentStrategy)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldInvestmentStrategy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -658,24 +674,7 @@ public class FrameApplication extends javax.swing.JFrame {
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
 
-        Application application = new Application(jTextFieldName.getText(), jTextAreaDescription.getText(), 
-            (java.sql.Date)jCalendarComboBoxProduction, jTextFieldType.getText(),
-            (Responsible) jComboBoxResponsible.getSelectedItem(),(Responsible) jComboBoxResponsibleDeputy.getSelectedItem(),
-            (Responsible) jComboBoxResponsibleOperation.getSelectedItem(), (Responsible) jComboBoxResponsibleDevelopment.getSelectedItem(),
-            (Lifecycle) jComboBoxLifecycle.getSelectedItem(), (Database) jComboBoxDatabaseUse.getSelectedItem(),
-            (java.sql.Date) jCalendarComboBoxDecommissionDate, Integer.parseInt(jTextFieldInvestmentCost.getText()),
-            Integer.parseInt(jTextFieldOperatingCost.getText()), Integer.parseInt(jTextFieldNumberOfUser.getText()),
-            jTextFieldSecurityAvailability.getText(), jTextFieldSecurityConfidentiality.getText(),
-            jTextFieldSecurityIntegrity.getText(),
-            jTextFieldCategory.getText(), (Server) jComboBoxHostBy.getSelectedItem(),
-            jTextFieldBBusinessFit.getText(), jTextFieldITFit.getText(), jTextFieldCostFit.getText(),
-            jTextFieldStrategicImportance.getText(), (ArrayList<Capability>) jListSupportCapabilities.getModel(),
-            (ArrayList<Application>) jListReplace.getModel(), (ArrayList<Application>) jListReplacedBy.getModel(), 
-            (ArrayList<Interface>) jListProvidedInterfaces.getModel(), (ArrayList<Interface>) jListUsedInterface.getModel(), 
-            (ArrayList<Technology>) jListUsedTechnologie.getModel()
-        );
-        
-        application.createObject();
+        createApplication().createObject();
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     /**
@@ -715,6 +714,8 @@ public class FrameApplication extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
+    private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxDecommissioningDate;
+    private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBoxProductionDate;
     private javax.swing.JComboBox jComboBoxDatabaseUse;
     private javax.swing.JComboBox jComboBoxHostBy;
     private javax.swing.JComboBox jComboBoxLifecycle;
@@ -796,5 +797,52 @@ public class FrameApplication extends javax.swing.JFrame {
 
    private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));
+    }
+
+    private void loadValue() {
+        jCalendarComboBoxDecommissioningDate.setDate(application.getDecommissionDate());
+        jCalendarComboBoxProductionDate.setDate(application.getProductionDate());
+        jComboBoxDatabaseUse.setSelectedItem((Database) application.getDatabase());
+        jComboBoxHostBy.setSelectedItem((Server) application.getServer());
+        jComboBoxLifecycle.setSelectedItem((Lifecycle) application.getLifecycle());
+        jComboBoxResponsible.setSelectedItem((Responsible) application.getResponsible());
+        jComboBoxResponsibleDeputy.setSelectedItem((Responsible) application.getResponsibleDeputy());
+        jComboBoxResponsibleDevelopment.setSelectedItem((Responsible) application.getResponsibleDevelopment());
+        jComboBoxResponsibleOperation.setSelectedItem((Responsible) application.getResponsibleOperation());
+        jLabelValID.setText(Integer.toString(application.getId()));
+        jTextAreaDescription.setText(application.getDescription());
+        jTextFieldBBusinessFit.setText(application.getFitBusiness());
+        jTextFieldCategory.setText(application.getCategory());
+        jTextFieldCostFit.setText(application.getFitCost());
+        jTextFieldITFit.setText(application.getFitIT());
+        jTextFieldInvestmentCost.setText(Integer.toString(application.getInvestmentCost()));
+        jTextFieldInvestmentStrategy.setText(application.getInvestmentStrategy());
+        jTextFieldName.setText(application.getName());
+        jTextFieldNumberOfUser.setText(Integer.toString(application.getNumberUser()));
+        jTextFieldOperatingCost.setText(Integer.toString(application.getOperatingCost()));
+        jTextFieldSecurityAvailability.setText(application.getSecurityAvailability());
+        jTextFieldSecurityConfidentiality.setText(application.getSecurityConfidentiality());
+        jTextFieldSecurityIntegrity.setText(application.getSecurityIntegrity());
+        jTextFieldStrategicImportance.setText(application.getStrategyImportance());
+        jTextFieldType.setText(application.getTypeApplication());
+        
+    }
+
+    private Application createApplication() {
+         return new Application(jTextFieldName.getText(), jTextAreaDescription.getText(), 
+            (Date) jCalendarComboBoxProductionDate.getDate() , jTextFieldType.getText(),
+            (Responsible) jComboBoxResponsible.getSelectedItem(),(Responsible) jComboBoxResponsibleDeputy.getSelectedItem(),
+            (Responsible) jComboBoxResponsibleOperation.getSelectedItem(), (Responsible) jComboBoxResponsibleDevelopment.getSelectedItem(),
+            (Lifecycle) jComboBoxLifecycle.getSelectedItem(), (Database) jComboBoxDatabaseUse.getSelectedItem(), (Date) jCalendarComboBoxDecommissioningDate.getDate(), Integer.parseInt(jTextFieldInvestmentCost.getText()), jTextFieldInvestmentStrategy.getText(),
+            Integer.parseInt(jTextFieldOperatingCost.getText()), Integer.parseInt(jTextFieldNumberOfUser.getText()),
+            jTextFieldSecurityAvailability.getText(), jTextFieldSecurityConfidentiality.getText(),
+            jTextFieldSecurityIntegrity.getText(),
+            jTextFieldCategory.getText(), (Server) jComboBoxHostBy.getSelectedItem(),
+            jTextFieldBBusinessFit.getText(), jTextFieldITFit.getText(), jTextFieldCostFit.getText(),
+            jTextFieldStrategicImportance.getText(), (ArrayList<Capability>) jListSupportCapabilities.getModel(),
+            (ArrayList<Application>) jListReplace.getModel(), (ArrayList<Application>) jListReplacedBy.getModel(), 
+            (ArrayList<Interface>) jListProvidedInterfaces.getModel(), (ArrayList<Interface>) jListUsedInterface.getModel(), 
+            (ArrayList<Technology>) jListUsedTechnologie.getModel()
+        );
     }
 }

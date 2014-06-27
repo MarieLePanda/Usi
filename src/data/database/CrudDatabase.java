@@ -4,6 +4,7 @@
  */
 package data.database;
 
+import static data.database.ConnectionSql.closeConnection;
 import java.sql.*;
 import myObject.*;
 
@@ -27,6 +28,8 @@ public class CrudDatabase {
             }
         }catch(SQLException e){
             System.out.println("connectionUser " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
     
@@ -43,6 +46,8 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println("createUser " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
     
@@ -62,6 +67,8 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println("updateUser " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
     
@@ -75,13 +82,51 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println("deleteUser " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
     
     public static void createApplication(Application application){
-        ConnectionSql.getConnection();
-        System.out.print("Creation de l'application en base de données");
-        System.out.println(application);
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "INSERT INTO application (`name`, `description`, `production_date`, `TYPE_APPLICATIONid`, `Responsibleid`, `DATABASEid`, "
+                + "`ResponsibleIdDeputy`, `ResponsibleIdDevelopment`, `ResponsibleiIdOperation`, `Lifecycleid`, `decommissionDate`, `investmentCost`, `operatingCost`, "
+                + "`NumberOfUser`, `SECURITYidAvailability`, `SECURITYidConfidentiality`, `SECURITYidIntegrity`, `Categoryid`, `SERVERid`, `FITidBusiness`, `FITidIT`, "
+                + "`FITidCost`, `STRATEGYidIImportance`) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, application.getName());
+            preparedStatement.setString(2, application.getDescription());
+            preparedStatement.setDate(3, application.getProductionDate());
+            preparedStatement.setString(4, application.getTypeApplication());
+            preparedStatement.setInt(5, application.getResponsible().getId());
+            preparedStatement.setInt(6, application.getDatabase().getId());
+            preparedStatement.setInt(7, application.getResponsibleDeputy().getId());
+            preparedStatement.setInt(8, application.getResponsibleDevelopment().getId());
+            preparedStatement.setInt(9, application.getResponsibleOperation().getId());
+            preparedStatement.setInt(10, application.getLifecycle().getId());
+            preparedStatement.setDate(11, application.getDecommissionDate());
+            preparedStatement.setInt(12, application.getInvestmentCost());
+            preparedStatement.setInt(13, application.getOperatingCost());
+            preparedStatement.setInt(14, application.getNumberUser());
+            preparedStatement.setString(15, application.getSecurityAvailability());
+            preparedStatement.setString(16, application.getSecurityConfidentiality());
+            preparedStatement.setString(17, application.getSecurityIntegrity());
+            preparedStatement.setString(18, application.getCategory());
+            preparedStatement.setInt(19, application.getServer().getId());
+            preparedStatement.setString(20, application.getFitBusiness());
+            preparedStatement.setString(21, application.getFitIT());
+            preparedStatement.setString(22, application.getFitCost());
+            preparedStatement.setString(23, application.getStrategyImportance());
+            
+            preparedStatement.execute();
+            
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }finally{
+            closeConnection(connection);
+        }
         
     }
     
@@ -100,6 +145,8 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println(e.toString() + " " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         
     }
@@ -118,6 +165,8 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println("updateSegment " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
         
     }
@@ -134,6 +183,8 @@ public class CrudDatabase {
             preparedStatement.executeUpdate();
         }catch(SQLException e){
             System.out.println(e.toString() + " " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
     }
     
@@ -148,6 +199,8 @@ public class CrudDatabase {
             preparedStatement.executeUpdate();
         }catch(SQLException e){
             System.out.println(e.toString() + " updateAssoProcessToSegment " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
     }
     
@@ -170,6 +223,8 @@ public class CrudDatabase {
             preparedStatement.execute();
         }catch(SQLException e){
             System.out.println("deleteSegment 2 " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
         
     }
@@ -192,6 +247,8 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println(e.toString() + " createProcess " + e.getMessage());
+        }finally{
+            closeConnection(connection);
         }
         
     }
@@ -214,8 +271,9 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println(" updateProcess " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
-        System.out.println(process);
     }
     
     public static void updateAssoCapabilityToProcess(myObject.Process process, Capability capability){
@@ -230,6 +288,8 @@ public class CrudDatabase {
             preparedStatement.executeUpdate();
         }catch(SQLException e){
             System.out.println( "updateAssoCapabilityToProcess " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
   
@@ -244,6 +304,8 @@ public class CrudDatabase {
             preparedStatement.executeUpdate();
         }catch(SQLException e){
             System.out.println(" updateAssoCapabilityToProcess " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
     
@@ -266,6 +328,8 @@ public class CrudDatabase {
             preparedStatement.execute();
         }catch(SQLException e){
             System.out.println("deleteProcess 2 " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
         
     }   
@@ -287,6 +351,8 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println("createCapability " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
         
     }
@@ -309,10 +375,12 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println("updateCapability " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
     
-         public static void deleteCapability(Capability capability){
+    public static void deleteCapability(Capability capability){
         Connection connection = ConnectionSql.getConnection();
         String sql = "DELETE FROM capability_application WHERE CAPABILITYid = ?";
         try{
@@ -321,8 +389,10 @@ public class CrudDatabase {
             preparedStatement.executeUpdate();
         }catch(SQLException e){
             System.out.println("deleteCapability 1 " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
-   
+        connection = ConnectionSql.getConnection();
         sql = "DELETE FROM capability WHERE id = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -330,10 +400,12 @@ public class CrudDatabase {
             preparedStatement.execute();
         }catch(SQLException e){
             System.out.println("deleteCapability 2 " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
         
     }
-             public static void createResponsible(Responsible responsible){
+    public static void createResponsible(Responsible responsible){
         Connection connection = ConnectionSql.getConnection();
         String sql = "INSERT INTO responsible (id, nom)"
                 + "VALUE (NULL,?)";
@@ -345,6 +417,8 @@ public class CrudDatabase {
             
         }catch(SQLException e){
             System.out.println("createResponsible " + e.toString());
+        }finally{
+            closeConnection(connection);
         }
     }
 }
