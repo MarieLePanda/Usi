@@ -20,6 +20,7 @@ public class FrameAdmin extends javax.swing.JFrame {
     public FrameAdmin() {
         
         initComponents();
+        this.setTitle("Administration utilisateur");
         setIcon();
         this.setLocationRelativeTo(null);
         pack();

@@ -28,10 +28,14 @@ public class FrameProcess extends javax.swing.JFrame {
     
     public FrameProcess(String type) {
         this.type = type;
-        if(type.equals("Quartier"))
+        if(type.equals("Quartier")){
             process = new myObject.Process();
-        else if(type.equals("Ilot"))
+            this.setTitle("Nouveau quartier");
+        }
+        else if(type.equals("Ilot")){
             capability = new Capability();
+            this.setTitle("Nouveau ilot");
+        }
         initComponents();
         setIcon();
         this.setLocationRelativeTo(null);
@@ -45,6 +49,7 @@ public class FrameProcess extends javax.swing.JFrame {
         type = "Quartier";
         this.process = process;
         initComponents();
+        this.setTitle("Modifier quartier");
         loadValue();
     }
         
@@ -52,6 +57,7 @@ public class FrameProcess extends javax.swing.JFrame {
         type = "Ilot";
         this.capability = capability;
         initComponents();
+        this.setTitle("Modifier ilot");
         loadValue();
     }
 

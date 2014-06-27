@@ -1,7 +1,8 @@
 package launcherUsi;
 import IHM.*;
-import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
-import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
+import IHM.lookandfeel.LookAndFeelManage;
+//import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
+//import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
 import java.awt.Toolkit;
 import java.io.File;
 import java.lang.reflect.Method;
@@ -27,23 +28,7 @@ public class Launcher {
                 //userConnected.setLogin("panda");
                 //userConnected.setPassword("admin");
                 if(userConnected == null){
-                    
-                    try
-                    {
-                        
-                        //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
-                        //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueStellLookAndFeel");
-                        //UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
-                        //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaSilverMoonLookAndFeel");
-                        //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel");
-                        //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel");
-                        //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlackMoonLookAndFeel");
-                        UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel");
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println(e.toString());
-                    }
+                    LookAndFeelManage.loadDefautLook();
                     
                     WindowConnection win = new WindowConnection();
                     win.setVisible(true);

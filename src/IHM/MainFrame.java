@@ -5,6 +5,7 @@ package IHM;
 
 import IHM.frameAdmin.FrameAdmin;
 import IHM.frameObject.*;
+import IHM.lookandfeel.LookAndFeelManage;
 import data.IHM.DataIHM;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -34,6 +35,7 @@ public class MainFrame extends javax.swing.JFrame{
        
         ModuleLoader.loadPlugin();
         initComponents();
+        this.setTitle("Gestion MetaModel");
         setIcon();
         this.setLocationRelativeTo(null);
            
@@ -56,6 +58,20 @@ public class MainFrame extends javax.swing.JFrame{
         }else
             jMenuPlugin.add(new JMenuItem("<Aucun pluging>"));
         
+        for(final String lf : LookAndFeelManage.nameLook)
+            {
+                ActionListener ls = new ActionListener() {
+
+                   public void actionPerformed(ActionEvent e) {
+                       LookAndFeelManage.changeLook(lf);
+                       JOptionPane.showMessageDialog(null,"Thème changé");
+                   }
+               };
+                JMenuItem jm = new JMenuItem(lf);
+                jm.addActionListener(ls);
+               jMenuLook.add(jm);
+               
+            }
     }
 
     /**
@@ -78,6 +94,7 @@ public class MainFrame extends javax.swing.JFrame{
         jMenuDelete = new javax.swing.JMenu();
         jMenuAdministration = new javax.swing.JMenu();
         jMenuPlugin = new javax.swing.JMenu();
+        jMenuLook = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -159,6 +176,9 @@ public class MainFrame extends javax.swing.JFrame{
         });
         jMenuBar1.add(jMenuPlugin);
 
+        jMenuLook.setText("Look");
+        jMenuBar1.add(jMenuLook);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,7 +228,9 @@ public class MainFrame extends javax.swing.JFrame{
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
+        
         jTreeMetaModel.setModel(new javax.swing.JTree(DataIHM.initTree()).getModel());
+        SwingUtilities.updateComponentTreeUI(this);
     }//GEN-LAST:event_formWindowActivated
 
     private void jMenuCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCreateMouseClicked
@@ -221,53 +243,62 @@ public class MainFrame extends javax.swing.JFrame{
     private void jMenuUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuUpdateMouseClicked
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
-        
-        if(node != null){
-            MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
-            if(__aucun.getName().equals("__Aucun"))
-                JOptionPane.showMessageDialog(null,"Seul un arabe peut le faire");
-            else{
-                if(node.getUserObject() instanceof Segment){
-                    FrameSegment win = new FrameSegment((Segment) node.getUserObject());
-                    win.setVisible(true);
-                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        try{
+            if(node != null){
+                MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
+                if(__aucun.getName().equals("__Aucun"))
+                    JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
+                else{
+                    if(node.getUserObject() instanceof Segment){
+                        FrameSegment win = new FrameSegment((Segment) node.getUserObject());
+                        win.setVisible(true);
+                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
+                    else if(node.getUserObject() instanceof myObject.Process){
+                        FrameProcess win = new FrameProcess((myObject.Process) node.getUserObject());
+                        win.setVisible(true);
+                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
+                    else if(node.getUserObject() instanceof Capability){
+                        FrameProcess win = new FrameProcess((Capability) node.getUserObject());
+                        win.setVisible(true);
+                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
                 }
-                else if(node.getUserObject() instanceof myObject.Process){
-                    FrameProcess win = new FrameProcess((myObject.Process) node.getUserObject());
-                    win.setVisible(true);
-                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                }
-                else if(node.getUserObject() instanceof Capability){
-                    FrameProcess win = new FrameProcess((Capability) node.getUserObject());
-                    win.setVisible(true);
-                    win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                }
+            } else{
+                JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
             }
-        } else{
-            JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
+        }catch(ClassCastException e){
+            JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
         }
+        
     }//GEN-LAST:event_jMenuUpdateMouseClicked
 
     private void jMenuDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuDeleteMouseClicked
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
-        if(node != null){
-            MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
-            if(__aucun.getName().equals("__Aucun"))
-                JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
-            else{
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'objet " + node.toString());
-                {
-                    MetaModelObject objectDelete = (MetaModelObject) node.getUserObject();
-                    if(dialogResult == JOptionPane.YES_OPTION){
-                        objectDelete.deleteObject();
-                        JOptionPane.showMessageDialog(null,"Objet supprimé");
+        try{
+            if(node != null){
+                MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
+                if(__aucun.getName().equals("__Aucun"))
+                    JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
+                else{
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'objet " + node.toString());
+                    {
+                        MetaModelObject objectDelete = (MetaModelObject) node.getUserObject();
+                        if(dialogResult == JOptionPane.YES_OPTION){
+                            objectDelete.deleteObject();
+                            JOptionPane.showMessageDialog(null,"Objet supprimé");
+                        }
                     }
                 }
+            }else{
+                JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à supprimer");
             }
-        }else{
-            JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à supprimer");
-        }  
+        }catch(ClassCastException e){
+            JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
+        }
+        
     }//GEN-LAST:event_jMenuDeleteMouseClicked
 
     private void jMenuAdministrationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAdministrationMouseClicked
@@ -320,6 +351,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCreate;
     private javax.swing.JMenu jMenuDelete;
+    private javax.swing.JMenu jMenuLook;
     private javax.swing.JMenu jMenuObject;
     private javax.swing.JMenu jMenuPlugin;
     private javax.swing.JMenu jMenuUpdate;

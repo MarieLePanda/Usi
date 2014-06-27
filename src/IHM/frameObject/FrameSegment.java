@@ -20,6 +20,7 @@ public class FrameSegment extends javax.swing.JFrame {
      */
     public FrameSegment() {
         initComponents();
+        this.setTitle("Nouvelle zone");
         this.setLocationRelativeTo(null);
     }
     
@@ -31,6 +32,7 @@ public class FrameSegment extends javax.swing.JFrame {
         this.segment = segment;
         initComponents();
         setIcon();
+        this.setTitle("Modifier zone");
         loadValue();
         this.setLocationRelativeTo(null);
         
