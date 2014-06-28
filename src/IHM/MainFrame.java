@@ -97,6 +97,7 @@ public class MainFrame extends javax.swing.JFrame{
                 formWindowGainedFocus(evt);
             }
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -250,12 +251,12 @@ public class MainFrame extends javax.swing.JFrame{
                         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     }
                     else if(node.getUserObject() instanceof myObject.Process){
-                        FrameProcess win = new FrameProcess((myObject.Process) node.getUserObject());
+                        FrameProcessOrCpability win = new FrameProcessOrCpability((myObject.Process) node.getUserObject());
                         win.setVisible(true);
                         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     }
                     else if(node.getUserObject() instanceof Capability){
-                        FrameProcess win = new FrameProcess((Capability) node.getUserObject());
+                        FrameProcessOrCpability win = new FrameProcessOrCpability((Capability) node.getUserObject());
                         win.setVisible(true);
                         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     }
@@ -298,7 +299,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jMenuAdministrationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAdministrationMouseClicked
         // TODO add your handling code here:
-        FrameAdmin win = new FrameAdmin();
+        FrameAdmin win = new FrameAdmin(this);
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuAdministrationMouseClicked
@@ -306,6 +307,10 @@ public class MainFrame extends javax.swing.JFrame{
     private void jMenuPluginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuPluginMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuPluginMouseClicked
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowLostFocus
 
     /**
      * @param args the command line arguments

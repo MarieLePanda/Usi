@@ -4,6 +4,7 @@
 package IHM.frameAdmin;
 
 import java.awt.Toolkit;
+import javax.swing.JFrame;
 import myObject.User;
 import javax.swing.JOptionPane;
 
@@ -13,15 +14,24 @@ import javax.swing.JOptionPane;
  */
 public class FrameCreateUser extends javax.swing.JFrame {
 
+    private JFrame motherFrame;
     /**
      * Creates new form FrameCreateUser
      */
-    public FrameCreateUser() {
+    public FrameCreateUser(JFrame motherFrame) {
+        this.motherFrame = motherFrame;
+        motherFrame.requestFocus();
+        motherFrame.setEnabled(false);
+        this.requestFocus();
         initComponents();
         setIcon();
         this.setTitle("Créer utilisateur");
         this.setLocationRelativeTo(null);
-        pack();
+        this.setResizable(false);
+    }
+
+    private FrameCreateUser() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -41,6 +51,11 @@ public class FrameCreateUser extends javax.swing.JFrame {
         jCheckBoxAdmin = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jButtonCreate.setText("Créer");
         jButtonCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +122,11 @@ public class FrameCreateUser extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButtonCreateActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        motherFrame.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

@@ -237,7 +237,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelSupportSegment" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxSupportSegment" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelSoutient" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jButtonAddCapability" min="-2" max="-2" attributes="0"/>
@@ -259,7 +259,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jComboBoxSupportSegment" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelSoutient" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -292,7 +292,7 @@
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(type.equals(&quot;Quartier&quot;)){"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="jLabelSoutient">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ilots soutient"/>
               </Properties>
@@ -311,7 +311,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}else if(type.equals(&quot;Ilot&quot;)){&#xa;            capability.setListApplication(data.IHM.DataIHM.getApplication(capability.getId()));&#xa;            jListCapability.setModel(new javax.swing.DefaultListModel() {&#xa;                Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);&#xa;                public int getSize() { return tabApplication.length; }&#xa;                public Object getElementAt(int i) { return tabApplication[i]; }&#xa;            });&#xa;}"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}else if(type.equals(&quot;Ilot&quot;)){&#xa;            capability.setListApplication(data.IHM.DataIHM.getListApplication(capability.getId()));&#xa;            jListCapability.setModel(new javax.swing.DefaultListModel() {&#xa;                Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);&#xa;                public int getSize() { return tabApplication.length; }&#xa;                public Object getElementAt(int i) { return tabApplication[i]; }&#xa;            });&#xa;}"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(type.equals(&quot;Quartier&quot;)){"/>
                   </AuxValues>
                 </Component>

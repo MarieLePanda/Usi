@@ -24,6 +24,7 @@ public class FrameApplication extends javax.swing.JFrame {
         initComponents();
         setIcon();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
     
     public FrameApplication(Application appliation) {
@@ -32,6 +33,7 @@ public class FrameApplication extends javax.swing.JFrame {
         setIcon();
         loadValue();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -346,7 +348,7 @@ public class FrameApplication extends javax.swing.JFrame {
 
         jLabelHostBy.setText("Serveur d'hebergement");
 
-        jComboBoxHostBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxHostBy.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.getAllServer()));
 
         jLabelDatabaseUse.setText("Base de données liée");
 

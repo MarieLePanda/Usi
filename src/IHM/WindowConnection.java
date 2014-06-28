@@ -26,6 +26,7 @@ public class WindowConnection extends javax.swing.JFrame {
         setIcon();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

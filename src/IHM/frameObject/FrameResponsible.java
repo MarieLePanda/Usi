@@ -22,6 +22,7 @@ public class FrameResponsible extends javax.swing.JFrame {
         initComponents();
         setIcon();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

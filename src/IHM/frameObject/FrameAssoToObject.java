@@ -11,7 +11,7 @@ import myObject.*;
  *
  * @author Mary
  */
-public class FrameAssoToSegment extends javax.swing.JFrame {
+public class FrameAssoToObject extends javax.swing.JFrame {
 
     private MetaModelObject object;
     
@@ -19,8 +19,9 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
     /**
      * Creates new form FrameAssoToSegment
      */
-    public FrameAssoToSegment() {
+    public FrameAssoToObject() {
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
        
     }
     
@@ -28,7 +29,7 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
      * Creates new form FrameAssoToSegment
      * @param object object selected to associate
      */
-    public FrameAssoToSegment(MetaModelObject object) {
+    public FrameAssoToObject(MetaModelObject object) {
         this.object = object;
         initComponents();
         setIcon();
@@ -38,6 +39,7 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
             initComboBoxListToProcess();
         }
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -118,20 +120,20 @@ public class FrameAssoToSegment extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameAssoToSegment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameAssoToObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameAssoToSegment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameAssoToObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameAssoToSegment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameAssoToObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameAssoToSegment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameAssoToObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameAssoToSegment().setVisible(true);
+                new FrameAssoToObject().setVisible(true);
             }
         });
     }

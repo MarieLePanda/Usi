@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class ConnectionSql {
     private static Connection connexion;
-    private static String[] conf = new String[4];
+    private static final String[] conf = new String[4];
     
     /**
      * Returns a connection in admin mode database
@@ -30,7 +30,6 @@ public class ConnectionSql {
             conf[1] = "";
             conf[2] = "";
             conf[3] = "";
-            
            	try {
                     FileReader fichierLecture = new FileReader("C:\\Users\\MKSJ\\Documents\\GitHub\\Usi\\src\\conf\\conf.txt");
                     //C:\Users\MKSJ\Documents\GitHub\Usi\src\conf\conf.txt
@@ -60,21 +59,13 @@ public class ConnectionSql {
             } catch ( ClassNotFoundException e ) {
                     System.out.println(e.getMessage());
             }
-
             try {
-                System.out.println("DEBUG"+conf[0]);
-                System.out.println("DEBUG"+conf[1]);
-                System.out.println("DEBUG"+conf[2]);
-                System.out.println("DEBUG"+conf[3]);
                 connexion = DriverManager.getConnection( conf[0] + "/" + conf[1], conf[2], conf[3] );
-
-
-            } catch ( SQLException e ) {
+            }catch ( SQLException e ) {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(null,"getConnection " + e.toString());
             } 
         //}
-
         return connexion;
     }
     

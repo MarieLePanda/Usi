@@ -6,6 +6,7 @@ package IHM.frameAdmin;
 
 import IHM.MainFrame;
 import java.awt.Toolkit;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import launcherUsi.Launcher;
@@ -24,6 +25,7 @@ public class ChangePwd extends javax.swing.JFrame {
         initComponents();
         setIcon();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -40,6 +42,11 @@ public class ChangePwd extends javax.swing.JFrame {
         jButtonValidate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Entrez un nouveau mot de passe :");
 
@@ -92,6 +99,10 @@ public class ChangePwd extends javax.swing.JFrame {
         MainFrame wind = new MainFrame();
         wind.setVisible(true);
     }//GEN-LAST:event_jButtonValidateActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("usi.png")));

@@ -173,7 +173,7 @@ public class Capability extends MetaModelObject{
 
     @Override
     public void addObjectToMetaModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        listObject.add(this);
     }
 
     @Override

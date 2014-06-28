@@ -22,6 +22,9 @@ public class FrameSegment extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Nouvelle zone");
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        jButtonAddProcess.setEnabled(false);
+        jButtonRemoveProcess.setEnabled(false);
     }
     
     /**
@@ -35,7 +38,7 @@ public class FrameSegment extends javax.swing.JFrame {
         this.setTitle("Modifier zone");
         loadValue();
         this.setLocationRelativeTo(null);
-        
+        this.setResizable(false);        
     }
 
     /**
@@ -265,6 +268,7 @@ public class FrameSegment extends javax.swing.JFrame {
         getContentPane().add(jButtonCancel, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
   private void loadValue(){
@@ -322,7 +326,7 @@ public class FrameSegment extends javax.swing.JFrame {
     private void jButtonAddProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProcessActionPerformed
         // TODO add your handling code here:
         if(segment != null){
-            FrameAssoToSegment win = new FrameAssoToSegment(segment);
+            FrameAssoToObject win = new FrameAssoToObject(segment);
             win.setVisible(true);
             win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         }else{

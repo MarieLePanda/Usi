@@ -14,17 +14,23 @@ import javax.swing.*;
  */
 public class FrameAdmin extends javax.swing.JFrame {
 
+    private JFrame motherFrame;
     /**
      * Creates new form FrameAdmin
      */
-    public FrameAdmin() {
-        
+    public FrameAdmin(JFrame motherFrame) {
+        this.motherFrame = motherFrame;
+        motherFrame.setEnabled(false);
         initComponents();
         this.setTitle("Administration utilisateur");
         setIcon();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        pack();
+        this.setResizable(false);
+    }
+
+    private FrameAdmin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -47,9 +53,19 @@ public class FrameAdmin extends javax.swing.JFrame {
         jButtonCreate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -216,7 +232,7 @@ public class FrameAdmin extends javax.swing.JFrame {
      */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         // TODO add your handling code here:
-        FrameCreateUser win = new FrameCreateUser();
+        FrameCreateUser win = new FrameCreateUser(this);
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButtonCreateActionPerformed
@@ -241,6 +257,8 @@ public class FrameAdmin extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
+
+        this.requestFocus();
         jComboBoxListUser.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.loadUser()));
         if(jComboBoxListUser.getSelectedItem() != null){
             User currentUser = (User) jComboBoxListUser.getSelectedItem();
@@ -251,6 +269,16 @@ public class FrameAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun utilisateur sélectionné");
         }        
     }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        motherFrame.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

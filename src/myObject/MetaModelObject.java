@@ -11,8 +11,8 @@ import java.util.ArrayList;
  * @author lug13995
  */
 public abstract class MetaModelObject {
-   // protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
-    protected static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie","Responsible"};
+    protected static ArrayList<MetaModelObject> listObject = new ArrayList<MetaModelObject>();
+    protected final static String[] listOfTypeObject = {"Zone", "Quartier", "Ilot", "Application", "Interface", "Serveur", "Base de données", "Technologie","Responsible"};
     protected String name;
     protected int id;
     /*public ArrayList<MetaModelObject> getListObject() {
@@ -67,19 +67,21 @@ public abstract class MetaModelObject {
     public abstract void dissociateObject(MetaModelObject secondObject, ArrayList<MetaModelObject> listTarget);
     
     public abstract int sizeObject();
-    
-    public boolean equals(Object obj){
-        if (this == obj)
-            return true;
-        if (obj == null)
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
+        }
+        if(this == obj){
+            return true;
+        }
         if (getClass() != obj.getClass()) {
             return false;
         }
         final MetaModelObject other = (MetaModelObject) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
+    
+
 }

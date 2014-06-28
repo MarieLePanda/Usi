@@ -23,6 +23,7 @@ public class FrameNewObject extends javax.swing.JFrame {
         initComponents();
         setIcon();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -91,7 +92,7 @@ public class FrameNewObject extends javax.swing.JFrame {
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }
             else if(jComboBoxTypeObject.getSelectedItem().equals("Quartier") ||jComboBoxTypeObject.getSelectedItem().equals("Ilot")){
-                FrameProcess win = new FrameProcess((String)jComboBoxTypeObject.getSelectedItem());
+                FrameProcessOrCpability win = new FrameProcessOrCpability((String)jComboBoxTypeObject.getSelectedItem());
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }else if(jComboBoxTypeObject.getSelectedItem().equals("Application")){

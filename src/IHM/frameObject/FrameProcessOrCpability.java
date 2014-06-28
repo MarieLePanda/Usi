@@ -13,7 +13,7 @@ import myObject.*;
  *
  * @author Mary
  */
-public class FrameProcess extends javax.swing.JFrame {
+public class FrameProcessOrCpability extends javax.swing.JFrame {
 
     private myObject.Process process;
     private Capability capability;
@@ -22,11 +22,12 @@ public class FrameProcess extends javax.swing.JFrame {
     /**
      * Creates new form FrameProcess when user create a new process
      */
-    public FrameProcess(){
+    public FrameProcessOrCpability(){
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
     
-    public FrameProcess(String type) {
+    public FrameProcessOrCpability(String type) {
         this.type = type;
         if(type.equals("Quartier")){
             process = new myObject.Process();
@@ -34,31 +35,42 @@ public class FrameProcess extends javax.swing.JFrame {
         }
         else if(type.equals("Ilot")){
             capability = new Capability();
-            this.setTitle("Nouveau ilot");
+            this.setTitle("Nouveau ilot");   
         }
         initComponents();
+        if(type.equals("Ilot")){
+            jLabelSupportSegment.setText("Support du quartier");
+            jLabelSoutient.setText("Application soutient");
+            jButtonAddCapability.setText("Ajouter une apllication");
+            jButtonRemoveCapability.setText("Supprimer une application");
+        }
         setIcon();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        jButtonAddCapability.setEnabled(false);
+        jButtonRemoveCapability.setEnabled(false);
     }
     
     /**
      * Creates new form FrameProcess when user update a existing process
      * @param process process to update
      */
-    public FrameProcess(myObject.Process process){
+    public FrameProcessOrCpability(myObject.Process process){
         type = "Quartier";
         this.process = process;
         initComponents();
         this.setTitle("Modifier quartier");
         loadValue();
+        this.setResizable(false);
     }
         
-    public FrameProcess(Capability capability){
+    public FrameProcessOrCpability(Capability capability){
         type = "Ilot";
         this.capability = capability;
         initComponents();
         this.setTitle("Modifier ilot");
         loadValue();
+        this.setResizable(false);
     }
 
     /**
@@ -88,7 +100,7 @@ public class FrameProcess extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabelSupportSegment = new javax.swing.JLabel();
         jComboBoxSupportSegment = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelSoutient = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListCapability = new javax.swing.JList();
         jButtonAddCapability = new javax.swing.JButton();
@@ -208,7 +220,7 @@ public class FrameProcess extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Ilots soutient");
+        jLabelSoutient.setText("Ilots soutient");
 
         if(type.equals("Quartier")){
             jListCapability.setModel(new javax.swing.DefaultListModel() {
@@ -217,7 +229,7 @@ public class FrameProcess extends javax.swing.JFrame {
                 public Object getElementAt(int i) { return tabCapability[i]; }
             });
         }else if(type.equals("Ilot")){
-            capability.setListApplication(data.IHM.DataIHM.getApplication(capability.getId()));
+            capability.setListApplication(data.IHM.DataIHM.getListApplication(capability.getId()));
             jListCapability.setModel(new javax.swing.DefaultListModel() {
                 Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);
                 public int getSize() { return tabApplication.length; }
@@ -249,7 +261,7 @@ public class FrameProcess extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSupportSegment)
                     .addComponent(jComboBoxSupportSegment, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelSoutient)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addComponent(jButtonAddCapability)
@@ -266,7 +278,7 @@ public class FrameProcess extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBoxSupportSegment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(jLabelSoutient)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -421,7 +433,7 @@ public class FrameProcess extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(type.equals("Quartier")){
             if(process.getName() != null){
-                FrameAssoToSegment win = new FrameAssoToSegment(process);
+                FrameAssoToObject win = new FrameAssoToObject(process);
                 win.setVisible(true);
                 win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             }else{
@@ -446,7 +458,7 @@ public class FrameProcess extends javax.swing.JFrame {
                 public Object getElementAt(int i) { return tabCapability[i]; }
             });
         }else if(type.equals("Ilot")){
-            capability.setListApplication(data.IHM.DataIHM.getApplication(capability.getId()));
+            capability.setListApplication(data.IHM.DataIHM.getListApplication(capability.getId()));
             jListCapability.setModel(new javax.swing.DefaultListModel() {
                 Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);
                 public int getSize() { return tabApplication.length; }
@@ -512,7 +524,9 @@ public class FrameProcess extends javax.swing.JFrame {
             jCalendarComboBoxValidFrom.setDate(capability.getValidFrom());
             jCalendarComboBoxValidUnitl.setDate(capability.getValideUntil());      
             jLabelSupportSegment.setText("Support du quartier");
-            jLabel3.setText("Application soutient");
+            jLabelSoutient.setText("Application soutient");
+            jButtonAddCapability.setText("Ajouter une apllication");
+            jButtonRemoveCapability.setText("Supprimer une application");
         }
         
     }
@@ -533,20 +547,20 @@ public class FrameProcess extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameProcess.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameProcessOrCpability.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameProcess.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameProcessOrCpability.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameProcess.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameProcessOrCpability.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameProcess.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameProcessOrCpability.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameProcess().setVisible(true);
+                new FrameProcessOrCpability().setVisible(true);
             }
         });
     }
@@ -562,12 +576,12 @@ public class FrameProcess extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxResponsibleDeputy;
     private javax.swing.JComboBox jComboBoxSupportSegment;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelResponsible;
+    private javax.swing.JLabel jLabelSoutient;
     private javax.swing.JLabel jLabelSupportSegment;
     private javax.swing.JLabel jLabelValId;
     private javax.swing.JLabel jLabelValidFrom;
