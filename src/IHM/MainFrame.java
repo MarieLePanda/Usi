@@ -90,7 +90,6 @@ public class MainFrame extends javax.swing.JFrame{
         jMenuAdministration = new javax.swing.JMenu();
         jMenuPlugin = new javax.swing.JMenu();
         jMenuLook = new javax.swing.JMenu();
-        jMenuHelp = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -176,19 +175,6 @@ public class MainFrame extends javax.swing.JFrame{
         jMenuLook.setText("Look");
         jMenuBar1.add(jMenuLook);
 
-        jMenuHelp.setText("Help");
-        jMenuHelp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuHelpMouseClicked(evt);
-            }
-        });
-        jMenuHelp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuHelpActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenuHelp);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,7 +187,7 @@ public class MainFrame extends javax.swing.JFrame{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
 
         pack();
@@ -326,18 +312,6 @@ public class MainFrame extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
-    private void jMenuHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHelpActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jMenuHelpActionPerformed
-
-    private void jMenuHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuHelpMouseClicked
-        // TODO add your handling code here:
-        Help win = new Help();
-        win.setVisible(true);
-        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jMenuHelpMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -377,7 +351,6 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCreate;
     private javax.swing.JMenu jMenuDelete;
-    private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuLook;
     private javax.swing.JMenu jMenuObject;
     private javax.swing.JMenu jMenuPlugin;
