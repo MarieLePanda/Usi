@@ -42,6 +42,24 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuAdministrationMouseClicked"/>
           </Events>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="jMenuCompte">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gerer Compte"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuCompteMouseClicked"/>
+              </Events>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="jMenuResponsable">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gerer Responsable"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuResponsableMouseClicked"/>
+              </Events>
+            </Menu>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuPlugin">
           <Properties>
@@ -55,6 +73,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Look"/>
           </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuHelp">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="?"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuHelpMouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>

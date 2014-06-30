@@ -421,4 +421,35 @@ public class CrudDatabase {
             closeConnection(connection);
         }
     }
+    
+        public static void deleteResponsible(Responsible responsible){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "DELETE FROM Responsible WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, responsible.getId());
+            preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            System.out.println("deleteResponsible " + e.toString());
+        }finally{
+            closeConnection(connection);
+        }
+        
+        
+    }
+            public static void updateResponsible(Responsible responsible){
+        Connection connection = ConnectionSql.getConnection();
+        String sql = "update responsible SET nom = ? WHERE id = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, responsible.getName());
+            preparedStatement.setInt(2, responsible.getId());
+            preparedStatement.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println("updateResponsible " + e.toString());
+        }finally{
+            closeConnection(connection);
+        }
+    }
 }

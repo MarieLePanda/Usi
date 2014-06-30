@@ -35,7 +35,8 @@ public class MainFrame extends javax.swing.JFrame{
         this.setLocationRelativeTo(null);
            
         if(Launcher.userConnected.getAdministrator() == false)
-            jMenuAdministration.setVisible(false);
+            jMenuCompte.setVisible(false);
+//jMenuAdministration.setVisible(false);
         if(ModuleLoader.listModule.size() > 0){
             for(final IModule m : ModuleLoader.listModule)
             {
@@ -88,8 +89,11 @@ public class MainFrame extends javax.swing.JFrame{
         jMenuUpdate = new javax.swing.JMenu();
         jMenuDelete = new javax.swing.JMenu();
         jMenuAdministration = new javax.swing.JMenu();
+        jMenuCompte = new javax.swing.JMenu();
+        jMenuResponsable = new javax.swing.JMenu();
         jMenuPlugin = new javax.swing.JMenu();
         jMenuLook = new javax.swing.JMenu();
+        jMenuHelp = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -162,6 +166,23 @@ public class MainFrame extends javax.swing.JFrame{
                 jMenuAdministrationMouseClicked(evt);
             }
         });
+
+        jMenuCompte.setText("Gerer Compte");
+        jMenuCompte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuCompteMouseClicked(evt);
+            }
+        });
+        jMenuAdministration.add(jMenuCompte);
+
+        jMenuResponsable.setText("Gerer Responsable");
+        jMenuResponsable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuResponsableMouseClicked(evt);
+            }
+        });
+        jMenuAdministration.add(jMenuResponsable);
+
         jMenuBar1.add(jMenuAdministration);
 
         jMenuPlugin.setText("Plugin");
@@ -174,6 +195,14 @@ public class MainFrame extends javax.swing.JFrame{
 
         jMenuLook.setText("Look");
         jMenuBar1.add(jMenuLook);
+
+        jMenuHelp.setText("?");
+        jMenuHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuHelpMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuHelp);
 
         setJMenuBar(jMenuBar1);
 
@@ -299,9 +328,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jMenuAdministrationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAdministrationMouseClicked
         // TODO add your handling code here:
-        FrameAdmin win = new FrameAdmin(this);
-        win.setVisible(true);
-        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+       
     }//GEN-LAST:event_jMenuAdministrationMouseClicked
 
     private void jMenuPluginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuPluginMouseClicked
@@ -311,6 +338,26 @@ public class MainFrame extends javax.swing.JFrame{
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
+
+    private void jMenuHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuHelpMouseClicked
+         Help win = new Help();
+        win.setVisible(true);
+        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuHelpMouseClicked
+
+    private void jMenuCompteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCompteMouseClicked
+        // TODO add your handling code here
+         FrameAdmin win = new FrameAdmin(this);
+        win.setVisible(true);
+        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuCompteMouseClicked
+
+    private void jMenuResponsableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuResponsableMouseClicked
+        // TODO add your handling code here:
+        FrameSetResponsable win = new FrameSetResponsable(this);
+        win.setVisible(true);
+        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuResponsableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -349,11 +396,14 @@ public class MainFrame extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenuAdministration;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCompte;
     private javax.swing.JMenu jMenuCreate;
     private javax.swing.JMenu jMenuDelete;
+    private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuLook;
     private javax.swing.JMenu jMenuObject;
     private javax.swing.JMenu jMenuPlugin;
+    private javax.swing.JMenu jMenuResponsable;
     private javax.swing.JMenu jMenuUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
