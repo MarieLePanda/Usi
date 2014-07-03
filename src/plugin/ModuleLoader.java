@@ -22,59 +22,74 @@ import javax.swing.ListModel;
  * @author lug13995
  */
 public class ModuleLoader { 
-    public static ArrayList<IModule> listModule = new ArrayList<IModule>();
-    public static void loadPlugin(){
-        try{
-            File file = new File(".\\.");
-            //C:\Users\lug13995\Documents\GitHub\UsiImportModule\dist
-            //E:\Programme\git\WorkspaceJava\UsiImportModule\dist
-            //.\.
-            Class tmpClass = null;
+    public static ArrayList<IModule> listModule=new ArrayList<IModule>();
+    public static ArrayList<String> names = new ArrayList<String>();
+    
+    public static void loadPlugin()
+    {
+        
+        try
+        {
+            URLClassLoader search;
+            // répertoire de plugins
+            File fichier= new File("E:\\Programme\\git\\WorkspaceJava\\Usi\\dist\\plugin");
+            // liste des plugins
+            File [] listeFichier = fichier.listFiles();
+            //classe loarder
+            ArrayList<ClassLoader> cl =new ArrayList<ClassLoader>();
+            // Liste denumeration
+            Enumeration enums;
+            String name=null;
+            Class nameClass=null;
             ArrayList<Class> tabClass = new ArrayList<Class>();
-            File[] files = file.listFiles();
-            String tmp = null;
-            Enumeration enumeration;
-            ClassLoader loader = null;
-            
-            for (File f : files){
-                try{
-                    URL urlList[] = {f.toURL()};
-                    System.out.println(f.toURL());
-                    loader = new URLClassLoader(urlList); 
-                    JarFile jar = new JarFile(f.getAbsolutePath());
-                    enumeration = jar.entries();
-                    while(enumeration.hasMoreElements()){
-                        tmp = enumeration.nextElement().toString();
-                        if(tmp.length() > 6 && tmp.substring(tmp.length()-6).compareTo(".class") == 0) {
-                            tmp = tmp.substring(0,tmp.length()-6);
-                            tmp = tmp.replaceAll("/",".");
-                            tmpClass = Class.forName(tmp ,true,loader);  
-                            for(int i = 0 ; i < tmpClass.getInterfaces().length; i ++ ){
-                                System.out.println(tmpClass.getInterfaces()[i].toString());
-                                boolean b = tmpClass.getInterfaces()[i].toString().substring(tmpClass.getInterfaces()[i].toString().length()-7).equals("IModule");
+            //parcours de la lsite des pulgins
+            int place=0;
+            for(File f : listeFichier)
+            {
+                try
+                {
+                    URL [] listeUrl = {f.toURL()};
+                    cl.add( new URLClassLoader (listeUrl));
+                    JarFile ficjar = new JarFile(f.getAbsolutePath());
+                    enums=ficjar.entries();
+                    // parcours de l'énumération
+                    
+                    while(enums.hasMoreElements())
+                    {
+                        name = enums.nextElement().toString();
+                        if(name.length() > 6 && name.substring(name.length()-6).compareTo(".class") == 0)
+                        {
+                            name = name.substring(0,name.length()-6);
+                            name = name.replaceAll("/",".");
+                            nameClass = Class.forName(name ,true,cl.get(place));
+                            for(int i = 0 ; i < nameClass.getInterfaces().length; i ++ )
+                            {
+                                System.out.println(nameClass.getInterfaces()[i].toString());
+                                boolean b = nameClass.getInterfaces()[i].toString().substring(nameClass.getInterfaces()[i].toString().length()-7).equals("IModule");
                                 if(b) {
-                                    tabClass.add(tmpClass);       
+                                    tabClass.add(nameClass);
                                 }
                             }
-			}
+                        }
                     }
-
-                 }
-                catch(Exception e){
-                   System.out.println("loadPlugin 1" + e.toString());
+                }catch(Exception e){
+                    e.printStackTrace();
+                    System.out.println();
                 }
+                place++;
             }
-            for(Class c : tabClass){
-                System.out.println(c.getName());
-                 IModule o = (IModule) Class.forName(c.getName(),true,loader).newInstance();
-                 listModule.add(o);
-                 o.plug();
+            place=0;
+            for(Class c : tabClass)
+            {
+                names.add(c.getName().substring(c.getName().indexOf(".")+1));
+                IModule myGestionnaire=(IModule) Class.forName(c.getName(),true,cl.get(place)).newInstance();
+                listModule.add(myGestionnaire);
+                place++;
             }
-        }catch(Exception e){
-            System.out.println("loadPlugin 2" + e.toString());
-        } 
-       
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("erreur lecture plugin");
+        }
     }
-        
-        
 }

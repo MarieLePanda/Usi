@@ -20,7 +20,7 @@ public class LookAndFeelManage {
     public static HashMap nameLook = new HashMap();
     
     public static void loadDefautLook(){
-
+/*
         //nameLook.add("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         nameLook.put("Greeb Dream", "de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
         nameLook.put("Silver Moon", "de.javasoft.plaf.synthetica.SyntheticaSilverMoonLookAndFeel");
@@ -39,7 +39,7 @@ public class LookAndFeelManage {
             Logger.getLogger(LookAndFeelManage.class.getName()).log(Level.SEVERE, null, ex);
         } catch(ClassNotFoundException ex){
             Logger.getLogger(LookAndFeelManage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
     
     public static void changeLook(String lf){
