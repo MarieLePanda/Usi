@@ -32,7 +32,7 @@ public class ModuleLoader {
         {
             URLClassLoader search;
             // répertoire de plugins
-            File fichier= new File("E:\\Programme\\git\\WorkspaceJava\\Usi\\dist\\plugin");
+            File fichier= new File("C:\\Users\\lug13995\\Documents\\GitHub\\Usi\\src\\plugin\\jar");
             // liste des plugins
             File [] listeFichier = fichier.listFiles();
             //classe loarder
