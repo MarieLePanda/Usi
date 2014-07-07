@@ -18,20 +18,12 @@ public class FrameCreateUser extends javax.swing.JFrame {
     /**
      * Creates new form FrameCreateUser
      */
-    public FrameCreateUser(JFrame motherFrame) {
-        this.motherFrame = motherFrame;
-        motherFrame.requestFocus();
-        motherFrame.setEnabled(false);
-        this.requestFocus();
+    public FrameCreateUser() {
         initComponents();
         setIcon();
         this.setTitle("Créer utilisateur");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-    }
-
-    private FrameCreateUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

@@ -4,7 +4,6 @@
  */
 package IHM.lookandfeel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,8 +18,10 @@ public class LookAndFeelManage {
     
     public static HashMap nameLook = new HashMap();
     
+    /**
+     * To load all L&F
+     */
     public static void loadDefautLook(){
-
         nameLook.put("Greeb Dream", "de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
         nameLook.put("Silver Moon", "de.javasoft.plaf.synthetica.SyntheticaSilverMoonLookAndFeel");
         nameLook.put("Blue Moon", "de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel");
@@ -39,6 +40,10 @@ public class LookAndFeelManage {
         }
     }
     
+    /**
+     * To change the L&F
+     * @param lf name of the L&F
+     */
     public static void changeLook(String lf){
         System.out.println(lf);
         try {

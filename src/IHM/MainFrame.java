@@ -25,7 +25,7 @@ import plugin.ModuleLoader;
 public class MainFrame extends javax.swing.JFrame{
 
     /**
-     * Creates new form MainFrame
+     * Creates new form MainFrame, load plugin and L&F
      */
     public MainFrame() {
        
@@ -37,7 +37,6 @@ public class MainFrame extends javax.swing.JFrame{
            
         if(Launcher.userConnected.getAdministrator() == false)
             jMenuCompte.setVisible(false);
-//jMenuAdministration.setVisible(false);
         if(ModuleLoader.listModule.size() > 0){
             for(final IModule m : ModuleLoader.listModule)
             {
@@ -302,12 +301,20 @@ public class MainFrame extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
+    /**
+     * To call help window
+     * @param evt on clic
+     */
     private void jMenuHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuHelpMouseClicked
-         Help win = new Help();
+        Help win = new Help();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuHelpMouseClicked
 
+    /**
+     * To call admin window
+     * @param evt on clic
+     */
     private void jMenuCompteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCompteMouseClicked
         // TODO add your handling code here
          FrameAdmin win = new FrameAdmin();
@@ -315,13 +322,21 @@ public class MainFrame extends javax.swing.JFrame{
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuCompteMouseClicked
 
+    /**
+     * To call responsible window
+     * @param evt on clic
+     */
     private void jMenuResponsableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuResponsableMouseClicked
         // TODO add your handling code here:
-        FrameSetResponsable win = new FrameSetResponsable(this);
+        FrameSetResponsable win = new FrameSetResponsable();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuResponsableMouseClicked
 
+    /**
+     * To call draw window
+     * @param evt on clic
+     */
     private void jMenuItemDisplayViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDisplayViewActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)jTreeMetaModel.getLastSelectedPathComponent();
@@ -350,6 +365,10 @@ public class MainFrame extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_jMenuItemDisplayViewActionPerformed
 
+    /**
+     * To delete an object
+     * @param evt on clic
+     */
     private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
@@ -376,6 +395,10 @@ public class MainFrame extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
+    /**
+     * To edit an object
+     * @param evt on clic
+     */
     private void jMenuItemUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
@@ -409,6 +432,10 @@ public class MainFrame extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_jMenuItemUpdateActionPerformed
 
+    /**
+     * To create an object
+     * @param evt on clic
+     */
     private void jMenuItemCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreateActionPerformed
         // TODO add your handling code here:
         FrameNewObject win = new FrameNewObject();

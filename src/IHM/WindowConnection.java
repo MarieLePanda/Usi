@@ -99,6 +99,10 @@ public class WindowConnection extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Check the credential
+     * @param evt on clic
+     */
     private void jButtonConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectionActionPerformed
         // TODO add your handling code here:
         User user = new User(jTextFieldLogin.getText(), new String(jPasswordFieldPass.getPassword()));

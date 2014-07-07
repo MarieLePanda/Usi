@@ -6,15 +6,12 @@ package IHM.frameAdmin;
 
 import IHM.MainFrame;
 import java.awt.Toolkit;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 import launcherUsi.Launcher;
-import myObject.User;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 public class ChangePwd extends javax.swing.JFrame {
 
@@ -88,6 +85,10 @@ public class ChangePwd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * To confirm the new password
+     * @param evt on clic
+     */
     private void jButtonValidateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidateActionPerformed
         // TODO add your handling code here:
         Launcher.userConnected.setPassword(new String(jPasswordField.getPassword()));

@@ -254,7 +254,11 @@ public class DataIHM {
         return lifecycle;    
     }
     
-        public static Lifecycle[] getAllLifecycle(){
+    /**
+     * Get all lifecycle into the data base
+     * @return array of lifecycle
+     */
+    public static Lifecycle[] getAllLifecycle(){
         ArrayList<Lifecycle> listLifecycle = new ArrayList<Lifecycle>();
         Connection connection = ConnectionSql.getConnection();
         String sql = "SELECT * FROM lifecycle ORDER BY libelleLifecycle";
@@ -382,6 +386,10 @@ public class DataIHM {
        return segment.toArray(new Segment[segment.size()]);
     }    
      
+    /**
+     * get all capability into the data base
+     * @return array of capability
+     */
     public static Capability[] getAllCapability(){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();       
         Connection connection = ConnectionSql.getConnection();
@@ -428,7 +436,7 @@ public class DataIHM {
     
      /**
      * Create a specify capability
-     * @param id the process id for which you want a list of capability
+     * @param processId the process id for which you want a list of capability
      * @return aurray of capability witch id passed as parameter
      */
     public static ArrayList<Capability> getCapability(int processId){
@@ -452,6 +460,10 @@ public class DataIHM {
         return capabilities;
     }
     
+    /**
+     * Return all process into the data base
+     * @return array of process
+     */
     public static myObject.Process[] getListAllProcess(){
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
@@ -467,13 +479,15 @@ public class DataIHM {
             System.out.println("getListAllProcess " + e.toString());
         }finally{
             closeConnection(connection);
-        }
-        for(myObject.Process p : listProcess){
-           
-        }
-        
+        }        
        return listProcess.toArray(new myObject.Process[listProcess.size()]);
     }    
+    
+    /**
+     * Return all capability attach to process id
+     * @param process id of the process 
+     * @return arraylist of capability
+     */
     public static ArrayList<Capability> getListCapability(int process){
         Connection connection = ConnectionSql.getConnection();
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
@@ -494,6 +508,11 @@ public class DataIHM {
         return capabilities;
     }
     
+    /**
+     * Convert an id on segment
+     * @param segmentId id of the object segment
+     * @return segment with id passed in param
+     */
     public static Segment getSegment(int segmentId){
         
         Connection connection = ConnectionSql.getConnection();
@@ -516,6 +535,11 @@ public class DataIHM {
         return segment;
     }  
     
+    /**
+     * Return all application attach to capability id
+     * @param capabilityId id of the capability 
+     * @return arraylist of application
+     */
     public static ArrayList<Application> getListApplication(int capabilityId){
         ArrayList<Application> applications = new ArrayList<Application>();
         ArrayList<Integer> idApplication = new ArrayList<Integer>();
@@ -560,6 +584,11 @@ public class DataIHM {
         return applications;
     }
         
+    /**
+     * Convert an id on process
+     * @param processId id of the object process
+     * @return process with id passed in param
+     */
     public static myObject.Process getUniqueProcess(int processId){
         myObject.Process process = new myObject.Process();
         Connection connection = ConnectionSql.getConnection();
@@ -580,6 +609,10 @@ public class DataIHM {
         return process;
     }
     
+    /**
+     * Return all object database into the data base
+     * @return array of database
+     */
     public static Database[] getAllDatabase(){
         ArrayList<Database> listDatabase = new ArrayList<Database>();
         Connection connection = data.database.ConnectionSql.getConnection();
@@ -599,6 +632,11 @@ public class DataIHM {
         return listDatabase.toArray(new Database[listDatabase.size()]);
     }
     
+    /**
+     * Convert a id on Database
+     * @param id id of the object Database 
+     * @return Database with id passed on param
+     */
     public static Database getdatabase(int id){
         Database database = new Database();
         Connection connection = data.database.ConnectionSql.getConnection();
@@ -619,6 +657,10 @@ public class DataIHM {
         return database;
     }
     
+    /**
+     * Return all server into the data base
+     * @return array of Server
+     */
     public static Server[] getAllServer(){
         ArrayList<Server> listServer = new ArrayList<Server>();
         Connection connection = data.database.ConnectionSql.getConnection();
@@ -639,6 +681,11 @@ public class DataIHM {
         return listServer.toArray(new Server[listServer.size()]);
     }
     
+     /**
+     * Convert a id on Server
+     * @param id id of the object Server 
+     * @return Server with id passed on param
+     */
     public static Server getServer(int id){
         Server server = null;
         Connection connection = data.database.ConnectionSql.getConnection();

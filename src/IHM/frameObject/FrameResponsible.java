@@ -5,6 +5,7 @@
  */
 
 package IHM.frameObject;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import javax.swing.*;
 import myObject.*;
@@ -89,9 +90,8 @@ public class FrameResponsible extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        if(jTextField1.getText()!=null || jTextField1.getText()!="" )
+        if(jTextField1.getText()!=null || !"".equals(jTextField1.getText()) )
         {
-
             try
             {
                 Responsible resp= new Responsible(1,jTextField1.getText());
@@ -99,9 +99,9 @@ public class FrameResponsible extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Responsible: " + resp.getName() + " créer");
                 this.dispose();
             }
-            catch(Exception e)
+            catch(HeadlessException e)
             {
-             JOptionPane.showMessageDialog(null,e.toString());
+                JOptionPane.showMessageDialog(null,e.toString());
             }  
         }
       

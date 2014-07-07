@@ -3,13 +3,11 @@
  */
 package IHM;
 
-import IHM.frameAdmin.*;
-import genmdp.MotDePasse;
+
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
-import java.util.HashSet;
 import javax.swing.*;
 import myObject.*;
-import myObject.User;
 
 /**
  *
@@ -21,19 +19,13 @@ public class FrameSetResponsable extends javax.swing.JFrame {
     /**
      * Creates new form FrameAdmin
      */
-    public FrameSetResponsable(JFrame motherFrame) {
-        this.motherFrame = motherFrame;
-        motherFrame.setEnabled(false);
+    public FrameSetResponsable() {
+        
         initComponents();
         this.setTitle("Administration utilisateur");
         setIcon();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setResizable(false);
-    }
-
-    private FrameSetResponsable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -155,6 +147,10 @@ public class FrameSetResponsable extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
+    /**
+     * To reload data in window
+     * @param evt 
+     */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
 
@@ -162,8 +158,7 @@ public class FrameSetResponsable extends javax.swing.JFrame {
         jComboBoxListResponsable.setModel(new javax.swing.DefaultComboBoxModel(data.IHM.DataIHM.loadResponsible()));
         if(jComboBoxListResponsable.getSelectedItem() != null){
             Responsible currentResponsible = (Responsible) jComboBoxListResponsable.getSelectedItem();
-            jTextFieldResponsable.setText(currentResponsible.getName());
-            
+            jTextFieldResponsable.setText(currentResponsible.getName());           
         }
         else{
             JOptionPane.showMessageDialog(null,"Action impossible.\n Aucun Responsable sélectionné");
@@ -191,6 +186,10 @@ public class FrameSetResponsable extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBoxListResponsableItemStateChanged
 
+    /**
+     * To delete a responsible selected
+     * @param evt clic on responsible
+     */
     private void jButtonDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteMouseClicked
         // TODO add your handling code here:
         try{
@@ -204,7 +203,7 @@ public class FrameSetResponsable extends javax.swing.JFrame {
             jTextFieldResponsable.setText("");
 
         }
-        catch(Exception e)
+        catch(HeadlessException e)
         {
            System.out.println(e.toString());
         }
@@ -222,7 +221,7 @@ public class FrameSetResponsable extends javax.swing.JFrame {
 
             jTextFieldResponsable.setText("");
         }
-        catch(Exception e)
+        catch(HeadlessException e)
         {
           System.out.println(e.toString());   
         }

@@ -9,7 +9,7 @@ import myObject.*;
 
 /**
  *
- * @author lug13995
+ * @author Mary
  */
 
 public class FrameNewObject extends javax.swing.JFrame {

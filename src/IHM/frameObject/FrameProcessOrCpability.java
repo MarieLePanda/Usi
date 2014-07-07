@@ -17,16 +17,13 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
 
     private myObject.Process process;
     private Capability capability;
-    private String type;
+    private final String type;
     
+
     /**
-     * Creates new form FrameProcess when user create a new process
+     * To create au new process or new capability
+     * @param type type of object to create
      */
-    public FrameProcessOrCpability(){
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-    }
-    
     public FrameProcessOrCpability(String type) {
         this.type = type;
         if(type.equals("Quartier")){
@@ -52,7 +49,7 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
     }
     
     /**
-     * Creates new form FrameProcess when user update a existing process
+     * Creates new form FrameProcessOrCpability when user update a existing process
      * @param process process to update
      */
     public FrameProcessOrCpability(myObject.Process process){
@@ -63,7 +60,11 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
         loadValue();
         this.setResizable(false);
     }
-        
+    
+    /**
+     * Creates new form FrameProcessOrCpability when user update a existing capability
+     * @param capability capability to update
+     */
     public FrameProcessOrCpability(Capability capability){
         type = "Ilot";
         this.capability = capability;
@@ -373,7 +374,7 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxSupportSegmentActionPerformed
 
     /**
-     * Create or update a process
+     * Create or update a process or capability
      * @param evt 
      */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
@@ -426,7 +427,7 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     /**
-     * To add a capability, call a new frame
+     * To add a capability or application, call a new frame
      * @param evt 
      */
     private void jButtonAddCapabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddCapabilityActionPerformed
@@ -454,14 +455,18 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
             process.setListCapability(data.IHM.DataIHM.getCapability(process.getId()));
             jListCapability.setModel(new javax.swing.DefaultListModel() {
                 Capability[] tabCapability = process.getListCapability().toArray(new Capability[process.getListCapability().size()]);
+                @Override
                 public int getSize() { return tabCapability.length; }
+                @Override
                 public Object getElementAt(int i) { return tabCapability[i]; }
             });
         }else if(type.equals("Ilot")){
             capability.setListApplication(data.IHM.DataIHM.getListApplication(capability.getId()));
             jListCapability.setModel(new javax.swing.DefaultListModel() {
                 Application[] tabApplication = capability.getListApplication().toArray(new Application[capability.getListApplication().size()]);
+                @Override
                 public int getSize() { return tabApplication.length; }
+                @Override
                 public Object getElementAt(int i) { return tabApplication[i]; }
             });
         }
@@ -481,9 +486,8 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
             }else{
                 int dialogResult = JOptionPane.showConfirmDialog (null, "Voulez vous vraiment dissocier " + jListCapability.getSelectedValue() + 
                                                                    " à votre quariter " + process.getName() + " ?");
-                if(dialogResult == JOptionPane.YES_OPTION){
-                   Capability capability = (Capability) jListCapability.getSelectedValue();
-                   data.database.CrudDatabase.updateAssoCapabilityToProcess(capability);
+                if(dialogResult == JOptionPane.YES_OPTION){                
+                   data.database.CrudDatabase.updateAssoCapabilityToProcess((Capability) jListCapability.getSelectedValue());
                    JOptionPane.showMessageDialog(null, "Association supprimée");
                 }
             }
@@ -557,12 +561,7 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrameProcessOrCpability().setVisible(true);
-            }
-        });
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private myObject.Capability capability1;

@@ -169,6 +169,10 @@ public class FrameAdmin extends javax.swing.JFrame {
         //A supprimer
     }//GEN-LAST:event_jCheckBoxAdminActionPerformed
 
+    /**
+     * To load data for user selected
+     * @param evt on choice
+     */
     private void jComboBoxListUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListUserActionPerformed
         if(jComboBoxListUser.getSelectedItem() != null){
             User currentUser = (User) jComboBoxListUser.getSelectedItem();
@@ -225,7 +229,7 @@ public class FrameAdmin extends javax.swing.JFrame {
      */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         // TODO add your handling code here:
-        FrameCreateUser win = new FrameCreateUser(this);
+        FrameCreateUser win = new FrameCreateUser();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButtonCreateActionPerformed
