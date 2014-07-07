@@ -10,6 +10,7 @@ import data.IHM.DataIHM;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import launcherUsi.Launcher;
@@ -65,8 +66,7 @@ public class MainFrame extends javax.swing.JFrame{
                };
                 JMenuItem jm = new JMenuItem((String) lf);
                 jm.addActionListener(ls);
-               jMenuLook.add(jm);
-               
+               jMenuLook.add(jm);              
             }
     }
 
@@ -225,6 +225,38 @@ public class MainFrame extends javax.swing.JFrame{
     private void jTreeMetaModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTreeMetaModelMouseClicked
         // TODO add your handling code here:
         // A supprimer
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)jTreeMetaModel.getLastSelectedPathComponent();
+        if(node != null){
+            if(node.getUserObject() instanceof Segment){
+                Segment s = (Segment) node.getUserObject();
+                ArrayList<String[]> zone = new ArrayList<String[]>();
+                ArrayList<String> list = new ArrayList<String>();
+                String[][] test;
+                int i =0;
+                int j = 0;
+                for(myObject.Process p : s.getListProcess()){
+                    list.add(p.getName());
+                    
+                    for(Capability c : data.IHM.DataIHM.getCapability(p.getId())){
+                        System.out.println("Debug " + c.getName());
+                        list.add(c.getName());
+                        j++;
+                    }
+                    i++;
+                    zone.add(list.toArray(new String[list.size()]));
+                }
+                for(String[] t : zone){
+                    for(String r : t){
+                        System.out.println(r);
+                    }
+                }
+                LevelOf.setNameLvl1(s.getName());
+                DrawRect.Paint(zone);
+                System.out.println("fait");
+            }else{
+                System.out.println("pas fait");
+            }
+        }
     }//GEN-LAST:event_jTreeMetaModelMouseClicked
 
     private void jTreeMetaModelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTreeMetaModelFocusGained
