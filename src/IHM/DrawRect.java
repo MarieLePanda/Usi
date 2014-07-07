@@ -16,6 +16,7 @@ import java.io.File;
 
 
 import java.util.ArrayList;
+import javax.swing.WindowConstants;
 
 
 public class DrawRect {
@@ -29,6 +30,7 @@ public class DrawRect {
 
 
 int x=0;
+
 		for(String[] arg:args){
 			LevelOf.newIlot(  new ArrayList<String>(),arg[0],arg);
 		x++;
@@ -42,7 +44,7 @@ int x=0;
 		JFrame window = new JFrame();
 
 		window.setLocationRelativeTo(null);
-
+                window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 
 		window.getContentPane().add(new Rect());

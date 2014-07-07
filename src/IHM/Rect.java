@@ -14,9 +14,6 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Rect extends JPanel { 
 	int Largeur3=30;
-
-
-
 	public void paintComponent(Graphics g){
 
 		int acc;
@@ -91,10 +88,7 @@ if(lvl1xy==0){
 
 		g.drawRect (lvl1[0], lvl1[1], lvl1[2], lvl1[3]);  
 
-		g.drawString(LevelOf.getNameLvl1(), lvl1[0]+10,lvl1[1]+lvl1[3]-5);	
-
-
-		
+		g.drawString(LevelOf.getNameLvl1(), lvl1[0]+10,lvl1[1]+lvl1[3]-5);
 
 	}
 

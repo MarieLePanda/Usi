@@ -85,9 +85,10 @@ public class MainFrame extends javax.swing.JFrame{
         jTreeMetaModel = new javax.swing.JTree(root);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuObject = new javax.swing.JMenu();
-        jMenuCreate = new javax.swing.JMenu();
-        jMenuUpdate = new javax.swing.JMenu();
-        jMenuDelete = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemDisplayView = new javax.swing.JMenuItem();
         jMenuAdministration = new javax.swing.JMenu();
         jMenuCompte = new javax.swing.JMenu();
         jMenuResponsable = new javax.swing.JMenu();
@@ -134,29 +135,37 @@ public class MainFrame extends javax.swing.JFrame{
 
         jMenuObject.setText("Objet");
 
-        jMenuCreate.setText("Créer");
-        jMenuCreate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuCreateMouseClicked(evt);
+        jMenuItem1.setText("Créer");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenuObject.add(jMenuCreate);
+        jMenuObject.add(jMenuItem1);
 
-        jMenuUpdate.setText("Modifier");
-        jMenuUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuUpdateMouseClicked(evt);
+        jMenuItem2.setText("Modifier");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenuObject.add(jMenuUpdate);
+        jMenuObject.add(jMenuItem2);
 
-        jMenuDelete.setText("Supprimer");
-        jMenuDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuDeleteMouseClicked(evt);
+        jMenuItem3.setText("Supprimer");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenuObject.add(jMenuDelete);
+        jMenuObject.add(jMenuItem3);
+
+        jMenuItemDisplayView.setText("Afficher vue");
+        jMenuItemDisplayView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDisplayViewActionPerformed(evt);
+            }
+        });
+        jMenuObject.add(jMenuItemDisplayView);
 
         jMenuBar1.add(jMenuObject);
 
@@ -225,38 +234,6 @@ public class MainFrame extends javax.swing.JFrame{
     private void jTreeMetaModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTreeMetaModelMouseClicked
         // TODO add your handling code here:
         // A supprimer
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode)jTreeMetaModel.getLastSelectedPathComponent();
-        if(node != null){
-            if(node.getUserObject() instanceof Segment){
-                Segment s = (Segment) node.getUserObject();
-                ArrayList<String[]> zone = new ArrayList<String[]>();
-                ArrayList<String> list = new ArrayList<String>();
-                String[][] test;
-                int i =0;
-                int j = 0;
-                for(myObject.Process p : s.getListProcess()){
-                    list.add(p.getName());
-                    
-                    for(Capability c : data.IHM.DataIHM.getCapability(p.getId())){
-                        System.out.println("Debug " + c.getName());
-                        list.add(c.getName());
-                        j++;
-                    }
-                    i++;
-                    zone.add(list.toArray(new String[list.size()]));
-                }
-                for(String[] t : zone){
-                    for(String r : t){
-                        System.out.println(r);
-                    }
-                }
-                LevelOf.setNameLvl1(s.getName());
-                DrawRect.Paint(zone);
-                System.out.println("fait");
-            }else{
-                System.out.println("pas fait");
-            }
-        }
     }//GEN-LAST:event_jTreeMetaModelMouseClicked
 
     private void jTreeMetaModelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTreeMetaModelFocusGained
@@ -290,74 +267,6 @@ public class MainFrame extends javax.swing.JFrame{
         SwingUtilities.updateComponentTreeUI(this);
     }//GEN-LAST:event_formWindowActivated
 
-    private void jMenuCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCreateMouseClicked
-        // TODO add your handling code here:      
-        FrameNewObject win = new FrameNewObject();
-        win.setVisible(true);
-        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jMenuCreateMouseClicked
-
-    private void jMenuUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuUpdateMouseClicked
-        // TODO add your handling code here:
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
-        try{
-            if(node != null){
-                MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
-                if(__aucun.getName().equals("__Aucun"))
-                    JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
-                else{
-                    if(node.getUserObject() instanceof Segment){
-                        FrameSegment win = new FrameSegment((Segment) node.getUserObject());
-                        win.setVisible(true);
-                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    }
-                    else if(node.getUserObject() instanceof myObject.Process){
-                        FrameProcessOrCpability win = new FrameProcessOrCpability((myObject.Process) node.getUserObject());
-                        win.setVisible(true);
-                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    }
-                    else if(node.getUserObject() instanceof Capability){
-                        FrameProcessOrCpability win = new FrameProcessOrCpability((Capability) node.getUserObject());
-                        win.setVisible(true);
-                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    }
-                }
-            } else{
-                JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
-            }
-        }catch(ClassCastException e){
-            JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
-        }
-        
-    }//GEN-LAST:event_jMenuUpdateMouseClicked
-
-    private void jMenuDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuDeleteMouseClicked
-        // TODO add your handling code here:
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
-        try{
-            if(node != null){
-                MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
-                if(__aucun.getName().equals("__Aucun"))
-                    JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
-                else{
-                    int dialogResult = JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'objet " + node.toString());
-                    {
-                        MetaModelObject objectDelete = (MetaModelObject) node.getUserObject();
-                        if(dialogResult == JOptionPane.YES_OPTION){
-                            objectDelete.deleteObject();
-                            JOptionPane.showMessageDialog(null,"Objet supprimé");
-                        }
-                    }
-                }
-            }else{
-                JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à supprimer");
-            }
-        }catch(ClassCastException e){
-            JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
-        }
-        
-    }//GEN-LAST:event_jMenuDeleteMouseClicked
-
     private void jMenuAdministrationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAdministrationMouseClicked
         // TODO add your handling code here:
        
@@ -390,6 +299,96 @@ public class MainFrame extends javax.swing.JFrame{
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuResponsableMouseClicked
+
+    private void jMenuItemDisplayViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDisplayViewActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)jTreeMetaModel.getLastSelectedPathComponent();
+        if(node != null){
+            if(node.getUserObject() instanceof Segment){
+                Segment s = (Segment) node.getUserObject();
+                ArrayList<String[]> zone = new ArrayList<String[]>();
+                ArrayList<String> list = new ArrayList<String>();
+                for(myObject.Process p : s.getListProcess()){
+                    list.add(p.getName());
+                    for(Capability c : data.IHM.DataIHM.getCapability(p.getId())){
+                        list.add(c.getName());
+                    }
+                    zone.add(list.toArray(new String[list.size()]));
+                    list = new ArrayList<String>();
+                }
+                LevelOf.Tab = new ArrayList<ArrayList<String>>();
+                LevelOf.CurrentRect = new DrawRect();
+                LevelOf.setNameLvl1(s.getName());
+                DrawRect.Paint(zone);
+            }
+        }
+    }//GEN-LAST:event_jMenuItemDisplayViewActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
+        try{
+            if(node != null){
+                MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
+                if(__aucun.getName().equals("__Aucun"))
+                JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
+                else{
+                    int dialogResult = JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'objet " + node.toString());
+                    {
+                        MetaModelObject objectDelete = (MetaModelObject) node.getUserObject();
+                        if(dialogResult == JOptionPane.YES_OPTION){
+                            objectDelete.deleteObject();
+                            JOptionPane.showMessageDialog(null,"Objet supprimé");
+                        }
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à supprimer");
+            }
+        }catch(ClassCastException e){
+            JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
+        try{
+            if(node != null){
+                MetaModelObject __aucun = (MetaModelObject) node.getUserObject();
+                if(__aucun.getName().equals("__Aucun"))
+                JOptionPane.showMessageDialog(null,"Seul un panda peut le faire");
+                else{
+                    if(node.getUserObject() instanceof Segment){
+                        FrameSegment win = new FrameSegment((Segment) node.getUserObject());
+                        win.setVisible(true);
+                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
+                    else if(node.getUserObject() instanceof myObject.Process){
+                        FrameProcessOrCpability win = new FrameProcessOrCpability((myObject.Process) node.getUserObject());
+                        win.setVisible(true);
+                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
+                    else if(node.getUserObject() instanceof Capability){
+                        FrameProcessOrCpability win = new FrameProcessOrCpability((Capability) node.getUserObject());
+                        win.setVisible(true);
+                        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
+                }
+            } else{
+                JOptionPane.showMessageDialog(null,"Choisisez d'abord un objet à modifier");
+            }
+        }catch(ClassCastException e){
+            JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        FrameNewObject win = new FrameNewObject();
+        win.setVisible(true);
+        win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,14 +428,15 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JMenu jMenuAdministration;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCompte;
-    private javax.swing.JMenu jMenuCreate;
-    private javax.swing.JMenu jMenuDelete;
     private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemDisplayView;
     private javax.swing.JMenu jMenuLook;
     private javax.swing.JMenu jMenuObject;
     private javax.swing.JMenu jMenuPlugin;
     private javax.swing.JMenu jMenuResponsable;
-    private javax.swing.JMenu jMenuUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables
