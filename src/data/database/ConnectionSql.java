@@ -31,7 +31,7 @@ public class ConnectionSql {
             conf[2] = "";
             conf[3] = "";
            	try {
-                    FileReader fichierLecture = new FileReader("C:\\Users\\lug13995\\Documents\\GitHub\\Usi\\src\\conf\\conf.txt");
+                    FileReader fichierLecture = new FileReader("conf\\conf.txt");
                     //C:\Users\MKSJ\Documents\GitHub\Usi\src\conf\conf.txt
                     //C:\Users\lug13995\Documents\GitHub\Usi\src\conf\conf.txt
                     //.\conf\conf.txt

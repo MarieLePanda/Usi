@@ -32,7 +32,7 @@ public class ModuleLoader {
         {
             URLClassLoader search;
             // répertoire de plugins
-            File fichier= new File("C:\\Users\\lug13995\\Documents\\GitHub\\Usi\\src\\plugin\\jar");
+            File fichier= new File("plugin\\jar");
             // liste des plugins
             File [] listeFichier = fichier.listFiles();
             //classe loarder
@@ -50,6 +50,7 @@ public class ModuleLoader {
                 {
                     URL [] listeUrl = {f.toURL()};
                     cl.add( new URLClassLoader (listeUrl));
+                    
                     JarFile ficjar = new JarFile(f.getAbsolutePath());
                     enums=ficjar.entries();
                     // parcours de l'énumération
@@ -73,8 +74,7 @@ public class ModuleLoader {
                         }
                     }
                 }catch(Exception e){
-                    e.printStackTrace();
-                    System.out.println();
+                    System.out.println(e.toString());
                 }
                 place++;
             }

@@ -83,11 +83,12 @@ public class MainFrame extends javax.swing.JFrame{
         DefaultMutableTreeNode root;
         root = DataIHM.initTree();
         jTreeMetaModel = new javax.swing.JTree(root);
+        jPanelView = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuObject = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemCreate = new javax.swing.JMenuItem();
+        jMenuItemUpdate = new javax.swing.JMenuItem();
+        jMenuItemDelete = new javax.swing.JMenuItem();
         jMenuItemDisplayView = new javax.swing.JMenuItem();
         jMenuAdministration = new javax.swing.JMenu();
         jMenuCompte = new javax.swing.JMenu();
@@ -133,31 +134,47 @@ public class MainFrame extends javax.swing.JFrame{
         });
         jScrollPane1.setViewportView(jTreeMetaModel);
 
+        javax.swing.GroupLayout jPanelViewLayout = new javax.swing.GroupLayout(jPanelView);
+        jPanelView.setLayout(jPanelViewLayout);
+        jPanelViewLayout.setHorizontalGroup(
+            jPanelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 367, Short.MAX_VALUE)
+        );
+        jPanelViewLayout.setVerticalGroup(
+            jPanelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         jMenuObject.setText("Objet");
 
-        jMenuItem1.setText("Créer");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCreate.setText("Créer");
+        jMenuItemCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemCreateActionPerformed(evt);
             }
         });
-        jMenuObject.add(jMenuItem1);
+        jMenuObject.add(jMenuItemCreate);
 
-        jMenuItem2.setText("Modifier");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemUpdate.setText("Modifier");
+        jMenuItemUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemUpdateActionPerformed(evt);
             }
         });
-        jMenuObject.add(jMenuItem2);
+        jMenuObject.add(jMenuItemUpdate);
 
-        jMenuItem3.setText("Supprimer");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDelete.setText("Supprimer");
+        jMenuItemDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuItemDeleteActionPerformed(evt);
             }
         });
-        jMenuObject.add(jMenuItem3);
+        jMenuItemDelete.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jMenuItemDeleteKeyTyped(evt);
+            }
+        });
+        jMenuObject.add(jMenuItemDelete);
 
         jMenuItemDisplayView.setText("Afficher vue");
         jMenuItemDisplayView.addActionListener(new java.awt.event.ActionListener() {
@@ -221,11 +238,16 @@ public class MainFrame extends javax.swing.JFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(383, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -288,7 +310,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jMenuCompteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCompteMouseClicked
         // TODO add your handling code here
-         FrameAdmin win = new FrameAdmin(this);
+         FrameAdmin win = new FrameAdmin();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuCompteMouseClicked
@@ -317,14 +339,18 @@ public class MainFrame extends javax.swing.JFrame{
                     list = new ArrayList<String>();
                 }
                 LevelOf.Tab = new ArrayList<ArrayList<String>>();
-                LevelOf.CurrentRect = new DrawRect();
                 LevelOf.setNameLvl1(s.getName());
                 DrawRect.Paint(zone);
+            }else{
+                JOptionPane.showMessageDialog(null, "Action possible seulement sur un objet de type zone");
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Selectionnez d'abord un objet de type zone");
+
         }
     }//GEN-LAST:event_jMenuItemDisplayViewActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
         try{
@@ -348,9 +374,9 @@ public class MainFrame extends javax.swing.JFrame{
         }catch(ClassCastException e){
             JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
         }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeMetaModel.getLastSelectedPathComponent();
         try{
@@ -381,14 +407,18 @@ public class MainFrame extends javax.swing.JFrame{
         }catch(ClassCastException e){
             JOptionPane.showMessageDialog(null,"Ceci n'est pas un objet");
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemUpdateActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreateActionPerformed
         // TODO add your handling code here:
         FrameNewObject win = new FrameNewObject();
         win.setVisible(true);
         win.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemCreateActionPerformed
+
+    private void jMenuItemDeleteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItemDeleteKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemDeleteKeyTyped
 
     /**
      * @param args the command line arguments
@@ -429,14 +459,15 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCompte;
     private javax.swing.JMenu jMenuHelp;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemCreate;
+    private javax.swing.JMenuItem jMenuItemDelete;
     private javax.swing.JMenuItem jMenuItemDisplayView;
+    private javax.swing.JMenuItem jMenuItemUpdate;
     private javax.swing.JMenu jMenuLook;
     private javax.swing.JMenu jMenuObject;
     private javax.swing.JMenu jMenuPlugin;
     private javax.swing.JMenu jMenuResponsable;
+    private javax.swing.JPanel jPanelView;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTreeMetaModel;
     // End of variables declaration//GEN-END:variables

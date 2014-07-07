@@ -14,23 +14,16 @@ import javax.swing.*;
  */
 public class FrameAdmin extends javax.swing.JFrame {
 
-    private JFrame motherFrame;
     /**
      * Creates new form FrameAdmin
      */
-    public FrameAdmin(JFrame motherFrame) {
-        this.motherFrame = motherFrame;
-        motherFrame.setEnabled(false);
+    public FrameAdmin() {
         initComponents();
         this.setTitle("Administration utilisateur");
         setIcon();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setResizable(false);
-    }
 
-    private FrameAdmin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -272,7 +265,6 @@ public class FrameAdmin extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        motherFrame.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus

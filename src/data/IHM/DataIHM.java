@@ -138,7 +138,7 @@ public class DataIHM {
     public static DefaultMutableTreeNode loadTreeApplication(){
         DefaultMutableTreeNode application = new DefaultMutableTreeNode("Application");
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM application";
+        String sql = "SELECT * FROM application ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -167,7 +167,7 @@ public class DataIHM {
     public static User[] loadUser(){
         ArrayList<User> users = new ArrayList<User>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM user ORDER BY login";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -189,7 +189,7 @@ public class DataIHM {
     public static Responsible[] loadResponsible(){
         ArrayList<Responsible> responsibles = new ArrayList<Responsible>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM responsible";
+        String sql = "SELECT * FROM responsible ORDER BY nom";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -214,7 +214,7 @@ public class DataIHM {
         
         Connection connection = ConnectionSql.getConnection();
         
-        String sql = "SELECT * FROM responsible WHERE id = ?";
+        String sql = "SELECT * FROM responsible WHERE id = ? ORDER BY nom";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -238,7 +238,7 @@ public class DataIHM {
     public static Lifecycle getLifecycle(int id){
         Lifecycle lifecycle = null;
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM lifecycle WHERE id = ?";
+        String sql = "SELECT * FROM lifecycle WHERE id = ? ORDER BY libelleLifecycle";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -257,7 +257,7 @@ public class DataIHM {
         public static Lifecycle[] getAllLifecycle(){
         ArrayList<Lifecycle> listLifecycle = new ArrayList<Lifecycle>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM lifecycle";
+        String sql = "SELECT * FROM lifecycle ORDER BY libelleLifecycle";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -280,7 +280,7 @@ public class DataIHM {
     public static myObject.Process[] getFreeProcess(){
         ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM process WHERE SEGMENTid = 100";
+        String sql = "SELECT * FROM process WHERE SEGMENTid = 100 ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -307,7 +307,7 @@ public class DataIHM {
         ArrayList<myObject.Process> process = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
         
-        String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
+        String sql = "SELECT * FROM process WHERE SEGMENTid = ? ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, segmentId);
@@ -336,7 +336,7 @@ public class DataIHM {
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
         if(segment !=null){
             Connection connection = ConnectionSql.getConnection();
-            String sql = "SELECT * FROM process WHERE SEGMENTid = ?";
+            String sql = "SELECT * FROM process WHERE SEGMENTid = ? ORDER BY name";
             try{
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, segment.getId());
@@ -363,7 +363,7 @@ public class DataIHM {
     public static Segment[] getListAllSegment(){
         ArrayList<Segment> segment = new ArrayList<Segment>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM segment";
+        String sql = "SELECT * FROM segment ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -385,7 +385,7 @@ public class DataIHM {
     public static Capability[] getAllCapability(){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();       
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM capability";
+        String sql = "SELECT * FROM capability ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -409,7 +409,7 @@ public class DataIHM {
     public static Capability[] getFreeCapability(){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();       
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM capability WHERE PROCESSid = 100";
+        String sql = "SELECT * FROM capability WHERE PROCESSid = 100 ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -434,7 +434,7 @@ public class DataIHM {
     public static ArrayList<Capability> getCapability(int processId){
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM capability WHERE PROCESSid = ?";
+        String sql = "SELECT * FROM capability WHERE PROCESSid = ? ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, processId);
@@ -455,7 +455,7 @@ public class DataIHM {
     public static myObject.Process[] getListAllProcess(){
         ArrayList<myObject.Process> listProcess = new ArrayList<myObject.Process>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM process";
+        String sql = "SELECT * FROM process ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -477,7 +477,7 @@ public class DataIHM {
     public static ArrayList<Capability> getListCapability(int process){
         Connection connection = ConnectionSql.getConnection();
         ArrayList<Capability> capabilities = new ArrayList<Capability>();
-        String sql = "SELECT * FROM capability WHERE PROCESSid = ?";
+        String sql = "SELECT * FROM capability WHERE PROCESSid = ? ORDER BY name";
         try{ 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, process);
@@ -498,7 +498,7 @@ public class DataIHM {
         
         Connection connection = ConnectionSql.getConnection();
         Segment segment = null;
-        String sql = "SELECT * FROM segment WHERE id = ?";
+        String sql = "SELECT * FROM segment WHERE id = ?  ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, segmentId);
@@ -535,7 +535,7 @@ public class DataIHM {
             closeConnection(connection);
         }
         connection = ConnectionSql.getConnection();
-        sql = "SELECT * FROM application WHERE id = ?";
+        sql = "SELECT * FROM application WHERE id = ? ";
         for(int i : idApplication){
             try{
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -563,7 +563,7 @@ public class DataIHM {
     public static myObject.Process getUniqueProcess(int processId){
         myObject.Process process = new myObject.Process();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM process WHERE id = ?";
+        String sql = "SELECT * FROM process WHERE id = ? ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, processId);
@@ -583,7 +583,7 @@ public class DataIHM {
     public static Database[] getAllDatabase(){
         ArrayList<Database> listDatabase = new ArrayList<Database>();
         Connection connection = data.database.ConnectionSql.getConnection();
-        String sql = "SELECT * FROM database";
+        String sql = "SELECT * FROM database ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -602,7 +602,7 @@ public class DataIHM {
     public static Database getdatabase(int id){
         Database database = new Database();
         Connection connection = data.database.ConnectionSql.getConnection();
-        String sql = "SELECT * FROM database WHERE id = ?";
+        String sql = "SELECT * FROM database WHERE id = ? ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -622,7 +622,7 @@ public class DataIHM {
     public static Server[] getAllServer(){
         ArrayList<Server> listServer = new ArrayList<Server>();
         Connection connection = data.database.ConnectionSql.getConnection();
-        String sql = "SELECT * FROM database";
+        String sql = "SELECT * FROM database ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
@@ -642,7 +642,7 @@ public class DataIHM {
     public static Server getServer(int id){
         Server server = null;
         Connection connection = data.database.ConnectionSql.getConnection();
-        String sql = "SELECT * FROM database WHERE id = ?";
+        String sql = "SELECT * FROM database WHERE id = ? ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);

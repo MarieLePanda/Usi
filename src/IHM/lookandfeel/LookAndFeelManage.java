@@ -20,17 +20,14 @@ public class LookAndFeelManage {
     public static HashMap nameLook = new HashMap();
     
     public static void loadDefautLook(){
-/*
-        //nameLook.add("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+
         nameLook.put("Greeb Dream", "de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel");
         nameLook.put("Silver Moon", "de.javasoft.plaf.synthetica.SyntheticaSilverMoonLookAndFeel");
         nameLook.put("Blue Moon", "de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel");
         nameLook.put("Black Star", "de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel");
-        nameLook.put("Black Moon", "de.javasoft.plaf.synthetica.SyntheticaBlackMoonLookAndFeel");
         nameLook.put("Blue Ice", "de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel");
-        nameLook.put("Blue Ligt", "de.javasoft.plaf.synthetica.SyntheticaBlueLightLookAndFeel");
         try {
-            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueLightLookAndFeel");
+            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel");
         } catch (InstantiationException ex) {
             Logger.getLogger(LookAndFeelManage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
@@ -39,7 +36,7 @@ public class LookAndFeelManage {
             Logger.getLogger(LookAndFeelManage.class.getName()).log(Level.SEVERE, null, ex);
         } catch(ClassNotFoundException ex){
             Logger.getLogger(LookAndFeelManage.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
     
     public static void changeLook(String lf){
