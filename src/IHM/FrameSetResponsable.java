@@ -167,7 +167,6 @@ public class FrameSetResponsable extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        motherFrame.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus

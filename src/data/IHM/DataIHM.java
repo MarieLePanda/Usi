@@ -17,7 +17,7 @@ import myObject.*;
  */
 public class DataIHM {
     
-    /**
+    /*
      * Create the tree
      * @return model of tree
      */
@@ -167,7 +167,7 @@ public class DataIHM {
     public static User[] loadUser(){
         ArrayList<User> users = new ArrayList<User>();
         Connection connection = ConnectionSql.getConnection();
-        String sql = "SELECT * FROM user ORDER BY login";
+        String sql = "SELECT * FROM user ORDER BY name";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet res = preparedStatement.executeQuery();
