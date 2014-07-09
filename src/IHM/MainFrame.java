@@ -355,6 +355,7 @@ public class MainFrame extends javax.swing.JFrame{
                 }
                 LevelOf.Tab = new ArrayList<ArrayList<String>>();
                 LevelOf.setNameLvl1(s.getName());
+                LevelOf.setExported(true);
                 DrawRect.Paint(zone);
             }else{
                 JOptionPane.showMessageDialog(null, "Action possible seulement sur un objet de type zone");

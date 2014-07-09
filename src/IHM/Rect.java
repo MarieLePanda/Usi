@@ -71,6 +71,7 @@ public class Rect extends JPanel {
 		
 		
 
+
 if(lvl1xy==0){
 	lvl1xy=tabdim[0];
 }else{
@@ -81,9 +82,16 @@ if(lvl1xy==0){
 	}
 	
 }
-
-		int[] lvl1={10,10,(lvl1xy)+10,tabdim[2]};
-
+int haut1=0;
+haut1=(LevelOf.getLvl2()/2);
+if(0==(z%2)){
+	
+	
+}else{
+	
+	haut1=haut1+2;
+}
+		int[] lvl1={10,10,(lvl1xy)+10,tabdim[3]*(haut1)+30};
 		g.setColor(Color.blue);
 
 		g.drawRect (lvl1[0], lvl1[1], lvl1[2], lvl1[3]);  
