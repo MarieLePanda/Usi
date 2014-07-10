@@ -386,7 +386,6 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
                         (Segment) jComboBoxSupportSegment.getSelectedItem(), (Responsible) jComboBoxResponsible.getSelectedItem(), 
                         (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), new ArrayList<Capability>());
                 process.createObject();
-                JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " créer");
                 this.dispose();
 
 
@@ -409,7 +408,6 @@ public class FrameProcessOrCpability extends javax.swing.JFrame {
                         (Responsible) jComboBoxResponsible.getSelectedItem(), 
                         (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), new ArrayList<Application>());
                 capability.createObject();
-                JOptionPane.showMessageDialog(null,"Ilot " + capability.getName() + " créer");
                 this.dispose();
             }else{
                capability.setName(jTextFieldName.getText());

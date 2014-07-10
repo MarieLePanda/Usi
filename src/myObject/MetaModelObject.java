@@ -53,6 +53,12 @@ public abstract class MetaModelObject {
 	this.name = name;
     }
     
+    public String getSurname(){
+        if(name.length() > 12)
+            return name.substring(0, 12);
+        else
+            return name;
+    }
     
     public abstract void addObjectToMetaModel();
     

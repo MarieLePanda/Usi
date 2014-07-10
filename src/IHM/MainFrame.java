@@ -348,7 +348,7 @@ public class MainFrame extends javax.swing.JFrame{
                 for(myObject.Process p : s.getListProcess()){
                     list.add(p.getName());
                     for(Capability c : data.IHM.DataIHM.getCapability(p.getId())){
-                        list.add(c.getName());
+                        list.add(c.getSurname());
                     }
                     zone.add(list.toArray(new String[list.size()]));
                     list = new ArrayList<String>();

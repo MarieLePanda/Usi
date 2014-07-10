@@ -296,7 +296,6 @@ public class FrameSegment extends javax.swing.JFrame {
             (Responsible) jComboBoxResponsible.getSelectedItem(), (Responsible) jComboBoxResponsibleDeputy.getSelectedItem(), 
             (ArrayList<myObject.Process>) new ArrayList<myObject.Process>());
             segment.createObject();
-            JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " créer");
             this.dispose();
                 
             

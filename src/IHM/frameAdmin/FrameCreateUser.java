@@ -110,14 +110,12 @@ public class FrameCreateUser extends javax.swing.JFrame {
         else{
             User newUser = new User(jTextFieldLogin.getText(), new String(jPasswordFieldPdw.getPassword()), jCheckBoxAdmin.isSelected(), true);
             newUser.createUser();
-            JOptionPane.showMessageDialog(null,"Utilisateur " + newUser.getLogin() + " créé");
             this.dispose();
         }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        motherFrame.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
     /**

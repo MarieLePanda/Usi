@@ -6,6 +6,7 @@ package data.database;
 
 import static data.database.ConnectionSql.closeConnection;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import myObject.*;
 
 /**
@@ -35,20 +36,40 @@ public class CrudDatabase {
     
     public static void createUser(User user){
         Connection connection = ConnectionSql.getConnection();
-        String sql = "INSERT INTO user (name, password, administrator, needChange) VALUES (?, ?, ?, ?)";
+        User test= null;
+        String sql = "SELECT * FROM `user` WHERE name = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setBoolean(3, user.getAdministrator());
-            preparedStatement.setBoolean(4, user.getNeedChange());
-            preparedStatement.execute();
-            
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                test = new User(res.getInt(1), res.getString(2), res.getString(3), res.getBoolean(4), res.getBoolean(5));
+            }
         }catch(SQLException e){
-            System.out.println("createUser " + e.toString());
+            System.out.println("connectionUser " + e.toString());
         }finally{
             closeConnection(connection);
         }
+        if(test == null){
+            connection = ConnectionSql.getConnection();
+            sql = "INSERT INTO user (name, password, administrator, needChange) VALUES (?, ?, ?, ?)";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, user.getLogin());
+                preparedStatement.setString(2, user.getPassword());
+                preparedStatement.setBoolean(3, user.getAdministrator());
+                preparedStatement.setBoolean(4, user.getNeedChange());
+                preparedStatement.execute();
+                JOptionPane.showMessageDialog(null,"Utilisateur " + user.getLogin() + " créé");
+
+
+            }catch(SQLException e){
+                System.out.println("createUser " + e.toString());
+            }finally{
+                closeConnection(connection);
+            }
+        }else
+            JOptionPane.showMessageDialog(null, "Nom déjà pris");
     }
     
     
@@ -133,22 +154,39 @@ public class CrudDatabase {
     
     public static void createSegment(Segment segment){
         Connection connection = ConnectionSql.getConnection();
-        String sql = "INSERT INTO `segment` ( `name`, `description`, `Responsibleid`, `ResponsibleidDeputy`) VALUES" +
-                        "(?, ?, ?, ?);";
+        Segment test= null;
+        String sql = "SELECT * FROM `segment` WHERE name = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, segment.getName());
-            preparedStatement.setString(2, segment.getDescription());
-            preparedStatement.setInt(3, segment.getResponsible().getId());
-            preparedStatement.setInt(4, segment.getResponsibledeputy().getId());
-            preparedStatement.execute();
-            
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                test = new Segment();
+            }
         }catch(SQLException e){
-            System.out.println(e.toString() + " " + e.getMessage());
+            System.out.println("connectionUser " + e.toString());
         }finally{
             closeConnection(connection);
         }
-        
+        if(test == null){
+            connection = ConnectionSql.getConnection();
+            sql = "INSERT INTO `segment` ( `name`, `description`, `Responsibleid`, `ResponsibleidDeputy`) VALUES" +
+                            "(?, ?, ?, ?);";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, segment.getName());
+                preparedStatement.setString(2, segment.getDescription());
+                preparedStatement.setInt(3, segment.getResponsible().getId());
+                preparedStatement.setInt(4, segment.getResponsibledeputy().getId());
+                preparedStatement.execute();
+                JOptionPane.showMessageDialog(null,"Zone " + segment.getName() + " créer");
+            }catch(SQLException e){
+                System.out.println(e.toString() + " " + e.getMessage());
+            }finally{
+                closeConnection(connection);
+            }
+        }else
+                JOptionPane.showMessageDialog(null, "Nom déjà pris");        
     }
     
     public static void updateSegment(Segment segment){
@@ -232,25 +270,42 @@ public class CrudDatabase {
     
         public static void createProcess(myObject.Process process){
         Connection connection = ConnectionSql.getConnection();
-        String sql = "INSERT INTO `process` (`name`, `description`, `validFrom`, `validUntil`, `SEGMENTid`, `Responsibleid`, `ResponsibleidDeputy`) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?);";
+        myObject.Process test= null;
+        String sql = "SELECT * FROM `process` WHERE name = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, process.getName());
-            preparedStatement.setString(2, process.getDescription());
-            preparedStatement.setDate(3, process.getValidFrom());
-            preparedStatement.setDate(4, process.getValideUntil());
-            preparedStatement.setInt(5, process.getSegment().getId());
-            preparedStatement.setInt(6, process.getResponsible().getId());
-            preparedStatement.setInt(7, process.getResponsibleDeputy().getId());
-            preparedStatement.execute();
-            
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                test = new myObject.Process();
+            }
         }catch(SQLException e){
-            System.out.println(e.toString() + " createProcess " + e.getMessage());
+            System.out.println("connectionUser " + e.toString());
         }finally{
             closeConnection(connection);
         }
-        
+        if(test == null){
+            connection = ConnectionSql.getConnection();
+            sql = "INSERT INTO `process` (`name`, `description`, `validFrom`, `validUntil`, `SEGMENTid`, `Responsibleid`, `ResponsibleidDeputy`) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?);";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, process.getName());
+                preparedStatement.setString(2, process.getDescription());
+                preparedStatement.setDate(3, process.getValidFrom());
+                preparedStatement.setDate(4, process.getValideUntil());
+                preparedStatement.setInt(5, process.getSegment().getId());
+                preparedStatement.setInt(6, process.getResponsible().getId());
+                preparedStatement.setInt(7, process.getResponsibleDeputy().getId());
+                preparedStatement.execute();
+                JOptionPane.showMessageDialog(null,"Quartier " + process.getName() + " créer");
+            }catch(SQLException e){
+                System.out.println(e.toString() + " createProcess " + e.getMessage());
+            }finally{
+                closeConnection(connection);
+            }
+        }else
+            JOptionPane.showMessageDialog(null, "Nom déjà pris");        
     }
     
     public static void updateProcess(myObject.Process process){
@@ -336,24 +391,42 @@ public class CrudDatabase {
      
     public static void createCapability(Capability capability){
         Connection connection = ConnectionSql.getConnection();
-        String sql = "INSERT INTO capability (PROCESSid, name, description, validFrom, validUntil, Responsibleid, ResponsibleidDeputy)"
-                + "VALUE (?, ?, ?, ?, ?, ?, ?)";
+        myObject.Process test= null;
+        String sql = "SELECT * FROM `capability` WHERE name = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, capability.getProcess().getId());
-            preparedStatement.setString(2, capability.getName());
-            preparedStatement.setString(3, capability.getDescription());
-            preparedStatement.setDate(4, capability.getValidFrom());
-            preparedStatement.setDate(5, capability.getValideUntil());
-            preparedStatement.setInt(6, capability.getResponsible().getId());
-            preparedStatement.setInt(7, capability.getResponsibleDeputy().getId());
-            preparedStatement.executeUpdate();
-            
+            preparedStatement.setString(1, capability.getName());
+            ResultSet res = preparedStatement.executeQuery();
+            while(res.next()){
+                test = new myObject.Process();
+            }
         }catch(SQLException e){
-            System.out.println("createCapability " + e.toString());
+            System.out.println("connectionUser " + e.toString());
         }finally{
             closeConnection(connection);
         }
+        if(test == null){
+            connection = ConnectionSql.getConnection();
+            sql = "INSERT INTO capability (PROCESSid, name, description, validFrom, validUntil, Responsibleid, ResponsibleidDeputy)"
+                    + "VALUE (?, ?, ?, ?, ?, ?, ?)";
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, capability.getProcess().getId());
+                preparedStatement.setString(2, capability.getName());
+                preparedStatement.setString(3, capability.getDescription());
+                preparedStatement.setDate(4, capability.getValidFrom());
+                preparedStatement.setDate(5, capability.getValideUntil());
+                preparedStatement.setInt(6, capability.getResponsible().getId());
+                preparedStatement.setInt(7, capability.getResponsibleDeputy().getId());
+                preparedStatement.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Ilot " + capability.getName() + " créer");
+            }catch(SQLException e){
+                System.out.println("createCapability " + e.toString());
+            }finally{
+                closeConnection(connection);
+            }
+        }else
+            JOptionPane.showMessageDialog(null, "Nom déjà pris");
         
     }
     
